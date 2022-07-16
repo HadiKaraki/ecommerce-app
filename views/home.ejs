@@ -1,0 +1,73 @@
+<% layout('layouts/boilerplate')%>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="../Home.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    </head>
+
+    <body>
+        <h1>Appliances</h1>
+        <section id="container">
+            <% if(appliances) {%>
+                <% for(let appliance of appliances) {%>
+                    <a href="/product/<%= appliance._id %> ">
+                        <div id="product">
+                            <div id="image">
+                                <img src="<%= appliance.images[0].url %> ">
+                            </div>
+                            <p>
+                                <%= appliance.name %>
+                            </p>
+                            <p>
+                                <%= appliance.price %>
+                            </p>
+                        </div>
+                    </a>
+                    <% } %>
+                        <% } %>
+        </section>
+        <h1>TV'S</h1>
+        <section id="container">
+            <% if(tvs) {%>
+                <% for(let tv of tvs) {%>
+                    <a href="/product/<%= tv._id %> ">
+                        <div id="product">
+                            <div id="image">
+                                <img src="<%= tv.images[0].url %> ">
+                            </div>
+                            <p>
+                                <%= tv.name %>
+                            </p>
+                            <p>
+                                <%= tv.price %>
+                            </p>
+                        </div>
+                    </a>
+                    <% } %>
+                        <% } %>
+        </section>
+        <h1>Mobile phones</h1>
+        <section id="container">
+            <% if(mobile_phones) {%>
+                <% for(let mobile_phone of mobile_phones) {%>
+                    <a href="/product/<%= mobile_phone._id %> ">
+                        <div id="product">
+                            <div id="image">
+                                <img src="<%= mobile_phone.images[0].url %> ">
+                            </div>
+                            <p>
+                                <%= mobile_phone.name %>
+                            </p>
+                            <p>
+                                <%= mobile_phone.price %>
+                            </p>
+                        </div>
+                    </a>
+                    <% } %>
+                        <% } %>
+        </section>
+    </body>
+
+    </html>

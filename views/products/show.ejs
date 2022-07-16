@@ -1,0 +1,156 @@
+<% layout('layouts/boilerplate')%>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="../Show.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    </head>
+
+    <body>
+        <section class="container">
+            <div class="left-child">
+                <div id="image">
+                    <img src="<%= product.images[0].url %> ">
+                </div>
+            </div>
+            <div class="right-child">
+                <div id="top-panel">
+                    <h1 style="color: blue;">
+                        <%= product.name %>
+                    </h1>
+                    <h1 style="color: red;">
+                        $
+                        <%= product.price %>
+                    </h1>
+                </div>
+                <div id="middle-panel">
+                    <div id="description">
+                        <h3>
+                            <%= product.description %>
+                        </h3>
+                    </div>
+                    <div id="item-code">
+                        <strong>
+                            <p style="margin-right: 80px; display: inline;">Item Code:</p>
+                        </strong>
+                        <p style="display: inline; color: blue">
+                            <%= product.code %>
+                        </p>
+                    </div>
+                    <div id="brand">
+                        <strong>
+                            <p style="margin-right: 40px;">Brand:</p>
+                        </strong>
+
+                    </div>
+                </div>
+                <div id="bottom-panel">
+                    <% if(currentUser){ %>
+                        <% if(!addedToCart) {%>
+                            <button id="addcart-button" onclick="addToCart(event)"><i class="fa fa-shopping-cart"
+                                    style="font-size:24px"></i></button>
+                            <% } else {%>
+                                <button id="removecart-button" onclick="removeFromCart(event)" style="background-color: red;"><i class="fa fa-shopping-cart"
+                                        style="font-size:24px;"></i></button>
+                                <% } %>
+                                    <% if(!addedToWishlist) {%>
+                                        <button id="addwishlist-button" onclick="addToWishlist(event)"><i
+                                                class="fa fa-heart-o" aria-hidden="true"
+                                                style="font-size:24px;"></i></button>
+                                        <% } else {%>
+                                            <button id="removewishlist-button" onclick="removeFromWishlist(event)" style="background-color: red;"><i class="fa fa-heart-o"
+                                                    aria-hidden="true" style="font-size:24px;"></i></button>
+                                            <% } %>
+                                                <% } %>
+                </div>
+            </div>
+        </section>
+    </body>
+
+    <script>
+        var product_id = '<%- product.id %>'
+            // document.getElementById('removecart-button').addEventListener('click', removeFromCart)
+
+        function addToCart(e) {
+            var cartButton = document.getElementById('addcart-button');
+            e.preventDefault();
+            var params = "id=" + product_id;
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('POST', '/product/addToCart', true);
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhttp.onload = function() {
+                console.log(this.responseText);
+            }
+
+            xhttp.send(params);
+
+            changeButton(cartButton)
+        }
+
+        function removeFromCart(e) {
+            var cartButton = document.getElementById('removecart-button');
+            e.preventDefault();
+            var params = "id=" + product_id;
+            const xhttp = new XMLHttpRequest();
+
+            xhttp.open('POST', '/product/removeFromCart', true);
+
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhttp.onload = function() {
+                console.log(this.responseText);
+            }
+
+            xhttp.send(params);
+
+            changeButton(cartButton)
+        }
+
+        function addToWishlist(e) {
+            var wishlistButton = document.getElementById('addwishlist-button');
+            e.preventDefault();
+            var params = "id=" + product_id;
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('POST', '/product/addToWishlist', true);
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhttp.onload = function() {
+                console.log(this.responseText);
+            }
+
+            xhttp.send(params);
+
+            changeButton(wishlistButton)
+        }
+
+        function removeFromWishlist(e) {
+            var wishlistButton = document.getElementById('removewishlist-button');
+            e.preventDefault();
+            var params = "id=" + product_id;
+            const xhttp = new XMLHttpRequest();
+
+            xhttp.open('POST', '/product/removeFromWishlist', true);
+
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhttp.onload = function() {
+                console.log(this.responseText);
+            }
+
+            xhttp.send(params);
+
+            changeButton(wishlistButton)
+        }
+
+        function changeButton(btn) {
+            if (btn.style.backgroundColor == "red") {
+                btn.style.backgroundColor = "#1DA1F2";
+            } else {
+                btn.style.backgroundColor = "red";
+            }
+        }
+    </script>
+
+    </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../Home.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+
+<body>
+    <form action="/product/add" method="POST" enctype="multipart/form-data">
+        <input type="text" name="product[name]" placeholder="name" required>
+        <input type="text" name="product[price]" placeholder="price" required>
+        <input type="text" name="product[description]" placeholder="description" required>
+        <input type="text" name="product[code]" placeholder="code" required>
+        <select name="product[category]">
+            <option>TV</option>
+            <option>MOBILE</option>
+            <option>APPLIANCE</option>
+        </select>
+        <!-- <input type="file" name="product[brand]" placeholder="brand" required> -->
+        <input type="file" id="image" name="image" multiple>
+        <button type="submit">Add product</button>
+    </form>
+</body>
+
+</html>
