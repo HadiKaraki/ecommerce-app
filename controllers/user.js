@@ -4,13 +4,8 @@ const flash = require('connect-flash');
 module.exports.account = async(req, res) => {
     if (req.isAuthenticated()) {
         const currUserID = req.user._id
-        const user = await User.findById(currUserID).populate({
-            path: 'posts',
-            populate: {
-                path: 'posts'
-            }
-        }).populate('posts');
-        res.render('account', { user })
+        const user = await User.findById(currUserID);
+        res.render('users/account', { user })
     } else {
         res.redirect('../user/login');
     }
@@ -101,8 +96,11 @@ module.exports.login = async(req, res) => {
     res.redirect(redirectUrl);
 }
 
-module.exports.logout = (req, res) => {
-    req.logout();
+module.exports.logout = async(req, res, next) => {
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+    });
     req.flash('success', "Goodbye!");
-    res.redirect('/user/login');
+    res.redirect('/');
 }

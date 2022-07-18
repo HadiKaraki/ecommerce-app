@@ -4,15 +4,11 @@ body {
 
 h1 {
     color: black;
+    margin-left: 10px;
 }
 
 body {
     font-family: 'Open Sans', sans-serif;
-}
-
-h1 {
-    color: black;
-    margin-left: 10px;
 }
 
 #container a {
@@ -96,6 +92,7 @@ h1 {
         align-items: center;
         grid-column-gap: 10px;
         margin: 0;
+        margin-left: 0;
     }
     #container #product {
         width: 100%;
