@@ -13,9 +13,9 @@ module.exports.showProduct = async(req, res) => {
     try {
         const { id } = req.params;
         const product = await Product.findById(id);
+        var addedToCart = false;
+        var addedToWishlist = false;
         if (req.isAuthenticated()) {
-            var addedToCart = false;
-            var addedToWishlist = false;
             const userID = req.user._id;
             const currUser = await User.findById(userID)
             if (!product) {
@@ -30,10 +30,8 @@ module.exports.showProduct = async(req, res) => {
             if (wishlistIndex > -1) {
                 addedToWishlist = true;
             }
-            res.render('products/show', { product, addedToCart, addedToWishlist });
-        } else {
-            res.render('products/show', { product })
         }
+        res.render('products/show', { product, addedToCart, addedToWishlist });
     } catch (e) {
         console.log(castErrorDB(e));
         req.flash('error', 'Cannot find that product!');
@@ -62,6 +60,13 @@ module.exports.removeFromCart = async(req, res) => {
     await User.findByIdAndUpdate(userID, { $pull: { cart: productId } });
 }
 
+module.exports.deleteFromCart = async(req, res) => {
+    const { id } = req.params;
+    const userID = req.user._id;
+    await User.findByIdAndUpdate(userID, { $pull: { cart: id } });
+    res.redirect('back')
+}
+
 module.exports.addToWishlist = async(req, res) => {
     // AJAX
     console.log('add to wish')
@@ -81,6 +86,13 @@ module.exports.removeFromWishlist = async(req, res) => {
     var productId = mongoose.Types.ObjectId(id);
     const product = await Product.findById(productId);
     await User.findByIdAndUpdate(userID, { $pull: { wishlist: productId } });
+}
+
+module.exports.deleteFromWishlist = async(req, res) => {
+    const { id } = req.params;
+    const userID = req.user._id;
+    await User.findByIdAndUpdate(userID, { $pull: { wishlist: id } });
+    res.redirect('back')
 }
 
 module.exports.renderNewProduct = async(req, res) => {

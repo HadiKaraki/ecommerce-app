@@ -46,23 +46,21 @@
                     </div>
                 </div>
                 <div id="bottom-panel">
-                    <% if(currentUser){ %>
-                        <% if(!addedToCart) {%>
-                            <button id="addcart-button" onclick="addToCart(event)"><i class="fa fa-shopping-cart"
-                                    style="font-size:24px"></i></button>
-                            <% } else {%>
-                                <button id="removecart-button" onclick="removeFromCart(event)" style="background-color: red;"><i class="fa fa-shopping-cart"
-                                        style="font-size:24px;"></i></button>
-                                <% } %>
-                                    <% if(!addedToWishlist) {%>
-                                        <button id="addwishlist-button" onclick="addToWishlist(event)"><i
+                    <% if(!addedToCart) {%>
+                        <button class="cart-button" id="addcart-button" onclick="addToCart(event)"><i
+                                class="fa fa-shopping-cart" style="font-size:24px"></i></button>
+                        <% } else {%>
+                            <button class="cart-button" id="removecart-button" onclick="removeFromCart(event)" style="background-color: red;"><i class="fa fa-shopping-cart"
+                                    style="font-size:24px;"></i></button>
+                            <% } %>
+                                <% if(!addedToWishlist) {%>
+                                    <button class="wishlist-button" id="addwishlist-button" onclick="addToWishlist(event)"><i class="fa fa-heart-o" aria-hidden="true"
+                                            style="font-size:24px;"></i></button>
+                                    <% } else {%>
+                                        <button class="wishlist-button" id="removewishlist-button" onclick="removeFromWishlist(event)" style="background-color: red;"><i
                                                 class="fa fa-heart-o" aria-hidden="true"
                                                 style="font-size:24px;"></i></button>
-                                        <% } else {%>
-                                            <button id="removewishlist-button" onclick="removeFromWishlist(event)" style="background-color: red;"><i class="fa fa-heart-o"
-                                                    aria-hidden="true" style="font-size:24px;"></i></button>
-                                            <% } %>
-                                                <% } %>
+                                        <% } %>
                 </div>
             </div>
         </section>

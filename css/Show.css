@@ -64,8 +64,8 @@ body {
     border-top: 0.4px solid black;
 }
 
-#cart-button,
-#wishlist-button {
+.cart-button,
+.wishlist-button {
     margin-top: 14px;
     margin-bottom: 14px;
     cursor: pointer;
@@ -107,8 +107,5 @@ body {
     .left-child {
         width: 95%;
         margin: 0;
-    }
-    .right-child #item-code {
-        width;
     }
 }

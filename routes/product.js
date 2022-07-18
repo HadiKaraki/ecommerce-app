@@ -16,6 +16,10 @@ router.post('/addToCart', isLoggedIn, catchAsync(products.addToCart))
 
 router.post('/removeFromCart', isLoggedIn, catchAsync(products.removeFromCart))
 
+router.post('/deleteFromCart/:id', isLoggedIn, catchAsync(products.deleteFromCart))
+
+router.post('/deleteFromWishlist/:id', isLoggedIn, catchAsync(products.deleteFromCart))
+
 router.post('/addToWishlist', isLoggedIn, catchAsync(products.addToWishlist))
 
 router.post('/removeFromWishlist', isLoggedIn, catchAsync(products.removeFromWishlist))
