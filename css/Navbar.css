@@ -8,6 +8,8 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: rgb(28, 91, 184);
+    box-shadow: 0 2px 4px 0 rgb(73, 73, 73);
+    font-size: 18px;
 }
 
 li {
@@ -24,6 +26,7 @@ li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-size: 18px;
 }
 
 

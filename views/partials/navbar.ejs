@@ -15,11 +15,18 @@
         <!-- <li><img src="../tv.jpg"></li> -->
         <li><a href="/home">Home</a></li>
         <li><a href="news.asp">News</a></li>
-        <li id="user"><a href="/contact">Contact</a></li>
-        <li id="user"><a href="/user/account">Account</a></li>
-        <li id="user"><a href="/user/cart"><i class="fa fa-shopping-cart" style="font-size:24px">
-                    <%= currentUser.cart.length %>
-                </i></a></li>
+        <% if(currentUser) { %>
+            <li id="user"><a href="/user/wishlist"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:18px;">
+                        <%= currentUser.wishlist.length %>
+                    </i></a></li>
+            <li id="user"><a href="/user/cart"><i class="fa fa-shopping-cart" style="font-size:18px">
+                        <%= currentUser.cart.length %>
+                    </i></a></li>
+            <li id="user"><a href="/user/logout">Logout</a></li>
+            <% } %>
+                <li id="user"><a href="/contact">Contact</a></li>
+                <li id="user"><a href="/user/account"><i class="fa fa-user" aria-hidden="true"
+                            style="margin-right: 10px;"></i>Account</a></li>
     </ul>
 
 </body>
