@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 80vh;
     font-family: "Poppins", sans-serif;
 }
 
@@ -133,6 +133,7 @@ input[type="submit"]:hover {
     .center {
         margin-top: 10px;
         width: 90%;
+        margin-bottom: 30px;
     }
     form .txt_field {
         margin-top: 0;
