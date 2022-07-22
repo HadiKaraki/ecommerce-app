@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const flash = require('connect-flash');
 
-module.exports.account = async(req, res) => {
+module.exports.renderAccount = async(req, res) => {
     if (req.isAuthenticated()) {
         const currUserID = req.user._id
         const user = await User.findById(currUserID);

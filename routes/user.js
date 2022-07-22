@@ -24,7 +24,9 @@ router.get('/logout', isLoggedIn, users.logout)
 //     res.redirect('../user/home');
 // });
 
-router.get('/account', isLoggedIn, catchAsync(users.account))
+router.route('/account')
+    .get(isLoggedIn, users.renderAccount)
+    .post(isLoggedIn, catchAsync(users.editAccount));
 
 router.get('/cart', isLoggedIn, catchAsync(users.cart))
 

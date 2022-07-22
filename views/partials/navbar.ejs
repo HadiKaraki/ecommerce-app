@@ -16,12 +16,12 @@
         <li><button type="button" style="border: none;" onclick="history.go(-1)"><i class="fa fa-arrow-left"
                     aria-hidden="true"></i></button></li>
         <li><a href="/home">Home</a></li>
+        <li><a href="/contact">Contact</a></li>
         <% if(currentUser) {%>
             <% if(currentUser.admin) {%>
                 <li><a href="/product/new">New</a></li>
                 <% } %>
                     <% } %>
-                        <li id="user"><a href="/contact">Contact</a></li>
                         <% if(currentUser) { %>
                             <li id="user"><a href="/user/wishlist"><i class="fa fa-heart-o" aria-hidden="true"
                                         style="font-size:18px;">
