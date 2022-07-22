@@ -12,6 +12,8 @@ router.get('/new', isLoggedIn, isAdmin, catchAsync(products.renderNewProduct))
 
 router.post('/add', upload.array('image'), isLoggedIn, isAdmin, catchAsync(products.addProduct))
 
+router.get('/category/:category', catchAsync(products.category))
+
 router.post('/addToCart', isLoggedIn, catchAsync(products.addToCart))
 
 router.post('/removeFromCart', isLoggedIn, catchAsync(products.removeFromCart))

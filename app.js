@@ -6,6 +6,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const ejsMate = require('ejs-mate');
+const ejsLint = require('ejs-lint');
 const flash = require('connect-flash');
 const User = require('./models/user');
 const mongoose = require('mongoose');

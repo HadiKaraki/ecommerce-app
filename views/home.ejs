@@ -8,7 +8,14 @@
     </head>
 
     <body>
-        <h1>Appliances</h1>
+        <div id="brand" style="text-align: center;">
+            Buy4Less
+        </div>
+        <div id="category">
+            <a href="/product/category/APPLIANCE">
+                <h2>APPLIANCES</h2>
+            </a>
+        </div>
         <section id="container">
             <% if(appliances) {%>
                 <% for(let appliance of appliances) {%>
@@ -28,7 +35,11 @@
                     <% } %>
                         <% } %>
         </section>
-        <h1>TV'S</h1>
+        <div id="category">
+            <a href="/product/category/TV">
+                <h2>TV'S</h2>
+            </a>
+        </div>
         <section id="container">
             <% if(tvs) {%>
                 <% for(let tv of tvs) {%>
@@ -48,7 +59,11 @@
                     <% } %>
                         <% } %>
         </section>
-        <h1>Mobile phones</h1>
+        <div id="category">
+            <a href="/product/category/MOBILE">
+                <h2>MOBILE PHONES</h2>
+            </a>
+        </div>
         <section id="container">
             <% if(mobile_phones) {%>
                 <% for(let mobile_phone of mobile_phones) {%>

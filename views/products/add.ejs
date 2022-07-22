@@ -1,28 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate')%>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="../Home.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-</head>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../Newproduct.css">
+    </head>
 
-<body>
-    <form action="/product/add" method="POST" enctype="multipart/form-data">
-        <input type="text" name="product[name]" placeholder="name" required>
-        <input type="text" name="product[price]" placeholder="price" required>
-        <input type="text" name="product[description]" placeholder="description" required>
-        <input type="text" name="product[code]" placeholder="code" required>
-        <select name="product[category]">
-            <option>TV</option>
-            <option>MOBILE</option>
-            <option>APPLIANCE</option>
-        </select>
-        <!-- <input type="file" name="product[brand]" placeholder="brand" required> -->
-        <input type="file" id="image" name="image" multiple>
-        <button type="submit">Add product</button>
-    </form>
-</body>
+    <body>
+        <div class="center">
+            <h1>New product</h1>
+            <form action="/product/add" method="POST" enctype="multipart/form-data">
+                <div class="txt_field">
+                    <input type="text" name="product[name]" placeholder="Name" required>
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="product[brand]" placeholder="Brand" required>
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="product[price]" placeholder="Price" required>
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="product[description]" placeholder="Description" required>
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="product[code]" placeholder="Code" required>
+                </div>
+                <div class="select_field">
+                    <select name="product[category]">
+                        <option>TV</option>
+                        <option>MOBILE</option>
+                        <option>APPLIANCE</option>
+                    </select>
+                </div>
+                <div class="file_field">
+                    <input type="file" id="image" name="image" multiple>
+                </div>
+                <input type="submit" value="Add product">
+            </form>
+        </div>
 
-</html>
+    </body>

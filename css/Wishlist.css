@@ -17,7 +17,8 @@ h1 {
     border: 5px solid white;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    margin-left: 10px;
+    grid-column-gap: 10px;
+    margin-left: 40px;
 }
 
 #container #product {

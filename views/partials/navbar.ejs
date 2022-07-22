@@ -13,22 +13,30 @@
 <body>
     <ul>
         <!-- <li><img src="../tv.jpg"></li> -->
+        <li><button type="button" style="border: none;" onclick="history.go(-1)"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i></button></li>
         <li><a href="/home">Home</a></li>
-        <li id="user"><a href="/contact">Contact</a></li>
-        <% if(currentUser) { %>
-            <li id="user"><a href="/user/wishlist"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:18px;">
-                        <%= currentUser.wishlist.length %>
-                    </i></a></li>
-            <li id="user"><a href="/user/cart"><i class="fa fa-shopping-cart" style="font-size:18px">
-                        <%= currentUser.cart.length %>
-                    </i></a></li>
-            <li id="user"><a href="/user/logout">Logout</a></li>
-            <li id="user"><a href="/user/account"><i class="fa fa-user" aria-hidden="true"
-                        style="margin-right: 10px;"></i>Account</a></li>
-            <% } else {%>
-                <li id="user"><a href="/user/login">Login</a></li>
-                <li id="user"><a href="/user/register">Signup</a></li>
+        <% if(currentUser) {%>
+            <% if(currentUser.admin) {%>
+                <li><a href="/product/new">New</a></li>
                 <% } %>
+                    <% } %>
+                        <li id="user"><a href="/contact">Contact</a></li>
+                        <% if(currentUser) { %>
+                            <li id="user"><a href="/user/wishlist"><i class="fa fa-heart-o" aria-hidden="true"
+                                        style="font-size:18px;">
+                                        <%= currentUser.wishlist.length %>
+                                    </i></a></li>
+                            <li id="user"><a href="/user/cart"><i class="fa fa-shopping-cart" style="font-size:18px">
+                                        <%= currentUser.cart.length %>
+                                    </i></a></li>
+                            <li id="user"><a href="/user/logout">Logout</a></li>
+                            <li id="user"><a href="/user/account"><i class="fa fa-user" aria-hidden="true"
+                                        style="margin-right: 10px;"></i>Account</a></li>
+                            <% } else {%>
+                                <li id="user"><a href="/user/login">Login</a></li>
+                                <li id="user"><a href="/user/register">Signup</a></li>
+                                <% } %>
 
     </ul>
 

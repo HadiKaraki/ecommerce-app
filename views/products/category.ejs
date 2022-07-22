@@ -1,0 +1,89 @@
+<% layout('/layouts/boilerplate')%>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="../../Category.css">
+        <link rel="stylesheet" href="../../Navbar.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    </head>
+
+    <body>
+        <ul>
+            <label for="Samsung">Samsung</label><br>
+            <li><input type="checkbox" id="Samsung" onchange="hideDiv()" value="Samsung"></li>
+            <% if(category==="MOBILE" ) {%>
+                <label for="Apple">Apple</label><br>
+                <li><input type="checkbox" id="Apple" onchange="hideDiv()" value="Apple"></li>
+                <label for="OnePlus">OnePlus</label><br>
+                <li><input type="checkbox" id="OnePlus" onchange="hideDiv()" value="OnePlus"></li>
+                <% } %>
+                    <% if(category==="APPLIANCE" ) {%>
+                        <label for="LG">LG</label><br>
+                        <li><input type="checkbox" id="LG" onchange="hideDiv()" value="LG"></li>
+                        <% } %>
+                            <% if(category==="TV" ) {%>
+                                <label for="LG">LG</label><br>
+                                <li><input type="checkbox" id="LG" onchange="hideDiv()" value="LG"></li>
+                                <label for="Sony">Sony</label><br>
+                                <li><input type="checkbox" id="Sony" onchange="hideDiv()" value="Sony"></li>
+                                <% } %>
+        </ul>
+        <section id="container">
+            <% for(let product of products) {%>
+                <a href="/product/<%= product._id %> ">
+                    <div class="<%= product.brand %>" id="product">
+                        <div id="image">
+                            <img src="<%= product.images[0].url %> ">
+                        </div>
+                        <div id="bottom-panel">
+                            <div id="description">
+                                <strong>
+                                    <p>
+                                        <%= product.description %>
+                                    </p>
+                                </strong>
+                            </div>
+                            <div id="price">
+                                <p>
+                                    $
+                                    <%= product.price %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <% } %>
+        </section>
+
+        <script>
+            var allDivs = document.getElementsByTagName('div');
+            var allInputs = document.getElementsByTagName('input');
+
+            function hideDiv() {
+                for (var i = 0; i < allDivs.length; i++) {
+                    allDivs[i].style.display = "block";
+                }
+                for (var i = 0; i < allInputs.length; i++) {
+                    if (!allInputs[i].checked) {
+                        var divs = document.getElementsByClassName(allInputs[i].value);
+                        for (var j = 0; j < divs.length; j++) {
+                            divs[j].style.display = "none";
+                        }
+                    }
+                }
+                nonChecked();
+            }
+
+            function nonChecked() {
+                for (var i = 0; i < allInputs.length; i++) {
+                    if (allInputs[i].checked) {
+                        return;
+                    }
+                }
+                for (var i = 0; i < allDivs.length; i++) {
+                    allDivs[i].style.display = "block";
+                }
+            }
+        </script>
+    </body>

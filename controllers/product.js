@@ -39,6 +39,12 @@ module.exports.showProduct = async(req, res) => {
     }
 }
 
+module.exports.category = async(req, res) => {
+    const { category } = req.params;
+    const products = await Product.find({ category: category });
+    res.render('products/category', { products, category });
+}
+
 module.exports.addToCart = async(req, res) => {
     // AJAX
     console.log('add to cart')

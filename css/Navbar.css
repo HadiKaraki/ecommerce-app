@@ -8,9 +8,22 @@ ul {
     margin-top: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(28, 91, 184);
+    background-color: #2691d9;
     box-shadow: 0 2px 4px 0 rgb(73, 73, 73);
     font-size: 18px;
+    font-weight: bold;
+}
+
+ul button {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    background-color: #2691d9;
+    ;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    border: 0.5px solid black;
 }
 
 li {
@@ -34,5 +47,5 @@ li a {
 /* Change the link color to #111 (black) on hover */
 
 li a:hover {
-    background-color: #111;
+    background-color: grey;
 }

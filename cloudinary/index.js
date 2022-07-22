@@ -10,7 +10,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: 'Twitter',
+        folder: 'Ecommerce',
         allowedFormats: ['jpeg', 'png', 'jpg', 'mp4']
     }
 });
