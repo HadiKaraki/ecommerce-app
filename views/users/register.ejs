@@ -1,52 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate')%>
 
-<head>
-    <title>Register</title>
-    <link rel="stylesheet" href="../Signup.css">
-</head>
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" href="../Signup.css">
+    </head>
 
-<body>
-    <div class="center">
-        <div class="back-button">
-            <button type="button" id="back" onclick="history.go(-1)"><i class="fa fa-arrow-left"
-                    aria-hidden="true"></i>Back</button>
+    <body>
+        <div class="center">
+            <div class="back-button">
+                <button type="button" id="back" onclick="history.go(-1)"><i class="fa fa-arrow-left"
+                        aria-hidden="true"></i> Back</button>
+            </div>
+            <h1>Sign up</h1>
+            <form action="/user/register" method="POST">
+                <div class="txt_field">
+                    <input type="text" name="username" placeholder="Username" required>
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="first_name" placeholder="First name" required>
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="last_name" placeholder="Last name" required>
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="email" placeholder="Email" required>
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="address" placeholder="Address" required>
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="phone_number" placeholder="Phone number" required>
+                </div>
+                <div class="txt_field">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="select_field">
+                    <select name="title">
+                        <option>Mr</option>
+                        <option>Mrs</option>
+                    </select>
+                </div>
+                <div class="login_link">
+                    Already a member? <a href="/user/login">Login</a>
+                </div>
+                <input type="submit" value="Register">
+            </form>
         </div>
-        <h1>Sign up</h1>
-        <form action="/user/register" method="POST">
-            <div class="txt_field">
-                <input type="text" name="username" placeholder="Username" required>
-            </div>
-            <div class="txt_field">
-                <input type="text" name="first_name" placeholder="First name" required>
-            </div>
-            <div class="txt_field">
-                <input type="text" name="last_name" placeholder="Last name" required>
-            </div>
-            <div class="txt_field">
-                <input type="text" name="email" placeholder="Email" required>
-            </div>
-            <div class="txt_field">
-                <input type="text" name="address" placeholder="Address" required>
-            </div>
-            <div class="txt_field">
-                <input type="text" name="phone_number" placeholder="Phone number" required>
-            </div>
-            <div class="txt_field">
-                <input type="password" name="password" placeholder="Password" required>
-            </div>
-            <div class="select_field">
-                <select name="title">
-                    <option>Mr</option>
-                    <option>Mrs</option>
-                </select>
-            </div>
-            <div class="login_link">
-                Already a member? <a href="/user/login">Login</a>
-            </div>
-            <input type="submit" value="Register">
-        </form>
-    </div>
-</body>
+    </body>
 
-</html>
+    </html>
