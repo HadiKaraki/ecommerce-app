@@ -42,7 +42,8 @@ li a {
 }
 
 li a:hover {
-    background-color: blue;
+    background-color: yellow;
+    color: black;
 }
 
 @media (max-width: 768px) {

@@ -2,10 +2,14 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+#brand {}
+
 #brand h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
     text-decoration: underline;
-    text-decoration-color: blue;
+    text-decoration-color: yellow;
+    font-weight: normal;
 }
 
 #search-box {
@@ -20,10 +24,17 @@ body {
     padding-bottom: 20px;
 }
 
+#search-box button {
+    border: 0.6px solid black;
+    padding-bottom: 20px;
+    font-size: 18px;
+    background-color: white;
+}
+
 #container {
     margin-left: 10px;
     margin-right: 10px;
-    margin-top: 20px;
+    margin-top: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 10px;
@@ -52,7 +63,6 @@ body {
 #footer {
     font-size: 15px;
     padding: 20px;
-    border-top: 0.4px solid black;
     margin-top: 20px;
     text-align: center;
 }
@@ -66,15 +76,27 @@ body {
 @media (max-width: 768px) {
     #brand {
         margin-top: 10px;
+        margin-bottom: 20px;
         text-align: center;
     }
+    #search-box {
+        float: center;
+        margin: 0;
+        width: 60%;
+    }
+    #search-box input {
+        width: 60%;
+    }
     #container {
+        margin-top: 30px;
         grid-template-columns: 1fr
     }
-    #container #left-child,
-    #container #middle-child,
+    #container #left-child {
+        border-top: 0.4px solid black;
+        padding-top: 10px;
+    }
     #container #right-child {
         border-bottom: 0.4px solid black;
-        border-top: 0.4px solid black;
+        padding-top: 10px;
     }
 }
