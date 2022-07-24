@@ -9,82 +9,36 @@
 
     <body>
         <div id="brand">
-            <h1>Buy4Less</h1>
+            <h1 style="margin-left: 10px;">BuyForLess</h1>
         </div>
-        <div id="category">
+        <div id="search-box">
+            <input type="text" placeholder="Search store..">
+        </div>
+        <br><br>
+        <section id="container">
             <a href="/product/category/APPLIANCE">
-                <h1>APPLIANCES</h1>
+                <div id="left-child">
+                    <img src="../appliances.jpg">
+                    <h1>Appliances</h1>
+                </div>
             </a>
-        </div>
-        <section id="container">
-            <% if(appliances) {%>
-                <% for(let appliance of appliances) {%>
-                    <a href="/product/<%= appliance._id %> ">
-                        <div id="product">
-                            <div id="image">
-                                <img src="<%= appliance.images[0].url %> ">
-                            </div>
-                            <p>
-                                <%= appliance.name %>
-                            </p>
-                            <p>
-                                <%= appliance.price %>
-                            </p>
-                        </div>
-                    </a>
-                    <% } %>
-                        <% } %>
-        </section>
-        <div id="category">
-            <a href="/product/category/TV">
-                <h1>TV'S</h1>
-            </a>
-        </div>
-        <section id="container">
-            <% if(tvs) {%>
-                <% for(let tv of tvs) {%>
-                    <a href="/product/<%= tv._id %> ">
-                        <div id="product">
-                            <div id="image">
-                                <img src="<%= tv.images[0].url %> ">
-                            </div>
-                            <p>
-                                <%= tv.name %>
-                            </p>
-                            <p>
-                                <%= tv.price %>
-                            </p>
-                        </div>
-                    </a>
-                    <% } %>
-                        <% } %>
-        </section>
-        <div id="category">
             <a href="/product/category/MOBILE">
-                <h1>MOBILE PHONES</h1>
+                <div id="middle-child">
+                    <img src="../mobiles.jpg">
+                    <h1>Mobile phones</h1>
+                </div>
             </a>
-        </div>
-        <section id="container">
-            <% if(mobile_phones) {%>
-                <% for(let mobile_phone of mobile_phones) {%>
-                    <a href="/product/<%= mobile_phone._id %> ">
-                        <div id="product">
-                            <div id="image">
-                                <img src="<%= mobile_phone.images[0].url %> ">
-                            </div>
-                            <div id="bottom-panel">
-                                <p>
-                                    <%= mobile_phone.name %>
-                                </p>
-                                <p>
-                                    <%= mobile_phone.price %>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <% } %>
-                        <% } %>
+            <a href="/product/category/TV">
+                <div id="right-child">
+                    <img src="../tvs.jpg">
+                    <h1>Televisions</h1>
+                </div>
+            </a>
         </section>
+        <div id="footer">
+            <footer>2022 BuyForLess</footer>
+        </div>
+    </body>
     </body>
 
     </html>

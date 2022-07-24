@@ -10,23 +10,17 @@
 
     <body>
         <ul>
-            <label for="Samsung">Samsung</label><br>
-            <li><input type="checkbox" id="Samsung" onchange="hideDiv()" value="Samsung"></li>
+            <li><input type="checkbox" id="Samsung" onchange="hideDiv()" value="Samsung">Samsung</li>
             <% if(category==="MOBILE" ) {%>
-                <label for="Apple">Apple</label><br>
-                <li><input type="checkbox" id="Apple" onchange="hideDiv()" value="Apple"></li>
-                <label for="OnePlus">OnePlus</label><br>
-                <li><input type="checkbox" id="OnePlus" onchange="hideDiv()" value="OnePlus"></li>
+                <li><input type="checkbox" id="Apple" onchange="hideDiv()" value="Apple">Apple</li>
+                <li><input type="checkbox" id="OnePlus" onchange="hideDiv()" value="OnePlus">OnePlus</li>
                 <% } %>
                     <% if(category==="APPLIANCE" ) {%>
-                        <label for="LG">LG</label><br>
-                        <li><input type="checkbox" id="LG" onchange="hideDiv()" value="LG"></li>
+                        <li><input type="checkbox" id="LG" onchange="hideDiv()" value="LG">LG</li>
                         <% } %>
                             <% if(category==="TV" ) {%>
-                                <label for="LG">LG</label><br>
-                                <li><input type="checkbox" id="LG" onchange="hideDiv()" value="LG"></li>
-                                <label for="Sony">Sony</label><br>
-                                <li><input type="checkbox" id="Sony" onchange="hideDiv()" value="Sony"></li>
+                                <li><input type="checkbox" id="LG" onchange="hideDiv()" value="LG">LG</li>
+                                <li><input type="checkbox" id="Sony" onchange="hideDiv()" value="Sony">Sony</li>
                                 <% } %>
         </ul>
         <section id="container">

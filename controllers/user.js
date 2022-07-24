@@ -51,7 +51,7 @@ module.exports.editAccount = async(req, res) => {
     }
     await user.save();
     req.flash('success', 'Successfully updated account');
-    res.redirect('/user/account');
+    res.redirect('/home');
 }
 
 module.exports.renderRegister = (req, res) => {
