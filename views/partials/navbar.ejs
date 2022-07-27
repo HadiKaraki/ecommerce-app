@@ -25,7 +25,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="#" style="font-weight: bold;">BuyForLess</a>
+            <a class="navbar-brand" href="/home" style="font-weight: bold;">BuyForLess</a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="/home" style="color: white; font-size: 18px;">Home <span
@@ -36,12 +36,18 @@
                 </li>
                 <% if(currentUser) {%>
                     <% if(currentUser.admin) {%>
-                        <li><a class=" nav-link " style=" color: white; font-size: 18px; " href=" /product/new ">New</a>
+                        <li><a class=" nav-link " style=" color: white; font-size: 18px;" href=" /product/new ">New</a>
                         </li>
                         <% } %>
                             <% } %>
+                                <form action="/search" method="GET" class=" form-inline my-2 my-lg-0 ">
+                                    <div class="mx-auto">
+                                        <input class=" form-control mr-sm-2 " type=" search " id="search-bar" placeholder="Search entire store.." aria-label=" Search " name="query">
+                                        <button class=" btn btn-outline-success my-2 my-sm-0 " type=" submit " style=" color: white; background-color: black; ">Search</button>
+                                    </div>
+                                </form>
                                 <% if(currentUser) { %>
-                                    <li id=" user "><a class=" nav-link " href="/user/account" style=" color: white; font-size: 18px; " href=" /user/account "><i
+                                    <li class="nav-item" id=" user "><a class=" nav-link " href="/user/account" style=" color: white; font-size: 18px; " href=" /user/account "><i
                                                 class=" fa fa-user " aria-hidden=" true " style=" margin-right: 10px; ">
                                             </i>Account</a>
                                     </li>
@@ -51,35 +57,22 @@
                                     <li class=" nav-item " id=" user ">
                                         <a class=" nav-link" style=" color: white; font-size: 18px; " href=" /user/wishlist "><i class=" fa fa-heart-o " aria-hidden=" true "
                                                 style=" font-size:18px; ">
-                                                4
+                                                <%= currentUser.wishlist.length %>
                                             </i></a>
                                     </li>
-                                    <li class=" nav-item " id=" user "><a class=" nav-link " href="/user/cart" style=" color: white; font-size: 18px; " href=" /user/cart "><i
+                                    <li class=" nav-item text-right" id=" user "><a class=" nav-link " href="/user/cart" style=" color: white; font-size: 18px; " href=" /user/cart "><i
                                                 class=" fa fa-shopping-cart " style=" font-size:18px ">
-                                                6
+                                                <%= currentUser.cart.length %>
                                             </i></a></li>
                                     <% } else {%>
-                                        <li id=" user "><a class=" nav-link " style=" color: white; font-size: 18px; " href=" /user/login ">Login</a>
+                                        <li class="nav-item text-right" id=" user "><a class=" nav-link " style=" color: white; font-size: 18px; " href=" /user/login ">Login</a>
                                         </li>
-                                        <li id=" user "><a class=" nav-link " style=" color: white; font-size: 18px; " href=" /user/register ">Signup</a>
+                                        <li class="nav-item" id=" user "><a class=" nav-link " style=" color: white; font-size: 18px; " href=" /user/register ">Signup</a>
                                         </li>
                                         <% } %>
             </ul>
-            <form class=" form-inline my-2 my-lg-0 ">
-                <input class=" form-control mr-sm-2 " type=" search " placeholder=" Search " aria-label=" Search ">
-                <button class=" btn btn-outline-success my-2 my-sm-0 " type=" submit " style=" color: white; background-color: black; ">Search</button>
-            </form>
         </div>
     </nav>
-    <style>
-        .navbar {
-            -webkit-box-shadow: 0 6px 6px -6px #999;
-            -moz-box-shadow: 0 6px 6px -6px #999;
-            box-shadow: 0 6px 6px -6px #999;
-            padding-bottom: 0.3%;
-            padding-top: 0.3%;
-        }
-    </style>
     <script src=" https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js " integrity=" sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo " crossorigin=" anonymous "></script>
     <script src=" https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js " integrity=" sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/ " crossorigin=" anonymous "></script>
 </body>

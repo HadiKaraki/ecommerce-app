@@ -2,6 +2,14 @@ body {
     margin: 0;
 }
 
+.navbar {
+    -webkit-box-shadow: 0 6px 6px -6px #999;
+    -moz-box-shadow: 0 6px 6px -6px #999;
+    box-shadow: 0 6px 6px -6px #999;
+    padding-bottom: 0.3%;
+    padding-top: 0.3%;
+}
+
 ul {
     list-style-type: none;
     margin-bottom: 20px;
@@ -29,7 +37,7 @@ li {
 }
 
 #user {
-    float: right;
+    float: right !important;
 }
 
 li a {
@@ -43,7 +51,11 @@ li a {
 
 li a:hover {
     background-color: yellow;
-    color: black;
+    color: black !important;
+}
+
+#search-bar {
+    width: 350px !important;
 }
 
 @media (max-width: 768px) {

@@ -5,6 +5,9 @@ if (process.env.NODE_ENV !== "production") {
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const { MongoClient, ObjectID } = require("mongodb");
+const Cors = require("cors");
+const { request } = require("express");
 const ejsMate = require('ejs-mate');
 const ejsLint = require('ejs-lint');
 const flash = require('connect-flash');
@@ -21,6 +24,7 @@ const LocalStrategy = require('passport-local');
 const catchAsync = require('./utils/catchAsync');
 const path = require('path');
 const { isLoggedIn } = require('./middleware');
+var collection;
 
 // ROUTES
 const user = require('./routes/user');
@@ -29,6 +33,7 @@ const home = require('./routes/home');
 
 // MONGODB ATLAS
 const dbUrl = process.env.URL || 'mongodb://localhost:27017/ecommerceDB';
+const client = new MongoClient(dbUrl);
 mongoose.connect(dbUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -104,6 +109,7 @@ app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded, basically can only parse incoming Request Object if strings or arrays
 // combines the 2 above, then you can parse incoming Request Object if object, with nested objects, or generally any type.
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(Cors());
 
 // ROUTING
 app.use('/product', post)
@@ -113,6 +119,21 @@ app.use('/home', home)
 app.get('/', (req, res) => {
     res.redirect('/home')
 })
+
+app.get("/search", async(req, res) => {
+    try {
+        const agg = [
+            { $search: { autocomplete: { query: req.query.query, path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } } },
+            { $limit: 20 },
+            { $project: { _id: 1, name: 1, price: 1, brand: 1, images: 1 } }
+        ];
+        // RESULTS IS AN ARRAY
+        const results = await collection.aggregate(agg).toArray();
+        res.render('products/found', { results });
+    } catch (e) {
+        res.status(500).send({ message: e.message });
+    }
+});
 
 app.get('/back', (req, res) => {
     const redirectUrl = req.session.returnTo;
@@ -127,8 +148,14 @@ app.all('*', (req, res) => {
 })
 
 const port = process.env.PORT || 3000; // if first does not work, go to the second
-app.listen(port, () => {
-    console.log(`Serving on port ${port}`)
+app.listen(port, async() => {
+    try {
+        await client.connect();
+        collection = client.db("test").collection("products");
+        console.log(`Serving on port ${port}`)
+    } catch (e) {
+        console.error(e);
+    }
 })
 
 //msUmz38PI9crSPZh

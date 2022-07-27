@@ -1,0 +1,40 @@
+<% layout('layouts/boilerplate')%>
+
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../Category.css">
+    </head>
+
+    <body>
+        <section id="container">
+            <% if(results.length>0) { %>
+                <% for(let result of results) {%>
+                    <a href="/product/<%= result._id %> ">
+                        <div class="<%= result.brand %>" id="result">
+                            <div id="image">
+                                <img src="<%= result.images[0].url %> ">
+                            </div>
+                            <div id="bottom-panel">
+                                <div id="description">
+                                    <strong>
+                                        <p>
+                                            <%= result.name %>
+                                        </p>
+                                    </strong>
+                                </div>
+                                <div id="price">
+                                    <p>
+                                        $
+                                        <%= result.price %>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <% } %>
+                        <% } else {%>
+                            <h1>No results found.</h1>
+                            <% } %>
+        </section>
+
+    </body>
