@@ -1,0 +1,39 @@
+<% layout('layouts/boilerplate')%>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="../Cart.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    </head>
+
+
+    <section id="container">
+        <% for(let product of brandProducts) {%>
+            <a href="/product/<%= product._id %> ">
+                <div id="product">
+                    <div id="image">
+                        <img src="<%= product.images[0].url %> ">
+                    </div>
+                    <div id="bottom-panel">
+                        <div id="description">
+                            <strong>
+                                <p>
+                                    <%= product.name %>
+                                </p>
+                            </strong>
+                        </div>
+                        <div id="price">
+                            <p>
+                                $
+                                <%= product.price %>
+                            </p>
+                        </div>
+                        <form action="/product/deleteFromCart/<%= product._id %> " method="POST">
+                            <button id="remove-button" style="background-color: red;">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </a>
+            <% } %>
+    </section>

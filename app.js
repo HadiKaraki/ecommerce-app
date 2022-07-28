@@ -28,7 +28,8 @@ var collection;
 
 // ROUTES
 const user = require('./routes/user');
-const post = require('./routes/product');
+const product = require('./routes/product');
+const brand = require('./routes/brand');
 const home = require('./routes/home');
 
 // MONGODB ATLAS
@@ -112,7 +113,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(Cors());
 
 // ROUTING
-app.use('/product', post)
+app.use('/brand', brand)
+app.use('/product', product)
 app.use('/user', user)
 app.use('/home', home)
 
@@ -123,7 +125,7 @@ app.get('/', (req, res) => {
 app.get("/search", async(req, res) => {
     try {
         const agg = [
-            { $search: { autocomplete: { query: req.query.query, path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } } },
+            { $search: { autocomplete: { query: req.query.name, path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } } },
             { $limit: 20 },
             { $project: { _id: 1, name: 1, price: 1, brand: 1, images: 1 } }
         ];
