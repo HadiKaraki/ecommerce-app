@@ -1,7 +1,11 @@
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif !important;
     margin: 0;
     background-color: rgb(241, 241, 241);
+}
+
+h1 {
+    font-size: 30px !important;
 }
 
 .container {
@@ -40,6 +44,7 @@ body {
 }
 
 .left-child #rating-panel {
+    background-color: white;
     display: flex;
     height: 300px;
     width: 100%;
@@ -61,6 +66,7 @@ body {
     flex: 1;
     border-bottom: 0.4px solid black;
     margin-right: 20px;
+    max-height: 540px;
     overflow-y: scroll;
 }
 
@@ -97,6 +103,10 @@ body {
 .right-child #reviews-panel {
     border-top: 0.4px solid black;
     margin-top: 60px;
+}
+
+.right-child #reviews-panel #review {
+    border-bottom: 0.4px solid black;
 }
 
 .right-child #reviews-panel #review p {
@@ -145,6 +155,8 @@ body {
         margin-right: 20px;
         margin-left: 20px;
         width: 90%;
+        max-height: 100%;
+        overflow-y: hidden;
     }
     .left-child {
         width: 95%;

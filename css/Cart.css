@@ -13,6 +13,7 @@ h1 {
 }
 
 #container {
+    margin-top: 20px;
     background-color: rgb(241, 241, 241);
     /* height: 500px; */
     display: grid;

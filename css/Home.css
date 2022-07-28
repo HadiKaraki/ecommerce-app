@@ -16,25 +16,6 @@ body {
     font-weight: normal;
 }
 
-#search-box {
-    float: right;
-    margin-right: 10px;
-}
-
-#search-box input {
-    border: 0.6px solid black;
-    width: 350px;
-    font-size: 18px;
-    padding-bottom: 20px;
-}
-
-#search-box button {
-    border: 0.6px solid black;
-    padding-bottom: 20px;
-    font-size: 18px;
-    background-color: white;
-}
-
 #container {
     margin-left: 10px;
     margin-right: 10px;
@@ -88,9 +69,6 @@ body {
     #search-box {
         float: center;
         margin: 0;
-        width: 60%;
-    }
-    #search-box input {
         width: 60%;
     }
     #container {

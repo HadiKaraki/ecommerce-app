@@ -22,16 +22,6 @@ ul {
     font-weight: bold;
 }
 
-ul button {
-    display: block;
-    text-align: center;
-    padding: 14px 16px;
-    background-color: #2691d9;
-    text-decoration: none;
-    font-size: 10px;
-    cursor: pointer;
-}
-
 li {
     float: left;
 }
@@ -54,12 +44,22 @@ li a:hover {
     color: black !important;
 }
 
-#search-bar {
+#search-box #search-bar {
     width: 350px !important;
+    border-radius: 0px !important;
+}
+
+#search-box button {
+    border-radius: 0px !important;
+}
+
+#search-box button:hover {
+    background-color: yellow !important;
+    color: black !important;
 }
 
 @media (max-width: 768px) {
-    #user {
-        float: left;
+    #search-box #search-bar {
+        width: 253px !important;
     }
 }
