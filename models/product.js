@@ -38,7 +38,7 @@ const ProductSchema = new Schema({
     images: [ImageSchema],
     reviews: [{
         type: Schema.Types.ObjectId,
-        ref: 'EcommerceUsers'
+        ref: 'ProductReview'
     }]
 }, opts);
 

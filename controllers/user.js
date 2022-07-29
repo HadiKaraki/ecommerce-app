@@ -54,6 +54,15 @@ module.exports.editAccount = async(req, res) => {
     res.redirect('/home');
 }
 
+module.exports.changePassword = async(req, res) => {
+    const { newPassword } = req.body;
+    const user = await User.findById(req.user._id);
+    user.setPassword(newPassword, function() {
+        user.save();
+        res.status(200).json({ message: 'password reset successful' });
+    });
+}
+
 module.exports.renderRegister = (req, res) => {
     res.render('users/register');
 }

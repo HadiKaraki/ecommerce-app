@@ -12,7 +12,7 @@ const castErrorDB = err => {
 module.exports.showProduct = async(req, res) => {
     try {
         const { id } = req.params;
-        const product = await Product.findById(id);
+        const product = await Product.findById(id)
         var addedToCart = false;
         var addedToWishlist = false;
         if (req.isAuthenticated()) {

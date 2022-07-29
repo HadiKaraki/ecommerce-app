@@ -29,6 +29,7 @@ var collection;
 // ROUTES
 const user = require('./routes/user');
 const product = require('./routes/product');
+const review = require('./routes/review');
 const brand = require('./routes/brand');
 const home = require('./routes/home');
 
@@ -114,6 +115,7 @@ app.use(Cors());
 
 // ROUTING
 app.use('/brand', brand)
+app.use('/review', review)
 app.use('/product', product)
 app.use('/user', user)
 app.use('/home', home)
@@ -146,7 +148,7 @@ app.get('/back', (req, res) => {
 app.all('*', (req, res) => {
     // req.flash('error', 'Page not found')
     // res.redirect('back');
-    res.send("Page not found")
+    res.render('notfound')
 })
 
 const port = process.env.PORT || 3000; // if first does not work, go to the second
