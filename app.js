@@ -87,7 +87,6 @@ passport.deserializeUser(User.deserializeUser());
 // Executed every time the app receives a request
 app.use((req, res, next) => {
     console.log(req.session)
-    console.log(req.session.returnTo)
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
@@ -125,9 +124,10 @@ app.get('/', (req, res) => {
 })
 
 app.get("/search", async(req, res) => {
+    let name = req.query.name;
     try {
         const agg = [
-            { $search: { autocomplete: { query: req.query.name, path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } } },
+            { $search: { autocomplete: { query: name, path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } } },
             { $limit: 20 },
             { $project: { _id: 1, name: 1, price: 1, brand: 1, images: 1 } }
         ];

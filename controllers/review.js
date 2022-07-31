@@ -7,7 +7,12 @@ module.exports.newReview = async(req, res) => {
     const { productID } = req.params
     const { text, rating } = req.body;
     const review = new Review();
-    const product = await Product.findById(productID);
+    const product = await Product.findById(productID).populate({
+        path: 'reviews',
+        populate: {
+            path: 'reviews'
+        }
+    }).populate('reviews');;
     review.body = text
     review.rating = rating;
     review.author = req.user._id

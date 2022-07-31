@@ -11,7 +11,7 @@ const upload = multer({ storage });
 
 router.route('/register')
     .get(users.renderRegister)
-    .post(upload.single('image'), catchAsync(users.register));
+    .post(catchAsync(users.register));
 
 router.route('/login')
     .get(users.renderLogin)
@@ -19,21 +19,20 @@ router.route('/login')
 
 router.get('/logout', isLoggedIn, users.logout)
 
-// router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '../user/login' }), async(req, res) => {
-//     req.flash('success', 'welcome back!');
-//     res.redirect('../user/home');
-// });
-
 router.route('/account')
     .get(isLoggedIn, users.renderAccount)
     .post(isLoggedIn, catchAsync(users.editAccount));
 
+router.get('/forgotpassword', users.forgotPassword)
+
+router.post('/forgotpassinstruc', users.forgotPassInstruc)
+
+router.route('/resetpassword/:userID')
+    .get(users.resetPassword)
+    .post(users.changePassword)
+
 router.get('/cart', isLoggedIn, catchAsync(users.cart))
 
 router.get('/wishlist', isLoggedIn, catchAsync(users.wishlist))
-
-// router.route('/profile')
-//     .get(isLoggedIn, users.profile)
-//     .post(isLoggedIn, catchAsync(users.editProfile));
 
 module.exports = router;

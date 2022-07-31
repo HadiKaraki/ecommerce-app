@@ -47,18 +47,20 @@ module.exports.category = async(req, res) => {
 
 module.exports.addToCart = async(req, res) => {
     // AJAX
-    console.log('add to cart')
-    const { id } = req.body;
-    const userID = req.user._id;
-    var productId = mongoose.Types.ObjectId(id);
-    const currUser = await User.findById(userID);
-    currUser.cart.push(productId);
-    await currUser.save();
+    if (req.isAuthenticated()) {
+        const { id } = req.body;
+        const userID = req.user._id;
+        var productId = mongoose.Types.ObjectId(id);
+        const currUser = await User.findById(userID);
+        currUser.cart.push(productId);
+        await currUser.save();
+    } else {
+        res.redirect('/user/login');
+    }
 }
 
 module.exports.removeFromCart = async(req, res) => {
-    console.log('remove from cart')
-        // AJAX
+    // AJAX
     const { id } = req.body;
     const userID = req.user._id;
     var productId = mongoose.Types.ObjectId(id);
@@ -114,16 +116,16 @@ module.exports.addProduct = async(req, res) => {
 }
 
 module.exports.renderEditProduct = async(req, res) => {
-    const { id } = req.params;
-    const product = await Product.findById(id)
+    const { productID } = req.params;
+    const product = await Product.findById(productID)
     res.render('product/edit', { product });
 }
 
 module.exports.editProduct = async(req, res) => {
-    const { id } = req.params;
-    const product = await Product.findByIdAndUpdate(id, {...req.body.site });
-    const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
-    site.images.push(...imgs);
+    const { productID } = req.params;
+    const product = await Product.findByIdAndUpdate(id, {...req.body.product });
+    // const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    // site.images.push(...imgs);
     await product.save();
     if (req.body.deleteImages) {
         for (let filename of req.body.deleteImages) {

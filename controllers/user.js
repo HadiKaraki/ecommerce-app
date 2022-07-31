@@ -1,15 +1,6 @@
 const User = require('../models/user');
 const flash = require('connect-flash');
-
-module.exports.renderAccount = async(req, res) => {
-    if (req.isAuthenticated()) {
-        const currUserID = req.user._id
-        const user = await User.findById(currUserID);
-        res.render('users/account', { user })
-    } else {
-        res.redirect('../user/login');
-    }
-}
+var nodemailer = require('nodemailer');
 
 module.exports.cart = async(req, res) => {
     const userID = req.user._id;
@@ -33,6 +24,12 @@ module.exports.wishlist = async(req, res) => {
     res.render('users/wishlist', { currUser });
 }
 
+module.exports.renderAccount = async(req, res) => {
+    const currUserID = req.user._id
+    const user = await User.findById(currUserID);
+    res.render('users/account', { user })
+}
+
 module.exports.editAccount = async(req, res) => {
     const { first_name, last_name, address, title, } = req.body
     const userID = req.user._id;
@@ -54,17 +51,81 @@ module.exports.editAccount = async(req, res) => {
     res.redirect('/home');
 }
 
-module.exports.changePassword = async(req, res) => {
-    const { newPassword } = req.body;
-    const user = await User.findById(req.user._id);
-    user.setPassword(newPassword, function() {
-        user.save();
-        res.status(200).json({ message: 'password reset successful' });
+module.exports.forgotPassword = async(req, res) => {
+    res.render('users/forgot_password');
+}
+
+module.exports.forgotPassInstruc = async(req, res) => {
+    const { email } = req.body;
+    const user = await User.findOne({ email: email });
+    const output = `<p>Click on 
+                        <a href="http://localhost:3000/user/resetpassword/${user._id}">
+                            this
+                        </a>
+                        link in order to reset your password.
+                    </p>`
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'yeah.com75@gmail.com',
+            pass: 'sbiwphzqazzjxtzc'
+        }
+    });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"BuyForLess" yeah.com75@gmail.com', // sender address
+        to: email, // list of receivers
+        subject: 'Password reset request', // Subject line
+        text: '', // plain text body
+        html: output // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+        res.render('users/forgot_pass_instruc');
     });
 }
 
+module.exports.resetPassword = async(req, res) => {
+    const { userID } = req.params;
+    if (userID.length !== 24) {
+        req.flash('error', 'Expired or wrong link')
+        res.redirect('/user/login');
+        return;
+    }
+    res.render('users/reset_password', { userID });
+}
+
+module.exports.changePassword = async(req, res) => {
+    const { userID } = req.params
+    const user = await User.findById(userID);
+    const { newPassword } = req.body;
+    if (user) {
+        user.setPassword(newPassword, function() {
+            user.save();
+            req.flash('success', 'Succesfuly changed password!')
+            res.redirect('/user/login');
+        });
+    } else {
+        req.flash('error', 'User not found')
+        res.redirect('/user/login');
+    }
+}
+
 module.exports.renderRegister = (req, res) => {
-    res.render('users/register');
+    if (!req.isAuthenticated()) {
+        res.render('users/register');
+    } else {
+        req.flash('error', 'Already logged in');
+        res.redirect('back');
+    }
 }
 
 module.exports.register = async(req, res) => {
@@ -98,14 +159,19 @@ module.exports.renderLogin = async(req, res) => {
 }
 
 module.exports.login = async(req, res) => {
-    const name = req.user.username
-    const redirectUrl = req.session.returnTo || '/home';
-    delete req.session.returnTo;
-    req.flash('success', 'welcome back!');
-    res.redirect(redirectUrl);
+    if (!req.isAuthenticated()) {
+        const name = req.user.username
+        const redirectUrl = req.session.returnTo || '/home';
+        req.flash('success', 'welcome back!');
+        res.redirect(redirectUrl);
+    } else {
+        req.flash('error', 'Already logged in');
+        res.redirect('back');
+    }
 }
 
 module.exports.logout = async(req, res, next) => {
+    //delete req.session.returnTo;
     req.logout(function(err) {
         if (err) { return next(err); }
         res.redirect('/');

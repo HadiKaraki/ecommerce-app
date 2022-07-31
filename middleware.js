@@ -21,7 +21,7 @@ module.exports.isAdmin = async(req, res, next) => {
     }
 }
 
-module.exports.passAuthenticate = (req, res, next) => {
-    passport.authenticate('local', { failureFlash: true, failureRedirect: '../user/login' })
-    next();
-}
+// module.exports.passAuthenticate = (req, res, next) => {
+//     passport.authenticate('local', { failureFlash: true, failureRedirect: '../user/login' })
+//     next();
+// }

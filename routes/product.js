@@ -8,9 +8,13 @@ const { storage } = require('../cloudinary');
 const upload = multer({ storage });
 const catchAsync = require('../utils/catchAsync');
 
-router.get('/new', isLoggedIn, isAdmin, catchAsync(products.renderNewProduct))
+router.route('/new')
+    .get(isLoggedIn, isAdmin, catchAsync(products.renderNewProduct))
+    .post(upload.array('image'), isLoggedIn, isAdmin, catchAsync(products.addProduct))
 
-router.post('/add', upload.array('image'), isLoggedIn, isAdmin, catchAsync(products.addProduct))
+router.route('/edit/:productID')
+    .get(isLoggedIn, isAdmin, catchAsync(products.renderEditProduct))
+    .post(upload.array('image'), isLoggedIn, isAdmin, catchAsync(products.editProduct))
 
 router.get('/category/:category', catchAsync(products.category))
 
