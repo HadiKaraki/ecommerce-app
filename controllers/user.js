@@ -1,6 +1,9 @@
 const User = require('../models/user');
 const flash = require('connect-flash');
 var nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
+var secret = 'fl7am4gaml01jfbal16adm8364hgmlasd';
+var payload;
 
 module.exports.cart = async(req, res) => {
     const userID = req.user._id;
@@ -55,11 +58,20 @@ module.exports.forgotPassword = async(req, res) => {
     res.render('users/forgot_password');
 }
 
-module.exports.forgotPassInstruc = async(req, res) => {
+module.exports.forgotPassEmail = async(req, res) => {
     const { email } = req.body;
     const user = await User.findOne({ email: email });
+    if (!user) {
+        res.send("This email is not registered. You may Sign up using this email.");
+        return;
+    }
+    payload = {
+        id: user._id,
+        email: email
+    };
+    var token = jwt.sign(payload, secret, { expiresIn: '1h' })
     const output = `<p>Click on 
-                        <a href="http://localhost:3000/user/resetpassword/${user._id}">
+                        <a href="http://e-comwebsite.herokuapp.com/user/resetpassword/${user._id}/${token}">
                             this
                         </a>
                         link in order to reset your password.
@@ -88,19 +100,18 @@ module.exports.forgotPassInstruc = async(req, res) => {
         }
         console.log('Message sent: %s', info.messageId);
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-        res.render('users/forgot_pass_instruc');
     });
 }
 
-module.exports.resetPassword = async(req, res) => {
-    const { userID } = req.params;
-    if (userID.length !== 24) {
-        req.flash('error', 'Expired or wrong link')
-        res.redirect('/user/login');
-        return;
-    }
-    res.render('users/reset_password', { userID });
+module.exports.changePasswordPage = async(req, res) => {
+    jwt.verify(req.params.token, secret, (err, authData) => {
+        if (err) {
+            res.send("Wrong or expired link");
+        } else {
+            const userID = req.params.userID;
+            res.render('users/reset_password', { userID });
+        }
+    });
 }
 
 module.exports.changePassword = async(req, res) => {
@@ -114,7 +125,7 @@ module.exports.changePassword = async(req, res) => {
             res.redirect('/user/login');
         });
     } else {
-        req.flash('error', 'User not found')
+        req.flash('error', 'Expired or corrupted link')
         res.redirect('/user/login');
     }
 }
@@ -161,6 +172,7 @@ module.exports.renderLogin = async(req, res) => {
 module.exports.login = async(req, res) => {
     if (!req.isAuthenticated()) {
         const name = req.user.username
+        const currUser = req.user;
         const redirectUrl = req.session.returnTo || '/home';
         req.flash('success', 'welcome back!');
         res.redirect(redirectUrl);

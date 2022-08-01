@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const { authenticate } = require('passport');
 const users = require('../controllers/user');
-const { isLoggedIn, passAuthenticate } = require('../middleware');
+const { isLoggedIn } = require('../middleware');
 const catchAsync = require('../utils/catchAsync');
 const multer = require('multer');
 const { storage } = require('../cloudinary');
@@ -23,13 +23,13 @@ router.route('/account')
     .get(isLoggedIn, users.renderAccount)
     .post(isLoggedIn, catchAsync(users.editAccount));
 
-router.get('/forgotpassword', users.forgotPassword)
+router.route('/forgotpassword')
+    .get(users.forgotPassword)
+    .post(users.forgotPassEmail)
 
-router.post('/forgotpassinstruc', users.forgotPassInstruc)
+router.get('/resetpassword/:userID/:token', users.changePasswordPage)
 
-router.route('/resetpassword/:userID')
-    .get(users.resetPassword)
-    .post(users.changePassword)
+router.post('/resetpassword/:userID', users.changePassword)
 
 router.get('/cart', isLoggedIn, catchAsync(users.cart))
 
