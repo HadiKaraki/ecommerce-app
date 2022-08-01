@@ -2,7 +2,8 @@ const User = require('../models/user');
 const flash = require('connect-flash');
 var nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
-var secret = 'fl7am4gaml01jfbal16adm8364hgmlasd';
+const { v4: uuidv4 } = require('uuid');
+var secret;
 var payload;
 
 module.exports.cart = async(req, res) => {
@@ -69,6 +70,7 @@ module.exports.forgotPassEmail = async(req, res) => {
         id: user._id,
         email: email
     };
+    secret = uuidv4();
     var token = jwt.sign(payload, secret, { expiresIn: '1h' })
     const output = `<p>Click on 
                         <a href="http://e-comwebsite.herokuapp.com/user/resetpassword/${user._id}/${token}">
@@ -124,6 +126,7 @@ module.exports.changePassword = async(req, res) => {
             req.flash('success', 'Succesfuly changed password!')
             res.redirect('/user/login');
         });
+        secret = uuidv4();
     } else {
         req.flash('error', 'Expired or corrupted link')
         res.redirect('/user/login');
