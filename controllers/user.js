@@ -72,11 +72,11 @@ module.exports.forgotPassEmail = async(req, res) => {
     };
     secret = uuidv4();
     var token = jwt.sign(payload, secret, { expiresIn: '1h' })
-    const output = `<p>Click on 
+    const output = `<p>A password reset was requested on this account. Click on 
                         <a href="http://e-comwebsite.herokuapp.com/user/resetpassword/${user._id}/${token}">
                             this
                         </a>
-                        link in order to reset your password.
+                        link in order to reset your password. This link expires in 1 hour.
                     </p>`
     let transporter = nodemailer.createTransport({
         service: 'gmail',

@@ -3,11 +3,6 @@ body {
     background-color: rgb(241, 241, 241);
 }
 
-#brand {
-    margin-top: 30px;
-    text-align: center;
-}
-
 #brand h1 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 35px;

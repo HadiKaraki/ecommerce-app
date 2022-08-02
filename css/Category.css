@@ -56,6 +56,10 @@ h1 {
     border: 0px;
 }
 
+#container #price {
+    color: red;
+}
+
 #container #product:nth-child(2n) {
     border-left: 0px;
 }

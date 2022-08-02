@@ -101,9 +101,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 // STATIC FILES (for serving css, images, and JS files)
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static(__dirname + '/css'))
-app.use(express.static(__dirname + '/assets'))
-app.use(express.static(__dirname + '/utils'))
+app.use(express.static(path.join(__dirname + '/css')))
+app.use(express.static(path.join(__dirname + '/assets')))
+app.use(express.static(path.join(__dirname + '/utils')))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -125,6 +125,7 @@ app.get('/', (req, res) => {
 
 app.get("/search", async(req, res) => {
     let name = req.query.name;
+    let option = req.query.option;
     try {
         const agg = [
             { $search: { autocomplete: { query: name, path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } } },

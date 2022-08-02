@@ -44,12 +44,23 @@ li a:hover {
     color: black !important;
 }
 
-#search-box #search-bar {
+#search-box #search-bar,
+#search-box-mobile #search-bar {
     width: 350px !important;
     border-radius: 0px !important;
 }
 
-#search-box button {
+#search-box #option,
+#search-box-mobile #option {
+    height: 38px;
+    margin-right: 8px;
+    cursor: pointer;
+    background-color: gold;
+    font-weight: bold;
+}
+
+#search-box button,
+#search-box-mobile button {
     border-radius: 0px !important;
 }
 
@@ -59,7 +70,27 @@ li a:hover {
 }
 
 @media (max-width: 768px) {
-    #search-box #search-bar {
-        width: 253px !important;
+    #brand-mobile {
+        display: block !important;
+        margin-left: 10px;
+        margin-top: 10px;
+        color: #1477ba;
+        text-decoration: underline;
+        text-decoration-color: gold;
+        text-decoration-thickness: 4px;
+    }
+    #search-box,
+    #search-box #search-bar,
+    #search-box #option {
+        display: none;
+    }
+    #search-box-mobile {
+        display: block !important;
+    }
+    #search-box-mobile #option {
+        margin: 0;
+    }
+    #search-box-mobile #search-bar {
+        width: 210px !important;
     }
 }
