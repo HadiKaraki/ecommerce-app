@@ -73,8 +73,8 @@ li a:hover {
     #brand-mobile {
         display: block !important;
         margin-left: 10px;
-        margin-top: 10px;
-        color: #1477ba;
+        margin-top: 20px;
+        color: #0e5e94;
         text-decoration: underline;
         text-decoration-color: gold;
         text-decoration-thickness: 4px;
@@ -87,10 +87,14 @@ li a:hover {
     #search-box-mobile {
         display: block !important;
     }
+    #search-box-mobile #search-bar {
+        width: 65% !important;
+    }
     #search-box-mobile #option {
         margin: 0;
+        width: 25%;
     }
-    #search-box-mobile #search-bar {
-        width: 210px !important;
+    #search-box-mobile button {
+        width: 10% !important;
     }
 }

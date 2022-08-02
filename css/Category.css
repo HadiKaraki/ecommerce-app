@@ -7,6 +7,18 @@ h1 {
     color: black;
 }
 
+#categories-list {
+    background-color: yellow;
+}
+
+#categories-list #category {
+    margin-left: 10px;
+}
+
+#categories-list #category input {
+    margin-right: 5px;
+}
+
 #container a {
     color: black;
     text-decoration: none;
