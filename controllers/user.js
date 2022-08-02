@@ -81,14 +81,14 @@ module.exports.forgotPassEmail = async(req, res) => {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'yeah.com75@gmail.com',
-            pass: 'sbiwphzqazzjxtzc'
+            user: 'hadikaraki373@gmail.com',
+            pass: 'vztvzljysxeckygd'
         }
     });
 
     // setup email data with unicode symbols
     let mailOptions = {
-        from: '"BuyForLess" yeah.com75@gmail.com', // sender address
+        from: '"BuyForLess" hadikaraki373@gmail.com', // sender address
         to: email, // list of receivers
         subject: 'Password reset request', // Subject line
         text: '', // plain text body
@@ -194,3 +194,5 @@ module.exports.logout = async(req, res, next) => {
     req.flash('success', "Goodbye!");
     res.redirect('/');
 }
+
+//sbiwphzqazzjxtzc
