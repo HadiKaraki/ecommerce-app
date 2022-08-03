@@ -11,10 +11,10 @@
         <section class="container">
             <div class="left-child">
                 <div id="image">
-                    <img src="<%= product.images[0].url %> ">
+                    <img src="<%= populatedProduct.images[0].url %> ">
                 </div>
                 <div id="rating-panel">
-                    <form action="/review/new/<%= product._id %> " method="POST" novalidate>
+                    <form action="/review/new/<%= populatedProduct._id %> " method="POST" novalidate>
                         <!-- <div class="mb-3">
                                     <label class="form-label" for="rating">Rating</label>
                                     <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
@@ -31,8 +31,8 @@
                             <input type="radio" id="first-rate5" name="rating" value="5" />
                             <label for="first-rate5" title="Amazing">5 stars</label>
                         </fieldset>
-                        <div class="mb-3">
-                            <label class="form-label" for="body">Review Text</label>
+                        <div id="text-box">
+                            <label style="text-decoration: underline;" class="form-label" for="body">Review Text</label>
                             <textarea class="form-control" name="text" id="body" cols="30" rows="3" required></textarea>
                             <div class="valid-feedback">
                                 Looks good!
@@ -45,17 +45,17 @@
             <div class="right-child">
                 <div id="top-panel">
                     <h1 style="color: blue;">
-                        <%= product.name %>
+                        <%= populatedProduct.name %>
                     </h1>
                     <h1 style="color: red;">
                         $
-                        <%= product.price %>
+                        <%= populatedProduct.price %>
                     </h1>
                 </div>
                 <div id="middle-panel">
                     <div id="description">
                         <h3>
-                            <%= product.description %>
+                            <%= populatedProduct.description %>
                         </h3>
                     </div>
                     <div id="item-code">
@@ -63,7 +63,7 @@
                             <p style="margin-right: 80px; display: inline;">Item Code:</p>
                         </strong>
                         <p style="display: inline; color: blue">
-                            <%= product.code %>
+                            <%= populatedProduct.code %>
                         </p>
                     </div>
                     <div id="brand">
@@ -71,7 +71,7 @@
                             <p style="margin-right: 120px; display: inline;">Brand:
                             </p>
                             <p style="display: inline;">
-                                <%= product.brand %>
+                                <%= populatedProduct.brand %>
                             </p>
                         </strong>
 
@@ -95,14 +95,32 @@
                                         <% } %>
                 </div>
                 <div id="reviews-panel">
-                    <% for(let review of product.reviews) {%>
+                    <% for(let review of populatedProduct.reviews) {%>
                         <div id="review">
-                            <h2>
-                                <%= review.author.username %>
-                            </h2>
-                            <p>
-                                <%= review.body %>
-                            </p>
+                            <div id="review-author">
+                                <h3>
+                                    <%= review.author.username %>
+                                </h3>
+                            </div>
+                            <% if(review.body) {%>
+                                <div id="review-body">
+                                    <p>
+                                        <%= review.body %>
+                                    </p>
+                                </div>
+                                <% } %>
+                                    <% if(review.rating) {%>
+                                        <div id="review-rating">
+                                            <p>
+                                                <%= review.rating %>
+                                            </p>
+                                        </div>
+                                        <% } %>
+                                            <form action="/review/delete/<%= review._id %>?_method=DELETE" method="POST">
+                                                <% if(currentUser && review.author._id.equals(currentUser._id)) {%>
+                                                    <button type="submit" id="delete-review">Delete</button>
+                                                    <% } %>
+                                            </form>
                         </div>
                         <% } %>
                 </div>
@@ -111,7 +129,7 @@
     </body>
 
     <script>
-        var product_id = '<%- product.id %>'
+        var product_id = '<%- populatedProduct.id %>'
             // document.getElementById('removecart-button').addEventListener('click', removeFromCart)
 
         function addToCart(e) {

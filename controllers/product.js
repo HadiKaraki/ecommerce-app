@@ -12,18 +12,20 @@ const castErrorDB = err => {
 module.exports.showProduct = async(req, res) => {
     try {
         const { id } = req.params;
-        const product = await Product.findById(id)
+        var populatedProduct = await Product.findById(id).populate('reviews')
+        populatedProduct = await populatedProduct.populate('reviews.author');
+        console.log(populatedProduct)
         var addedToCart = false;
         var addedToWishlist = false;
         if (req.isAuthenticated()) {
             const userID = req.user._id;
             const currUser = await User.findById(userID)
-            if (!product) {
+            if (!populatedProduct) {
                 req.flash('error', 'Cannot find that product!');
                 return res.redirect('back');
             }
-            const cartIndex = currUser.cart.indexOf(product._id);
-            const wishlistIndex = currUser.wishlist.indexOf(product._id);
+            const cartIndex = currUser.cart.indexOf(populatedProduct._id);
+            const wishlistIndex = currUser.wishlist.indexOf(populatedProduct._id);
             if (cartIndex > -1) {
                 addedToCart = true;
             }
@@ -31,7 +33,7 @@ module.exports.showProduct = async(req, res) => {
                 addedToWishlist = true;
             }
         }
-        res.render('products/show', { product, addedToCart, addedToWishlist });
+        res.render('products/show', { populatedProduct, addedToCart, addedToWishlist });
     } catch (e) {
         console.log(castErrorDB(e));
         req.flash('error', 'Cannot find that product!');
