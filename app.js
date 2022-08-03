@@ -125,10 +125,10 @@ app.get('/', (req, res) => {
 
 app.get("/search", async(req, res) => {
     let name = req.query.name;
-    let option = req.query.option;
+    let option = req.query.option.toUpperCase();
     try {
         const agg = [
-            { $search: { autocomplete: { query: name, path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } } },
+            { $search: { compound: { must: [{ text: { query: option, path: "category", fuzzy: { maxEdits: 2, prefixLength: 3 } } }, { autocomplete: { query: name, path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } }] } } },
             { $limit: 20 },
             { $project: { _id: 1, name: 1, price: 1, brand: 1, images: 1 } }
         ];
