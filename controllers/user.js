@@ -117,20 +117,21 @@ module.exports.changePasswordPage = async(req, res) => {
 }
 
 module.exports.changePassword = async(req, res) => {
-    const { userID } = req.params
-    const user = await User.findById(userID);
-    const { newPassword } = req.body;
-    if (user) {
-        user.setPassword(newPassword, function() {
-            user.save();
-            req.flash('success', 'Succesfuly changed password!')
-            res.redirect('/user/login');
-        });
-        secret = uuidv4();
-    } else {
-        req.flash('error', 'Expired or corrupted link')
-        res.redirect('/user/login');
-    }
+    jwt.verify(req.params.token, secret, async(err, authData) => {
+        if (err) {
+            res.send("Wrong or expired link");
+        } else {
+            const { userID } = req.params
+            const user = await User.findById(userID);
+            const { newPassword } = req.body;
+            user.setPassword(newPassword, function() {
+                user.save();
+                req.flash('success', 'Succesfuly changed password!')
+                res.redirect('/user/login');
+            });
+            secret = uuidv4();
+        }
+    });
 }
 
 module.exports.renderRegister = (req, res) => {

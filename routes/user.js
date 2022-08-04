@@ -29,7 +29,7 @@ router.route('/forgotpassword')
 
 router.get('/resetpassword/:userID/:token', users.changePasswordPage)
 
-router.post('/resetpassword/:userID', users.changePassword)
+router.post('/resetpassword/:userID/:token', users.changePassword)
 
 router.get('/cart', isLoggedIn, catchAsync(users.cart))
 
