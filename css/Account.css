@@ -132,9 +132,15 @@ input[type="submit"]:hover {
 }
 
 @media (max-width: 768px) {
+    body {
+        height: 40vh;
+    }
     .center {
         margin-top: 30px;
         margin-bottom: 30px;
         width: 90%;
+    }
+    #footer {
+        height: 100%;
     }
 }

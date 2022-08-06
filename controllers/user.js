@@ -106,12 +106,13 @@ module.exports.forgotPassEmail = async(req, res) => {
 }
 
 module.exports.changePasswordPage = async(req, res) => {
+    const token = req.params.token;
     jwt.verify(req.params.token, secret, (err, authData) => {
         if (err) {
             res.send("Wrong or expired link");
         } else {
             const userID = req.params.userID;
-            res.render('users/reset_password', { userID });
+            res.render('users/reset_password', { userID, token });
         }
     });
 }

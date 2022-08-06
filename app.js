@@ -126,7 +126,7 @@ app.get('/', (req, res) => {
 app.get("/search", async(req, res) => {
     let name = req.query.name;
     let option = req.query.option
-    if (option === undefined) {
+    if (option === 'All') {
         option = ['APPLIANCE, MOBILE, TV']
     } else {
         option = option.toUpperCase();
