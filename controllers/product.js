@@ -14,7 +14,14 @@ module.exports.showProduct = async(req, res) => {
         const { id } = req.params;
         var populatedProduct = await Product.findById(id).populate('reviews')
         populatedProduct = await populatedProduct.populate('reviews.author');
-        console.log(populatedProduct)
+        var reviewSum = 0;
+        for (let review of populatedProduct.reviews) {
+            reviewSum += review.rating;
+        }
+        var averageRating = reviewSum / populatedProduct.reviews.length
+        averageRating = Math.ceil(averageRating);
+        console.log("AVERAGE RATINGGG")
+        console.log(averageRating)
         var addedToCart = false;
         var addedToWishlist = false;
         if (req.isAuthenticated()) {
@@ -33,7 +40,7 @@ module.exports.showProduct = async(req, res) => {
                 addedToWishlist = true;
             }
         }
-        res.render('products/show', { populatedProduct, addedToCart, addedToWishlist });
+        res.render('products/show', { populatedProduct, addedToCart, addedToWishlist, averageRating });
     } catch (e) {
         console.log(castErrorDB(e));
         req.flash('error', 'Cannot find that product!');

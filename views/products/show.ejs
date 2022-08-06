@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" href="../Show.css">
+        <link rel="stylesheet" href="../Stars.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     </head>
 
@@ -15,10 +16,25 @@
                 </div>
                 <div id="rating-panel">
                     <form action="/review/new/<%= populatedProduct._id %> " method="POST" novalidate>
+                        Average Rating:
+                        <p class="starability-result" data-rating="<%=averageRating%>">
+                        </p>
+                        <p>
+                            <%= populatedProduct.reviews.length %> reviews
+                        </p>
                         <!-- <div class="mb-3">
                                     <label class="form-label" for="rating">Rating</label>
                                     <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
                                 </div> -->
+                        <div id="text-box">
+                            <label style="text-decoration: underline;" class="form-label" for="body">Review Text</label>
+                            <textarea class="form-control" name="text" id="body" cols="30" rows="3" required></textarea>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <button class="btn btn-success">Submit</button>
+                        <p>Submit rating:</p>
                         <fieldset class="starability-basic">
                             <input type="radio" id="first-rate1" name="rating" value="1" />
                             <label for="first-rate1" title="Terrible">1 star</label>
@@ -31,14 +47,6 @@
                             <input type="radio" id="first-rate5" name="rating" value="5" />
                             <label for="first-rate5" title="Amazing">5 stars</label>
                         </fieldset>
-                        <div id="text-box">
-                            <label style="text-decoration: underline;" class="form-label" for="body">Review Text</label>
-                            <textarea class="form-control" name="text" id="body" cols="30" rows="3" required></textarea>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <button class="btn btn-success">Submit</button>
                     </form>
                 </div>
             </div>
@@ -110,17 +118,18 @@
                                 </div>
                                 <% } %>
                                     <% if(review.rating) {%>
+                                        <form action="/review/delete/<%= review._id %>?_method=DELETE" method="POST">
+                                            <% if(currentUser && review.author._id.equals(currentUser._id)) {%>
+                                                <button type="submit" id="delete-review">Delete</button>
+                                                <% } %>
+                                        </form>
                                         <div id="review-rating">
-                                            <p>
-                                                <%= review.rating %>
+                                            <p class="starability-result" data-rating="<%=review.rating%>">
+                                                Rated:
+                                                <%= review.rating %> stars
                                             </p>
                                         </div>
                                         <% } %>
-                                            <form action="/review/delete/<%= review._id %>?_method=DELETE" method="POST">
-                                                <% if(currentUser && review.author._id.equals(currentUser._id)) {%>
-                                                    <button type="submit" id="delete-review">Delete</button>
-                                                    <% } %>
-                                            </form>
                         </div>
                         <% } %>
                 </div>
