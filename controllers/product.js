@@ -12,24 +12,31 @@ const castErrorDB = err => {
 module.exports.showProduct = async(req, res) => {
     try {
         const { id } = req.params;
-        var populatedProduct = await Product.findById(id).populate('reviews')
-        populatedProduct = await populatedProduct.populate('reviews.author');
+        var product = await Product.findById(id).populate('reviews')
+        if (!product) {
+            req.flash('error', 'Cannot find that product!');
+            return res.redirect('back');
+        }
+        populatedProduct = await product.populate('reviews.author');
         var reviewSum = 0;
         for (let review of populatedProduct.reviews) {
             reviewSum += review.rating;
         }
-        var averageRating = reviewSum / populatedProduct.reviews.length
+        var averageRating = reviewSum / product.reviews.length
         averageRating = Math.ceil(averageRating);
-        console.log("AVERAGE RATINGGG")
-        console.log(averageRating)
         var addedToCart = false;
         var addedToWishlist = false;
         if (req.isAuthenticated()) {
-            const userID = req.user._id;
-            const currUser = await User.findById(userID)
-            if (!populatedProduct) {
-                req.flash('error', 'Cannot find that product!');
-                return res.redirect('back');
+            const currUserID = req.user._id
+            var reviewed = false;
+            var reviewIndex = -1;
+            const currUser = await User.findById(currUserID)
+            for (let review of product.reviews) {
+                reviewIndex += 1;
+                if (review.author._id.equals(currUserID)) {
+                    reviewed = true;
+                    break;
+                }
             }
             const cartIndex = currUser.cart.indexOf(populatedProduct._id);
             const wishlistIndex = currUser.wishlist.indexOf(populatedProduct._id);
@@ -40,7 +47,19 @@ module.exports.showProduct = async(req, res) => {
                 addedToWishlist = true;
             }
         }
-        res.render('products/show', { populatedProduct, addedToCart, addedToWishlist, averageRating });
+        // product: reviews => array of "review" ids
+        // populatedProduct: reviews => array of populated "review" documents
+
+        // 1) To get review id of user: product.reviews.indexOf(userID)
+        // 2) To get the review document: populatedProduct.reviews[index]
+        var userReview = false;
+        if (reviewIndex > -1) {
+            userReview = populatedProduct.reviews[reviewIndex]
+        }
+        populatedProduct.in_stock = true;
+        populatedProduct.nb_in_stock = 3;
+        await populatedProduct.save();
+        res.render('products/show', { populatedProduct, addedToCart, addedToWishlist, averageRating, reviewed, userReview });
     } catch (e) {
         console.log(castErrorDB(e));
         req.flash('error', 'Cannot find that product!');
@@ -127,12 +146,12 @@ module.exports.addProduct = async(req, res) => {
 module.exports.renderEditProduct = async(req, res) => {
     const { productID } = req.params;
     const product = await Product.findById(productID)
-    res.render('product/edit', { product });
+    res.render('products/edit', { product });
 }
 
 module.exports.editProduct = async(req, res) => {
     const { productID } = req.params;
-    const product = await Product.findByIdAndUpdate(id, {...req.body.product });
+    const product = await Product.findByIdAndUpdate(productID, {...req.body.product });
     // const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
     // site.images.push(...imgs);
     await product.save();
@@ -143,7 +162,7 @@ module.exports.editProduct = async(req, res) => {
         await product.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
     }
     req.flash('success', 'Successfully updated product');
-    res.redirect(`/sites/show/${site._id}`)
+    res.redirect(`/product/${productID}`)
 }
 
 module.exports.deleteProduct = async(req, res) => {

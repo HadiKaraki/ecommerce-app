@@ -35,6 +35,10 @@ const ProductSchema = new Schema({
         type: String,
         required: true
     },
+    in_stock: Boolean,
+    nb_in_stock: {
+        type: Number,
+    },
     images: [ImageSchema],
     reviews: [{
         type: Schema.Types.ObjectId,

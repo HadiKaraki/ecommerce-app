@@ -64,6 +64,20 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="/user/logout" style="color: white; font-size: 18px;">Logout</a>
                                     </li>
+                                    <div id="cart-wish">
+                                        <li class="nav-item">
+                                            <a class=" nav-link" style=" color: white; font-size: 18px; margin: 0px;" href=" /user/wishlist "><i class=" fa fa-heart-o " aria-hidden=" true "
+                                                    style=" font-size:18px; ">
+                                                    <%= currentUser.wishlist.length %>
+                                                </i></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class=" nav-link " href="/user/cart" style=" color: white; font-size: 18px; margin: 0px;" href=" /user/cart "><i class=" fa fa-shopping-cart "
+                                                    style=" font-size:18px ">
+                                                    <%= currentUser.cart.length %>
+                                                </i></a>
+                                        </li>
+                                    </div>
                                     <% } else {%>
                                         <li class="nav-item text-right" id=" user "><a class=" nav-link " style=" color: white; font-size: 18px; " href=" /user/login ">Login</a>
                                         </li>
@@ -72,36 +86,38 @@
                                         <% } %>
             </ul>
         </div>
-        <% if(currentUser) {%>
-            <a class=" nav-link" style=" color: white; font-size: 18px; margin: 0px;" href=" /user/wishlist "><i
-                    class=" fa fa-heart-o " aria-hidden=" true " style=" font-size:18px; ">
+    </nav>
+    <% if(currentUser) {%>
+        <div id="cart-wish-mobile">
+            <a style="display: inline;" href="/user/wishlist"><i class=" fa fa-heart-o " aria-hidden=" true "
+                    style=" font-size:23px; ">
                     <%= currentUser.wishlist.length %>
                 </i></a>
-            <a class=" nav-link " href="/user/cart" style=" color: white; font-size: 18px; margin: 0px;" href=" /user/cart "><i class=" fa fa-shopping-cart " style=" font-size:18px ">
+            <a href="/user/cart" style="display: inline;" href="/user/cart"><i class="fa fa-shopping-cart"
+                    style="font-size:23px; margin-left: 10px;">
                     <%= currentUser.cart.length %>
                 </i></a>
-            <% } %>
-
-    </nav>
-    <div id="brand-mobile-div">
-        <a href="/home">
-            <h1 id="brand-mobile" style="display: none;">BuyForLess</h1>
-        </a>
-    </div>
-    <div id="search-box-mobile" style="display: none;">
-        <form class=" form-inline my-2 my-sm-0 " action="/search" method="GET">
-            <input class=" form-control mr-sm-2 " type=" search " id="search-bar" placeholder="Search entire store.." name="name" aria-label="Search" required>
-            <select id="option" name="option">
-                <option selected disabled>Category</option>
-                <option>Appliance</option>
-                <option>Mobile</option>
-                <option>TV</option>
-            </select>
-            <button class=" btn btn-outline-success my-2 my-sm-0 " type=" submit " style=" color: white; background-color: black; "><i class="fa fa-search"></i></button>
-        </form>
-    </div>
-    <script src=" https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js " integrity=" sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo " crossorigin=" anonymous "></script>
-    <script src=" https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js " integrity=" sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/ " crossorigin=" anonymous "></script>
+        </div>
+        <% } %>
+            <div id="brand-mobile-div">
+                <a href="/home">
+                    <h1 id="brand-mobile" style="display: none;">BuyForLess</h1>
+                </a>
+            </div>
+            <div id="search-box-mobile" style="display: none;">
+                <form class=" form-inline my-2 my-sm-0 " action="/search" method="GET">
+                    <input class=" form-control mr-sm-2 " type=" search " id="search-bar" placeholder="Search entire store.." name="name" aria-label="Search" required>
+                    <select id="option" name="option">
+                        <option selected>All</option>
+                        <option>Appliance</option>
+                        <option>Mobile</option>
+                        <option>TV</option>
+                    </select>
+                    <button class=" btn btn-outline-success my-2 my-sm-0 " type=" submit " style=" color: white; background-color: black; "><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <script src=" https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js " integrity=" sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo " crossorigin=" anonymous "></script>
+            <script src=" https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js " integrity=" sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/ " crossorigin=" anonymous "></script>
 </body>
 
 </html>

@@ -16,7 +16,7 @@ router.route('/edit/:productID')
     .get(isLoggedIn, isAdmin, catchAsync(products.renderEditProduct))
     .post(upload.array('image'), isLoggedIn, isAdmin, catchAsync(products.editProduct))
 
-router.get('/category/:category', catchAsync(products.category))
+router.post('/delete/:productID', isLoggedIn, isAdmin, catchAsync(products.deleteProduct))
 
 router.post('/addToCart', isLoggedIn, catchAsync(products.addToCart))
 
@@ -29,6 +29,10 @@ router.post('/deleteFromWishlist/:id', isLoggedIn, catchAsync(products.deleteFro
 router.post('/addToWishlist', isLoggedIn, catchAsync(products.addToWishlist))
 
 router.post('/removeFromWishlist', isLoggedIn, catchAsync(products.removeFromWishlist))
+
+router.get('/category/:category', catchAsync(products.category))
+
+router.get('/filter_category', catchAsync(products.cat))
 
 router.route('/:id')
     .get(products.showProduct)

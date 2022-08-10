@@ -11,45 +11,82 @@
     <body>
         <section class="container">
             <div class="left-child">
-                <div id="image">
-                    <img src="<%= populatedProduct.images[0].url %> ">
-                </div>
-                <div id="rating-panel">
-                    <form action="/review/new/<%= populatedProduct._id %> " method="POST" novalidate>
-                        Average Rating:
-                        <p class="starability-result" data-rating="<%=averageRating%>">
-                        </p>
-                        <p>
-                            <%= populatedProduct.reviews.length %> reviews
-                        </p>
-                        <!-- <div class="mb-3">
-                                    <label class="form-label" for="rating">Rating</label>
-                                    <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
-                                </div> -->
-                        <div id="text-box">
-                            <label style="text-decoration: underline;" class="form-label" for="body">Review Text</label>
-                            <textarea class="form-control" name="text" id="body" cols="30" rows="3" required></textarea>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                <% if(currentUser && currentUser.admin) {%>
+                    <div id="delete-product">
+                        <form action="/product/delete/<%= populatedProduct._id %> ">
+                            <button id="delete-product-button">DELETE</button>
+                            <a style="float: right;" href="/product/edit/<%= populatedProduct._id %> ">EDIT</a>
+                        </form>
+                    </div>
+                    <% } %>
+                        <div id="image">
+                            <img src="<%= populatedProduct.images[0].url %> ">
                         </div>
-                        <button class="btn btn-success">Submit</button>
-                        <p>Submit rating:</p>
-                        <fieldset class="starability-basic">
-                            <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
-                            <input type="radio" id="rate1" name="rating" value="1" />
-                            <label for="rate1">1 star.</label>
-                            <input type="radio" id="rate2" name="rating" value="2" />
-                            <label for="rate2">2 stars.</label>
-                            <input type="radio" id="rate3" name="rating" value="3" />
-                            <label for="rate3">3 stars.</label>
-                            <input type="radio" id="rate4" name="rating" value="4" />
-                            <label for="rate4">4 stars.</label>
-                            <input type="radio" id="rate5" name="rating" value="5" />
-                            <label for="rate5">5 stars.</label>
-                        </fieldset>
-                    </form>
-                </div>
+                        <div id="rating-panel">
+                            <form action="/review/new/<%= populatedProduct._id %> " method="POST" novalidate>
+                                Average Rating:
+                                <p class="starability-result" data-rating="<%=averageRating%>">
+                                </p>
+                                <p>
+                                    <%= populatedProduct.reviews.length %> reviews
+                                </p>
+                                <% if(!reviewed) {%>
+                                    <div id="text-box">
+                                        <label style="text-decoration: underline;" class="form-label" for="body">Review
+                                            Text</label>
+                                        <textarea class="form-control" name="text" id="body" cols="30" rows="3" required></textarea>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success">Submit</button>
+                                    <p>Submit rating:</p>
+                                    <fieldset class="starability-basic">
+                                        <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                                        <input type="radio" id="rate1" name="rating" value="1" />
+                                        <label for="rate1">1 star.</label>
+                                        <input type="radio" id="rate2" name="rating" value="2" />
+                                        <label for="rate2">2 stars.</label>
+                                        <input type="radio" id="rate3" name="rating" value="3" />
+                                        <label for="rate3">3 stars.</label>
+                                        <input type="radio" id="rate4" name="rating" value="4" />
+                                        <label for="rate4">4 stars.</label>
+                                        <input type="radio" id="rate5" name="rating" value="5" />
+                                        <label for="rate5">5 stars.</label>
+                                    </fieldset>
+                                    <% } else {%>
+                                        <h2>Your rating:</h2>
+                                        <div id="review">
+                                            <div id="review-author">
+                                                <h3>
+                                                    <%= userReview.author.username %>
+                                                </h3>
+                                            </div>
+                                            <% if(userReview.body) {%>
+                                                <div id="review-body">
+                                                    <p>
+                                                        <%= userReview.body %>
+                                                    </p>
+                                                </div>
+                                                <% } %>
+                                                    <% if(userReview.rating) {%>
+                                                        <form action="/review/delete/<%= userReview._id %>?_method=DELETE" method="POST">
+                                                            <% if(currentUser &&
+                                                                userReview.author._id.equals(currentUser._id)) {%>
+                                                                <button type="submit" id="delete-review">Delete</button>
+                                                                <% } %>
+                                                        </form>
+                                                        <div id="review-rating">
+                                                            <p class="starability-result" data-rating="<%=userReview.rating%>">
+                                                                Rated:
+                                                                <%= userReview.rating %> stars
+                                                            </p>
+                                                        </div>
+                                                        <% } %>
+                                        </div>
+                                        <% } %>
+                            </form>
+                        </div>
             </div>
             <div class="right-child">
                 <div id="top-panel">
@@ -73,6 +110,24 @@
                         </strong>
                         <p style="display: inline; color: blue">
                             <%= populatedProduct.code %>
+                        </p>
+                    </div>
+                    <div id="in-stock">
+                        <strong>
+                            <p style="margin-right: 80px; display: inline;">In stock:</p>
+                        </strong>
+                        <% if(populatedProduct.in_stock) {%>
+                            <p style="display: inline;"><span style="color: red;">&#10003;</span> Yes</p>
+                            <% } else {%>
+                                <p>No</p>
+                                <% } %>
+                    </div>
+                    <div id="nb-in-stock">
+                        <strong>
+                            <p style="margin-right: 80px; display: inline;">Left in stock:</p>
+                        </strong>
+                        <p style="display: inline;">
+                            <%= populatedProduct.nb_in_stock %> left
                         </p>
                     </div>
                     <div id="brand">

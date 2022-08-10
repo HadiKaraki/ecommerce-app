@@ -101,7 +101,9 @@ h1 {
     border-top: 0.4px solid black;
 }
 
-.right-child #item-code {
+.right-child #item-code,
+.right-child #in-stock,
+.right-child #nb-in-stock {
     margin-top: 30px;
     margin-bottom: 10px;
 }

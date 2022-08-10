@@ -69,7 +69,25 @@ li a:hover {
     color: black !important;
 }
 
+#cart-wish-mobile {
+    margin-right: 10px;
+    margin-top: 25px;
+    display: none;
+    float: right;
+}
+
+#cart-wish-mobile a {
+    color: black;
+    text-decoration: none;
+}
+
 @media (max-width: 768px) {
+    #cart-wish {
+        display: none;
+    }
+    #cart-wish-mobile {
+        display: block;
+    }
     #brand-mobile-div #brand-mobile {
         display: block !important;
         margin-left: 10px;

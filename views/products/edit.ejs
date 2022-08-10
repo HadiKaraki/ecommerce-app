@@ -1,0 +1,58 @@
+<% layout('layouts/boilerplate')%>
+
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../../Newproduct.css">
+        <link rel="stylesheet" href="../../Navbar.css">
+        <link rel="stylesheet" href="../../Footer.css">
+    </head>
+
+    <body>
+        <div class="center">
+            <h1>New product</h1>
+            <form action="/product/edit/<%= product._id %>" method="POST" enctype="multipart/form-data">
+                <div class="txt_field">
+                    <input type="text" name="product[name]" placeholder="Name: <%= product.name %> ">
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="product[brand]" placeholder="Brand: <%= product.brand %>">
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="product[price]" placeholder="Price: <%= product.price %>">
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="product[description]" placeholder="Description: <%= product.description %>">
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="product[code]" placeholder="Code: <%= product.code %>">
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="product[nb_in_stock]" placeholder="Nb in stock: <%= product.nb_in_stock %>">
+                </div>
+                <div class="select_field">
+                    <select name="product[in_stock]">
+                        <option selected disabled>
+                            <%= product.in_stock %>
+                        </option>
+                        <option>true</option>
+                        <option>false</option>
+                    </select>
+                </div>
+                <div class="select_field">
+                    <select name="product[category]">
+                        <option selected disabled>
+                            <%= product.category %>
+                        </option>
+                        <option>TV</option>
+                        <option>MOBILE</option>
+                        <option>APPLIANCE</option>
+                    </select>
+                </div>
+                <div class="file_field">
+                    <input type="file" id="image" name="image" multiple>
+                </div>
+                <input type="submit" value="Edit product">
+            </form>
+        </div>
+
+    </body>

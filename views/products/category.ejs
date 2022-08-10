@@ -10,23 +10,29 @@
     </head>
 
     <body>
-        <ul id="categories-list">
-            <h3 style="margin-left: 10px;">Brands</h3>
-            <li id="category"><input type="checkbox" id="Samsung" onchange="hideDiv()" value="Samsung">Samsung</li>
-            <% if(category==="MOBILE" ) {%>
-                <li id="category"><input type="checkbox" id="Apple" onchange="hideDiv()" value="Apple">Apple</li>
-                <li id="category"><input type="checkbox" id="OnePlus" onchange="hideDiv()" value="OnePlus">OnePlus</li>
-                <% } %>
-                    <% if(category==="APPLIANCE" ) {%>
-                        <li id="category"><input type="checkbox" id="LG" onchange="hideDiv()" value="LG">LG</li>
-                        <li id="category"><input type="checkbox" id="Panasonic" onchange="hideDiv()" value="Panasonic">Panasonic</li>
-                        <% } %>
-                            <% if(category==="TV" ) {%>
-                                <li id="category"><input type="checkbox" id="LG" onchange="hideDiv()" value="LG">LG</li>
-                                <li id="category"><input type="checkbox" id="Sony" onchange="hideDiv()" value="Sony">Sony</li>
-                                <li id="category"><input type="checkbox" id="Panasonic" onchange="hideDiv()" value="Panasonic">Panasonic</li>
-                                <% } %>
-        </ul>
+        <form id="submitCategory" action="/product/filter_category" method="GET">
+            <ul id="categories-list">
+                <h3 style="margin-left: 10px;">Brands</h3>
+                <li id="category"><input type="checkbox" id="Samsung" onchange="document.getElementById('submitCategory').submit()" value="Samsung">Samsung</li>
+                <% if(category==="MOBILE" ) {%>
+                    <li id="category"><input type="checkbox" id="Apple" onchange="document.getElementById('submitCategory').submit()" value="Apple">Apple</li>
+                    <li id="category"><input type="checkbox" id="OnePlus" onchange="document.getElementById('submitCategory').submit()" value="OnePlus">OnePlus
+                    </li>
+                    <% } %>
+                        <% if(category==="APPLIANCE" ) {%>
+                            <li id="category"><input type="checkbox" id="LG" onchange="document.getElementById('submitCategory').submit()" value="LG">LG</li>
+                            <li id="category"><input type="checkbox" id="Panasonic" onchange="document.getElementById('submitCategory').submit()" value="Panasonic">Panasonic
+                            </li>
+                            <% } %>
+                                <% if(category==="TV" ) {%>
+                                    <li id="category"><input type="checkbox" id="LG" onchange="document.getElementById('submitCategory').submit()" value="LG">LG
+                                    </li>
+                                    <li id="category"><input type="checkbox" id="Sony" onchange="document.getElementById('submitCategory').submit()" value="Sony">Sony
+                                    </li>
+                                    <li id="category"><input type="checkbox" id="Panasonic" onchange="document.getElementById('submitCategory').submit()" value="Panasonic">Panasonic</li>
+                                    <% } %>
+            </ul>
+        </form>
         <section id="container">
             <% for(let product of products) {%>
                 <a href="/product/<%= product._id %> ">
