@@ -54,38 +54,33 @@
                                         <input type="radio" id="rate5" name="rating" value="5" />
                                         <label for="rate5">5 stars.</label>
                                     </fieldset>
-                                    <% } else {%>
-                                        <h2>Your rating:</h2>
-                                        <div id="review">
-                                            <div id="review-author">
-                                                <h3>
-                                                    <%= userReview.author.username %>
-                                                </h3>
-                                            </div>
-                                            <% if(userReview.body) {%>
-                                                <div id="review-body">
-                                                    <p>
-                                                        <%= userReview.body %>
+                            </form>
+                            <% } else {%>
+                                <h2>Your rating:</h2>
+                                <div id="review">
+                                    <% if(userReview.body) {%>
+                                        <div style="margin-top: 10px;" id="review-body">
+                                            <p>
+                                                <%= userReview.body %>
+                                            </p>
+                                        </div>
+                                        <% } %>
+                                            <% if(userReview.rating) {%>
+                                                <form action="/review/delete/<%= userReview._id %>?_method=DELETE" method="POST">
+                                                    <% if(currentUser && userReview.author._id.equals(currentUser._id))
+                                                        {%>
+                                                        <button type="submit" id="delete-review">Delete</button>
+                                                        <% } %>
+                                                </form>
+                                                <div id="review-rating">
+                                                    <p class="starability-result" data-rating="<%=userReview.rating%>">
+                                                        Rated:
+                                                        <%= userReview.rating %> stars
                                                     </p>
                                                 </div>
                                                 <% } %>
-                                                    <% if(userReview.rating) {%>
-                                                        <form action="/review/delete/<%= userReview._id %>?_method=DELETE" method="POST">
-                                                            <% if(currentUser &&
-                                                                userReview.author._id.equals(currentUser._id)) {%>
-                                                                <button type="submit" id="delete-review">Delete</button>
-                                                                <% } %>
-                                                        </form>
-                                                        <div id="review-rating">
-                                                            <p class="starability-result" data-rating="<%=userReview.rating%>">
-                                                                Rated:
-                                                                <%= userReview.rating %> stars
-                                                            </p>
-                                                        </div>
-                                                        <% } %>
-                                        </div>
-                                        <% } %>
-                            </form>
+                                </div>
+                                <% } %>
                         </div>
             </div>
             <div class="right-child">
@@ -174,11 +169,6 @@
                                 </div>
                                 <% } %>
                                     <% if(review.rating) {%>
-                                        <form action="/review/delete/<%= review._id %>?_method=DELETE" method="POST">
-                                            <% if(currentUser && review.author._id.equals(currentUser._id)) {%>
-                                                <button type="submit" id="delete-review">Delete</button>
-                                                <% } %>
-                                        </form>
                                         <div id="review-rating">
                                             <p class="starability-result" data-rating="<%=review.rating%>">
                                                 Rated:

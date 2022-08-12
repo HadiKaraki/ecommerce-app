@@ -138,7 +138,7 @@ h1 {
     font-size: 20px;
 }
 
-.right-child #reviews-panel #review #delete-review {
+#delete-review {
     background-color: red;
     border: 0.4px solid black;
     float: right;

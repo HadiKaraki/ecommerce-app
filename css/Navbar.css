@@ -81,6 +81,10 @@ li a:hover {
     text-decoration: none;
 }
 
+#cart-wish-mobile a:hover {
+    background-color: yellow;
+}
+
 @media (max-width: 768px) {
     #cart-wish {
         display: none;

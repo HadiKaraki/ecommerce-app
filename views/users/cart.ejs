@@ -10,33 +10,37 @@
     <body>
         <% if(currUser.cart.length>0) {%>
             <section id="container">
-                <% for(let product of currUser.cart) {%>
-                    <a href="/product/<%= product._id %> ">
-                        <div id="product">
-                            <div id="image">
-                                <img src="<%= product.images[0].url %> ">
-                            </div>
-                            <div id="bottom-panel">
-                                <div id="description">
-                                    <strong>
-                                        <p>
-                                            <%= product.name %>
-                                        </p>
-                                    </strong>
+                <div id="cart">
+                    <div id="top-panel">
+                        <h1>Cart</h1>
+                    </div>
+                    <% for(let product of currUser.cart) {%>
+                        <a href="/product/<%= product._id %> ">
+                            <section id="product">
+                                <div id="product-image">
+                                    <img src="<%= product.images[0].url %> ">
                                 </div>
-                                <div id="price">
-                                    <p>
+                                <div id="product-name">
+                                    <h7>
+                                        <%= product.name %>
+                                    </h7>
+                                </div>
+                                <div id="product-price">
+                                    <h7 style="color: red;">
                                         $
                                         <%= product.price %>
-                                    </p>
+                                    </h7>
                                 </div>
-                                <form action="/product/deleteFromCart/<%= product._id %> " method="POST">
-                                    <button id="remove-button" style="background-color: red;">Remove</button>
-                                </form>
+                                <div id="remove-button">
+                                    <button>Remove</button>
+                                </div>
+                            </section>
+                        </a>
+                        <% } %>
+                            <div id="bottom-panel">
+                                <button>Proceed to checkout</button>
                             </div>
-                        </div>
-                    </a>
-                    <% } %>
+                </div>
             </section>
             <% } else {%>
                 <h1>No products in cart currently.</h1>
