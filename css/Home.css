@@ -69,4 +69,7 @@ body {
         border-bottom: 0.4px solid black;
         padding-top: 10px;
     }
+    #footer {
+        position: relative;
+    }
 }

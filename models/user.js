@@ -43,6 +43,9 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Product'
     }],
+    credit_card: String,
+    CVC_code: Number,
+    Expiration_date: String
 }, opts);
 
 UserSchema.plugin(passportLocalMongoose);

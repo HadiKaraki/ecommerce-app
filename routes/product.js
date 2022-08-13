@@ -18,17 +18,13 @@ router.route('/edit/:productID')
 
 router.post('/delete/:productID', isLoggedIn, isAdmin, catchAsync(products.deleteProduct))
 
-router.post('/addToCart', isLoggedIn, catchAsync(products.addToCart))
+router.post('/addToCart/:productID', isLoggedIn, catchAsync(products.addToCart))
 
-router.post('/removeFromCart', isLoggedIn, catchAsync(products.removeFromCart))
+router.post('/removeFromCart/:productID', isLoggedIn, catchAsync(products.removeFromCart))
 
-router.post('/deleteFromCart/:id', isLoggedIn, catchAsync(products.deleteFromCart))
+router.post('/addToWishlist/:productID', isLoggedIn, catchAsync(products.addToWishlist))
 
-router.post('/deleteFromWishlist/:id', isLoggedIn, catchAsync(products.deleteFromWishlist))
-
-router.post('/addToWishlist', isLoggedIn, catchAsync(products.addToWishlist))
-
-router.post('/removeFromWishlist', isLoggedIn, catchAsync(products.removeFromWishlist))
+router.post('/removeFromWishlist/:productID', isLoggedIn, catchAsync(products.removeFromWishlist))
 
 router.get('/category/:category', catchAsync(products.category))
 

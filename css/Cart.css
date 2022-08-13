@@ -1,6 +1,7 @@
 body {
     font-family: "Poppins", sans-serif;
     background-color: rgb(241, 241, 241);
+    height: 80vh;
 }
 
 h1 {
@@ -79,7 +80,7 @@ a {
     margin-top: 30px;
     background-color: red;
     border: 0;
-    padding: 3px;
+    padding: 2px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -92,7 +93,7 @@ a {
     background-color: #2691d9;
     border: 0.4px solid black;
     color: yellow;
-    padding: 6px;
+    padding: 3px;
     border-radius: 10px;
     float: right;
     font-weight: bold;

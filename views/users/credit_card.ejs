@@ -1,0 +1,30 @@
+<% layout('layouts/boilerplate')%>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Credit card info</title>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../Credit_card.css">
+    </head>
+
+    <body>
+        <div class="center">
+            <h1>Credit Card Info</h1>
+            <form action="/user/creditcard" method="POST">
+                <div class="txt_field">
+                    <input type="password" name="card_nb" placeholder="Credit card number" required>
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="cvc_nb" placeholder="CVC" required>
+                </div>
+                <div class="txt_field">
+                    <input type="date" name="exp_date" placeholder="Expiration date" required>
+                </div>
+                <div class="login_link">
+                    <a href="/home">Skip for now</a>
+                </div>
+                <input type="submit" value="Save info">
+            </form>
+        </div>
+    </body>

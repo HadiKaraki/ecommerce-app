@@ -2,6 +2,7 @@
 
     <head>
         <meta charset="UTF-8">
+        <title>Wishlist items</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" href="../Wishlist.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -30,7 +31,7 @@
                                         <%= product.price %>
                                     </p>
                                 </div>
-                                <form action="/product/deleteFromWishlist/<%= product._id %> " method="POST">
+                                <form action="/product/removeFromWishlist/<%= product._id %> " method="POST">
                                     <button id="remove-button" style="background-color: red;">Remove</button>
                                 </form>
                             </div>

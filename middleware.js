@@ -1,6 +1,4 @@
-const passport = require('passport');
 const User = require('./models/user');
-const { authenticate } = require('passport');
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -17,6 +15,6 @@ module.exports.isAdmin = async(req, res, next) => {
     if (currUser.admin) {
         next();
     } else {
-        return res.redirect('back');
+        return res.sendStatus(403);
     }
 }

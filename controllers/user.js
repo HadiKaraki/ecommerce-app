@@ -2,6 +2,7 @@ const User = require('../models/user');
 const flash = require('connect-flash');
 var nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 var secret;
 var payload;
@@ -154,8 +155,8 @@ module.exports.register = async(req, res) => {
             await user.save()
             req.login(registeredUser, err => {
                 if (err) return next(err);
-                req.flash('success', 'Welcome!');
-                res.redirect(`/home`);
+                req.flash('success', 'Succesfuly created account')
+                res.redirect(`/user/creditcard`);
             })
         } catch (e) {
             req.flash('error', e.message);
@@ -164,6 +165,49 @@ module.exports.register = async(req, res) => {
     } else {
         res.redirect(`/home`);
     }
+}
+
+module.exports.renderCreditCard = async(req, res) => {
+    res.render('users/credit_card');
+}
+
+module.exports.creditCard = async(req, res) => {
+    const { card_nb, cvc_nb, exp_date } = req.body
+    if (card_nb && cvc_nb && exp_date) {
+        const userID = req.user._id;
+        const user = await User.findById(userID);
+        const saltRounds = 10;
+        const salt = await bcrypt.genSalt(saltRounds)
+        const hash = await bcrypt.hash(card_nb, salt)
+        user.credit_card = hash;
+        user.CVC_code = cvc_nb;
+        user.Expiration_date = exp_date;
+        await user.save()
+        req.flash('success', 'Succesfuly saved credit card')
+        res.redirect('/home');
+    } else {
+        req.flash('error', 'Missing info');
+        res.redirect('back');
+    }
+}
+
+module.exports.renderCheckout = async(req, res) => {
+    const userID = req.user._id;
+    const currUser = await User.findById(userID).populate({
+        path: 'cart',
+        populate: {
+            path: 'cart'
+        }
+    }).populate('cart');
+    var totalPrice = 0;
+    for (let product of currUser.cart) {
+        totalPrice += product.price;
+    }
+    res.render('users/checkout', { currUser, totalPrice });
+}
+
+module.exports.checkout = async(req, res) => {
+    res.render('users/checkout');
 }
 
 module.exports.renderLogin = async(req, res) => {

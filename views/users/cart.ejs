@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Cart items</title>
         <link rel="stylesheet" href="../Cart.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     </head>
@@ -32,13 +33,17 @@
                                     </h7>
                                 </div>
                                 <div id="remove-button">
-                                    <button>Remove</button>
+                                    <form action="/product/removeFromCart/<%= product._id %> " method="POST">
+                                        <button>Remove</button>
+                                    </form>
                                 </div>
                             </section>
                         </a>
                         <% } %>
                             <div id="bottom-panel">
-                                <button>Proceed to checkout</button>
+                                <form action="/user/checkout" method="GET">
+                                    <button>Proceed to checkout</button>
+                                </form>
                             </div>
                 </div>
             </section>

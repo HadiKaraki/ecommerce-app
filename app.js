@@ -139,7 +139,7 @@ app.get("/search", async(req, res) => {
         ];
         // RESULTS IS AN ARRAY
         const results = await collection.aggregate(agg).toArray();
-        res.render('products/found', { results });
+        res.render('products/search_results', { results });
     } catch (e) {
         res.status(500).send({ message: e.message });
     }
@@ -152,12 +152,10 @@ app.get('/back', (req, res) => {
 })
 
 app.all('*', (req, res) => {
-    // req.flash('error', 'Page not found')
-    // res.redirect('back');
     res.render('notfound')
 })
 
-const port = process.env.PORT || 3000; // if first does not work, go to the second
+const port = process.env.PORT || 3000;
 app.listen(port, async() => {
     try {
         await client.connect();

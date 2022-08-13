@@ -22,6 +22,7 @@ h1 {
 }
 
 .left-child #image {
+    cursor: pointer;
     background-color: white;
     flex: 1;
     width: 100%;
@@ -40,6 +41,14 @@ h1 {
     display: flex;
     height: 300px;
     width: 100%;
+}
+
+.left-child #small-images {}
+
+.left-child #small-images img {
+    height: 100px;
+    width: 100px;
+    margin-left: 10px;
 }
 
 .left-child #rating-panel {
@@ -157,9 +166,9 @@ h1 {
     margin-right: 10px;
 }
 
-#cart-button:hover,
-#wishlist-button:hover {
-    background-color: #15252f;
+.cart-button:hover,
+.wishlist-button:hover {
+    background-color: red;
     border: 0.5px solid #1e9eee;
 }
 
@@ -170,6 +179,77 @@ h1 {
   border-top: 0.4px solid black;
   margin-left: 20px;
 } */
+
+#overlay {
+    position: fixed;
+    /* Sit on top of the page content */
+    display: none;
+    width: 100%;
+    /* Full width (cover the whole page) */
+    height: 100%;
+    /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Black background with opacity */
+    z-index: 2;
+    /* Specify a stack order in case you're using a different order for other elements */
+    /* Add a pointer on hover */
+}
+
+#hidden-container {
+    position: relative;
+    display: none;
+    z-index: 3;
+}
+
+#top-section {
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    margin: 0 auto;
+    background-color: white;
+    border: 0.65px solid;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+}
+
+#bottom-section {
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    border: 0.65px solid black;
+    border-top: 0;
+}
+
+button {
+    float: right;
+}
+
+#big-image {
+    margin: 0 auto;
+}
+
+#big-image img {
+    width: 350px;
+    height: 350px;
+}
+
+#rest-of-images img {
+    height: 70px;
+    width: 70px;
+}
+
+#rest-of-images img:hover {
+    background-color: grey;
+    cursor: pointer;
+}
 
 @media (max-width: 768px) {
     .container,

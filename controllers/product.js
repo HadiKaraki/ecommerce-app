@@ -74,60 +74,38 @@ module.exports.category = async(req, res) => {
 }
 
 module.exports.addToCart = async(req, res) => {
-    // AJAX
-    if (req.isAuthenticated()) {
-        const { id } = req.body;
-        const userID = req.user._id;
-        var productId = mongoose.Types.ObjectId(id);
-        const currUser = await User.findById(userID);
-        currUser.cart.push(productId);
-        await currUser.save();
-    } else {
-        res.redirect('/user/login');
-    }
+    const { productID } = req.params;
+    const userID = req.user._id;
+    const currUser = await User.findById(userID);
+    currUser.cart.push(productID);
+    await currUser.save();
+    req.flash('success', 'Added to cart');
+    res.redirect('back')
 }
 
 module.exports.removeFromCart = async(req, res) => {
-    // AJAX
-    const { id } = req.body;
+    const { productID } = req.params;
     const userID = req.user._id;
-    var productId = mongoose.Types.ObjectId(id);
-    const product = await Product.findById(productId);
-    await User.findByIdAndUpdate(userID, { $pull: { cart: productId } });
-}
-
-module.exports.deleteFromCart = async(req, res) => {
-    const { id } = req.params;
-    const userID = req.user._id;
-    await User.findByIdAndUpdate(userID, { $pull: { cart: id } });
+    await User.findByIdAndUpdate(userID, { $pull: { cart: productID } });
+    req.flash('success', 'Removed from cart');
     res.redirect('back')
 }
 
 module.exports.addToWishlist = async(req, res) => {
-    // AJAX
-    console.log('add to wish')
-    const { id } = req.body;
+    const { productID } = req.params;
     const userID = req.user._id;
-    var productId = mongoose.Types.ObjectId(id);
     const currUser = await User.findById(userID);
-    currUser.wishlist.push(productId);
+    currUser.wishlist.push(productID);
     await currUser.save();
+    req.flash('success', 'Added to wishlist');
+    res.redirect('back')
 }
 
 module.exports.removeFromWishlist = async(req, res) => {
-    // AJAX
-    console.log('remove from wish')
-    const { id } = req.body;
+    const { productID } = req.params;
     const userID = req.user._id;
-    var productId = mongoose.Types.ObjectId(id);
-    const product = await Product.findById(productId);
-    await User.findByIdAndUpdate(userID, { $pull: { wishlist: productId } });
-}
-
-module.exports.deleteFromWishlist = async(req, res) => {
-    const { id } = req.params;
-    const userID = req.user._id;
-    await User.findByIdAndUpdate(userID, { $pull: { wishlist: id } });
+    await User.findByIdAndUpdate(userID, { $pull: { wishlist: productID } });
+    req.flash('success', 'Removed from wishlist');
     res.redirect('back')
 }
 
@@ -151,9 +129,34 @@ module.exports.renderEditProduct = async(req, res) => {
 
 module.exports.editProduct = async(req, res) => {
     const { productID } = req.params;
-    const product = await Product.findByIdAndUpdate(productID, {...req.body.product });
+    const { name, price, brand, description, code, nb_in_stock, in_stock, category } = req.body
+    const product = await Product.findById(productID);
     // const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
     // site.images.push(...imgs);
+    if (name) {
+        product.name = name;
+    }
+    if (price) {
+        product.price = price;
+    }
+    if (brand) {
+        product.brand = brand;
+    }
+    if (description) {
+        product.description = description;
+    }
+    if (code) {
+        product.code = code;
+    }
+    if (nb_in_stock) {
+        product.nb_in_stock = nb_in_stock;
+    }
+    if (in_stock) {
+        product.in_stock = in_stock;
+    }
+    if (category) {
+        product.category = category;
+    }
     await product.save();
     if (req.body.deleteImages) {
         for (let filename of req.body.deleteImages) {

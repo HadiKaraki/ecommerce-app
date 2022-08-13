@@ -1,9 +1,11 @@
 #footer {
     background-color: rgb(222, 218, 218, 0.5);
     font-size: 15px;
-    padding: 20px;
-    margin-top: 30px;
+    padding: 15px;
     text-align: center;
+    /* position: fixed;
+    bottom: 0;
+    width: 100%; */
 }
 
 #footer a {

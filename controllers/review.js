@@ -14,7 +14,7 @@ module.exports.newReview = async(req, res) => {
     await review.save()
     product.reviews.push(review)
     await product.save();
-    req.flash('success', 'Successfully made a new review');
+    req.flash('success', 'Review added');
     res.redirect('back')
 }
 
@@ -25,6 +25,6 @@ module.exports.deleteReview = async(req, res) => {
     //const post = Post.findOne({ comments: commentID })
     await Product.findOneAndUpdate(reviewID, { $pull: { reviews: reviewID } });
     await Review.findByIdAndDelete(reviewID);
-    req.flash('success', 'Successfully deleted review')
+    req.flash('success', 'Review deleted')
     res.redirect('back');
 }

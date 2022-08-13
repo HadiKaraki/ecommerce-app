@@ -1,0 +1,56 @@
+<% layout('layouts/boilerplate')%>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Checkout</title>
+        <link rel="stylesheet" href="../Checkout.css">
+
+    </head>
+
+    <body>
+        <section id='container'>
+            <aside id='info'>
+                <label for='paymentMethod'>Payment Method</label>
+                <select name='paymentMethod'>
+                    <option>Visa</option>
+                    <option>MasterCard</option>
+                    <option>Elo</option>
+                </select>
+
+                <!-- Credit Card Number -->
+                <label for='cardNumber'>Credit Card Number</label>
+                <input type='text' name='cardNumber' />
+
+                <!-- Credit Card Holder Name -->
+                <label for='cardholderName'>Cardholder Name</label>
+                <input type='text' name='cardholderName' />
+
+                <!-- Expiration Date -->
+                <label for='cardDate'>Expiration Date</label>
+                <input type='text' name='cardDate' />
+
+                <!-- CVV Card Number -->
+                <label for='cvv'>CVV</label>
+                <input type='text' name='cvv' />
+
+                <button id='makePayment'>MAKE A PAYMENT</button>
+            </aside>
+            <aside id='description'>
+                <% for(let product of currUser.cart) { %>
+                    <div id="product">
+                        <h1 id="product-name" style="display: inline;">
+                            <%= product.name %>
+                        </h1>
+                        <h1 id="product-price" style="display: inline; margin-left: 30%; color: red;">$
+                            <%= product.price%>
+                        </h1>
+                    </div>
+                    <% } %>
+                        <div style="border-top: 0.7px solid black; padding-top: 15px;" id="total">
+                            <h1 style="font-size: 25px;">Total: $
+                                <%= totalPrice %>
+                            </h1>
+                        </div>
+            </aside>
+        </section>
+    </body>

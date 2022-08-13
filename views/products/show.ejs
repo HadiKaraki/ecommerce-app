@@ -2,6 +2,9 @@
 
     <head>
         <meta charset="UTF-8">
+        <title>
+            <%= populatedProduct.name %>
+        </title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" href="../Show.css">
         <link rel="stylesheet" href="../Stars.css">
@@ -20,15 +23,11 @@
                     </div>
                     <% } %>
                         <div id="image">
-                            <img src="<%= populatedProduct.images[0].url %> ">
+                            <img src="<%= populatedProduct.images[0].url %> " onclick="zoomImage()">
                         </div>
+                        <div id="overlay"></div>
                         <div id="rating-panel">
                             <form action="/review/new/<%= populatedProduct._id %> " method="POST" novalidate>
-                                Average Rating:
-                                <p class="starability-result" data-rating="<%=averageRating%>">
-                                </p>
-                                <p>
-                                    <%= populatedProduct.reviews.length %> reviews
                                 </p>
                                 <% if(!reviewed) {%>
                                     <div id="text-box">
@@ -83,6 +82,19 @@
                                 <% } %>
                         </div>
             </div>
+            <section id="hidden-container">
+                <button onclick="close()">x</button>
+                <section id="top-section">
+                    <div id="big-image">
+                        <img id="top-image" src="<%= populatedProduct.images[0].url %>">
+                    </div>
+                </section>
+                <section id="bottom-section">
+                    <div id="rest-of-images">
+                        <img id="small-image" src="../tv.jpg" onclick="change(this)">
+                    </div>
+                </section>
+            </section>
             <div class="right-child">
                 <div id="top-panel">
                     <h1 style="color: blue;">
@@ -133,24 +145,40 @@
                                 <%= populatedProduct.brand %>
                             </p>
                         </strong>
-
+                        <div id="average-rating">
+                            <strong>
+                                <p style="margin: 0; margin-top: 30px;">Average rating:</p>
+                            </strong>
+                            <p class="starability-result" style="margin-top: 10px;" data-rating="<%=averageRating%>">
+                            </p>
+                            <p style="margin: 0;">
+                                <%= populatedProduct.reviews.length %> reviews
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div id="bottom-panel">
                     <% if(!addedToCart) {%>
-                        <button class="cart-button" id="addcart-button" onclick="addToCart(event)"><i
-                                class="fa fa-shopping-cart" style="font-size:24px"></i></button>
+                        <form action="/product/addToCart/<%= populatedProduct._id %>" method="POST">
+                            <button class="cart-button" id="addcart-button"><i class="fa fa-shopping-cart"
+                                    style="font-size:24px"></i></button>
+                        </form>
                         <% } else {%>
-                            <button class="cart-button" id="removecart-button" onclick="removeFromCart(event)" style="background-color: red;"><i class="fa fa-shopping-cart"
-                                    style="font-size:24px;"></i></button>
+                            <form action="/product/removeFromCart/<%= populatedProduct._id %>" method="POST">
+                                <button class="cart-button" id="removecart-button" style="background-color: red;"><i
+                                        class="fa fa-shopping-cart" style="font-size:24px;"></i></button>
+                            </form>
                             <% } %>
                                 <% if(!addedToWishlist) {%>
-                                    <button class="wishlist-button" id="addwishlist-button" onclick="addToWishlist(event)"><i class="fa fa-heart-o" aria-hidden="true"
-                                            style="font-size:24px;"></i></button>
+                                    <form action="/product/addToWishlist/<%= populatedProduct._id %>" method="POST">
+                                        <button class="wishlist-button" id="addwishlist-button"><i class="fa fa-heart-o"
+                                                aria-hidden="true" style="font-size:24px;"></i></button>
+                                    </form>
                                     <% } else {%>
-                                        <button class="wishlist-button" id="removewishlist-button" onclick="removeFromWishlist(event)" style="background-color: red;"><i
-                                                class="fa fa-heart-o" aria-hidden="true"
-                                                style="font-size:24px;"></i></button>
+                                        <form action="/product/removeFromWishlist/<%= populatedProduct._id %>" method="POST">
+                                            <button class="wishlist-button" id="removewishlist-button" style="background-color: red;"><i class="fa fa-heart-o"
+                                                    aria-hidden="true" style="font-size:24px;"></i></button>
+                                        </form>
                                         <% } %>
                 </div>
                 <div id="reviews-panel">
@@ -265,6 +293,23 @@
             } else {
                 btn.style.backgroundColor = "red";
             }
+        }
+
+        function zoomImage() {
+            document.getElementById('overlay').style.display = "block";
+            var container = document.getElementById('hidden-container');
+            container.style.display = "block";
+        }
+
+        function change(e) {
+            var source = e.getAttribute("src")
+            document.getElementById('top-image').src = source;
+        }
+
+        function close() {
+            console.log('dadafh')
+            document.getElementById('overlay').style.display = "none";
+            document.getElementById('hidden-container').style.display = "none";
         }
     </script>
 

@@ -13,6 +13,14 @@ router.route('/register')
     .get(users.renderRegister)
     .post(catchAsync(users.register));
 
+router.route('/creditcard')
+    .get(isLoggedIn, users.renderCreditCard)
+    .post(isLoggedIn, users.creditCard)
+
+router.route('/checkout')
+    .get(isLoggedIn, users.renderCheckout)
+    .post(isLoggedIn, users.checkout)
+
 router.route('/login')
     .get(users.renderLogin)
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '../user/login' }), users.login)
