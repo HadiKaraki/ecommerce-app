@@ -2,7 +2,6 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Edit product</title>
         <link rel="stylesheet" href="../../Editproduct.css">
         <link rel="stylesheet" href="../../Navbar.css">
         <link rel="stylesheet" href="../../Footer.css">
@@ -13,25 +12,25 @@
             <h1>New product</h1>
             <form action="/product/edit/<%= product._id %>" method="POST" enctype="multipart/form-data">
                 <div class="txt_field">
-                    <input type="text" name="name" placeholder="Name: <%= product.name %> ">
+                    <input type="text" name="product[name]" value="<%= product.name %> ">
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="brand" placeholder="Brand: <%= product.brand %>">
+                    <input type="text" name="product[brand]" value="<%= product.brand %>">
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="price" placeholder="Price: <%= product.price %>">
+                    <input type="text" name="product[price]" value="<%= product.price %>">
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="description" placeholder="Description: <%= product.description %>">
+                    <input type="text" name="product[description]" value="<%= product.description %>">
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="code" placeholder="Code: <%= product.code %>">
+                    <input type="text" name="product[code]" value="<%= product.code %>">
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="nb_in_stock" placeholder="Nb in stock: <%= product.nb_in_stock %>">
+                    <input type="text" name="product[nb_in_stock]" value="<%= product.nb_in_stock %>">
                 </div>
                 <div class="select_field">
-                    <select name="in_stock">
+                    <select name="product[in_stock]">
                         <option selected disabled>
                             <%= product.in_stock %>
                         </option>
@@ -40,7 +39,7 @@
                     </select>
                 </div>
                 <div class="select_field">
-                    <select name="category">
+                    <select name="product[category]">
                         <option selected disabled>
                             <%= product.category %>
                         </option>

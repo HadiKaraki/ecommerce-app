@@ -129,35 +129,10 @@ module.exports.renderEditProduct = async(req, res) => {
 
 module.exports.editProduct = async(req, res) => {
     const { productID } = req.params;
-    const { name, price, brand, description, code, nb_in_stock, in_stock, category } = req.body
-    const product = await Product.findById(productID);
+    console.log(req.body.product)
+    const product = await Product.findByIdAndUpdate(productID, {...req.body.product });
     // const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
     // site.images.push(...imgs);
-    if (name) {
-        product.name = name;
-    }
-    if (price) {
-        product.price = price;
-    }
-    if (brand) {
-        product.brand = brand;
-    }
-    if (description) {
-        product.description = description;
-    }
-    if (code) {
-        product.code = code;
-    }
-    if (nb_in_stock) {
-        product.nb_in_stock = nb_in_stock;
-    }
-    if (in_stock) {
-        product.in_stock = in_stock;
-    }
-    if (category) {
-        product.category = category;
-    }
-    await product.save();
     if (req.body.deleteImages) {
         for (let filename of req.body.deleteImages) {
             await cloudinary.uploader.destroy(filename);

@@ -145,6 +145,25 @@ app.get("/search", async(req, res) => {
     }
 });
 
+app.get("/autocomplete", async(req, res) => {
+    console.log(req.query)
+    try {
+        const agg = [
+            { $search: { autocomplete: { query: "Phone", path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } } },
+            { $limit: 20 },
+            { $project: { _id: 0, name: 1 } }
+        ];
+        const result = await collection.aggregate(agg).toArray();
+        res.send(result);
+    } catch (e) {
+        res.status(500).send({ message: e.message });
+    }
+});
+
+app.get('/searchtest', (req, res) => {
+    res.render('search')
+})
+
 app.get('/back', (req, res) => {
     const redirectUrl = req.session.returnTo;
     delete req.session.returnTo;
