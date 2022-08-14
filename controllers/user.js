@@ -36,22 +36,8 @@ module.exports.renderAccount = async(req, res) => {
 }
 
 module.exports.editAccount = async(req, res) => {
-    const { first_name, last_name, address, title, } = req.body
     const userID = req.user._id;
-    const user = await User.findById(userID);
-    if (first_name != '') {
-        user.first_name = first_name;
-    }
-    if (last_name != '') {
-        user.last_name = last_name;
-    }
-    if (address != '') {
-        user.address = address;
-    }
-    if (title != '') {
-        user.title = title;
-    }
-    await user.save();
+    await User.findByIdAndUpdate(userID, {...req.body.user });
     req.flash('success', 'Successfully updated account');
     res.redirect('/home');
 }

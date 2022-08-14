@@ -11,16 +11,16 @@
             <h1>Edit Account</h1>
             <form action="/user/account" method="POST">
                 <div class="txt_field">
-                    <input type="text" name="first_name" placeholder="First name">
+                    <input type="text" name="user[first_name]" value="<%=currentUser.first_name  %> ">
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="last_name" placeholder="Last name">
+                    <input type="text" name="user[last_name]" value="<%=currentUser.last_name  %> ">
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="address" placeholder="Address">
+                    <input type="text" name="user[address]" value="<%=currentUser.address  %> ">
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="phone_number" placeholder="Phone number">
+                    <input type="text" name="user[phone_nb]" value="<%=currentUser.phone_nb  %> ">
                 </div>
                 <div class="select_field">
                     <select name="title">

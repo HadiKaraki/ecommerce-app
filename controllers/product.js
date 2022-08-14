@@ -129,8 +129,10 @@ module.exports.renderEditProduct = async(req, res) => {
 
 module.exports.editProduct = async(req, res) => {
     const { productID } = req.params;
-    console.log(req.body.product)
+    const { nb_in_stock } = req.body;
     const product = await Product.findByIdAndUpdate(productID, {...req.body.product });
+    product.nb_in_stock = parseInt(nb_in_stock);
+    console.log(typeof(parseInt(nb_in_stock)));
     // const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
     // site.images.push(...imgs);
     if (req.body.deleteImages) {
@@ -139,6 +141,7 @@ module.exports.editProduct = async(req, res) => {
         }
         await product.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
     }
+    await product.save()
     req.flash('success', 'Successfully updated product');
     res.redirect(`/product/${productID}`)
 }
