@@ -119,44 +119,7 @@
                     <ul id="specs"></ul>
                 </form>
             </div>
-            <script>
-                $(document).ready(function() {
-                    $("#search-bar").autocomplete({
-                        source: async function(req, res) {
-                            let data = await fetch(`http://e-comwebsite.herokuapp.com/autocomplete?name=${$("#search-bar").val()}`)
-                                .then(results => results.json())
-                                .then(results => results.map(result => {
-                                    return {
-                                        label: result.name,
-                                    };
-                                }));
-                            console.log(data)
-                            res(data);
-                        },
-                        // OPTIONS
-                        //autoFocus: true,
-                        //delay: 0,
-                        minLength: 2 // min number of letters to start giving output
-                    });
-                });
-
-                $(document).ready(function() {
-                    $("#search-bar-mobile").autocomplete({
-                        source: async function(req, res) {
-                            let data = await fetch(`http://e-comwebsite.herokuapp.com/autocomplete?name=${$("#search-bar-mobile").val()}`)
-                                .then(results => results.json())
-                                .then(results => results.map(result => {
-                                    return {
-                                        label: result.name,
-                                    };
-                                }));
-                            console.log(data)
-                            res(data);
-                        },
-                        minLength: 2,
-                    });
-                });
-            </script>
+            <script src="../navbar.js"></script>
             <script src=" https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js " integrity=" sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo " crossorigin=" anonymous "></script>
             <script src=" https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js " integrity=" sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/ " crossorigin=" anonymous "></script>
 </body>

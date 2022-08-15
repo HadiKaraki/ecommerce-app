@@ -146,12 +146,17 @@ app.get("/search", async(req, res) => {
 });
 
 app.get("/autocomplete", async(req, res) => {
-    console.log(req.query)
+    let option = req.query.option
+    if (option === 'All') {
+        option = ['APPLIANCE, MOBILE, TV']
+    } else {
+        option = option.toUpperCase();
+    }
     try {
         const agg = [
-            { $search: { autocomplete: { query: req.query.name, path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } } },
+            { $search: { compound: { must: [{ text: { query: option, path: "category", fuzzy: { maxEdits: 2, prefixLength: 3 } } }, { autocomplete: { query: req.query.name, path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } }] } } },
             { $limit: 20 },
-            { $project: { _id: 0, name: 1 } }
+            { $project: { _id: 1, name: 1, price: 1, brand: 1, images: 1 } }
         ];
         const result = await collection.aggregate(agg).toArray();
         res.send(result);
@@ -159,10 +164,6 @@ app.get("/autocomplete", async(req, res) => {
         res.status(500).send({ message: e.message });
     }
 });
-
-app.get('/searchtest', (req, res) => {
-    res.render('search')
-})
 
 app.get('/back', (req, res) => {
     const redirectUrl = req.session.returnTo;
