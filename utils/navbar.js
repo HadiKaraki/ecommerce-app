@@ -22,7 +22,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#search-bar-mobile").autocomplete({
         source: async function(req, res) {
-            let data = await fetch(`http://e-comwebsite.herokuapp.com/autocomplete?name=${$("#search-bar-mobile").val()}&option=${$("#option").val()}`)
+            let data = await fetch(`http://e-comwebsite.herokuapp.com/autocomplete?name=${$("#search-bar-mobile").val()}&option=${$("#option2").val()}`)
                 .then(results => results.json())
                 .then(results => results.map(result => {
                     return {
