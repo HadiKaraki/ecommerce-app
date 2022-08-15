@@ -44,7 +44,7 @@ li a:hover {
 }
 
 #search-box #option,
-#search-box-mobile #option {
+#search-box-mobile #option2 {
     height: 38px;
     margin-right: 8px;
     cursor: pointer;
@@ -108,7 +108,7 @@ li a:hover {
     #search-box-mobile #search-bar-mobile {
         width: 65% !important;
     }
-    #search-box-mobile #option {
+    #search-box-mobile #option2 {
         margin: 0;
         width: 25%;
     }
