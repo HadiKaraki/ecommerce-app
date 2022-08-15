@@ -123,7 +123,7 @@
                 $(document).ready(function() {
                     $("#search-bar").autocomplete({
                         source: async function(req, res) {
-                            let data = await fetch(`http://e-comwebsite.herokuapp.com/autocomplete?name=${req.query}`)
+                            let data = await fetch(`http://e-comwebsite.herokuapp.com/autocomplete?name=${$("#search-bar").val()}`)
                                 .then(results => results.json())
                                 .then(results => results.map(result => {
                                     return {
@@ -133,14 +133,17 @@
                             console.log(data)
                             res(data);
                         },
-                        minLength: 2,
+                        // OPTIONS
+                        //autoFocus: true,
+                        //delay: 0,
+                        minLength: 2 // min number of letters to start giving output
                     });
                 });
 
                 $(document).ready(function() {
                     $("#search-bar-mobile").autocomplete({
                         source: async function(req, res) {
-                            let data = await fetch(`http://e-comwebsite.herokuapp.com/autocomplete?name=${req.query}`)
+                            let data = await fetch(`http://e-comwebsite.herokuapp.com/autocomplete?name=${$("#search-bar-mobile").val()}`)
                                 .then(results => results.json())
                                 .then(results => results.map(result => {
                                     return {

@@ -68,7 +68,7 @@ const sessionConfig = {
     cookie: {
         httpOnly: true,
         expires: Date.now() + 1000 * 60 * 60 * 24,
-        maxAge: 1000 * 60 * 60 // milliseconds seconds minutes days weeks
+        maxAge: 1000 * 60 * 60 * 24 // milliseconds seconds minutes days weeks
     }
 }
 
@@ -149,7 +149,7 @@ app.get("/autocomplete", async(req, res) => {
     console.log(req.query)
     try {
         const agg = [
-            { $search: { autocomplete: { query: "Phone", path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } } },
+            { $search: { autocomplete: { query: req.query.name, path: "name", fuzzy: { maxEdits: 2, prefixLength: 3 } } } },
             { $limit: 20 },
             { $project: { _id: 0, name: 1 } }
         ];

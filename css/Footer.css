@@ -30,3 +30,5 @@
         height: 35px;
     }
 }
+
+@media screen (max-height: 700px) {}
