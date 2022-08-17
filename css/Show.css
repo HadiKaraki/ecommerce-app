@@ -43,7 +43,14 @@ h1 {
     width: 100%;
 }
 
-.left-child #small-images {}
+.left-child #productCarousel {
+    width: 100%;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
 
 .left-child #small-images img {
     height: 100px;

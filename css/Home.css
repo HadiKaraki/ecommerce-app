@@ -3,6 +3,16 @@ body {
     background-color: rgb(241, 241, 241);
 }
 
+#shop-by {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    margin-left: 15px;
+    margin-top: 20px;
+    font-size: 30px;
+    text-decoration: underline;
+    text-decoration-color: yellow;
+    color: #0e5e94;
+}
+
 #brand h1 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 35px;
@@ -11,11 +21,11 @@ body {
 }
 
 #container {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
     margin-top: 40px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-column-gap: 10px;
 }
 
@@ -27,24 +37,37 @@ body {
     text-decoration-thickness: 4px;
 }
 
-#container #left-child,
-#container #middle-child,
-#container #right-child {
-    cursor: pointer;
-    transition: 0.25s;
+#left-container {
+    height: 80%;
 }
 
-#container #left-child:hover,
-#container #middle-child:hover,
-#container #right-child:hover {
+#left-container img {
+    width: 100%;
+    height: 100%;
+}
+
+#right-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+    height: 480px;
+    height: 80%;
+}
+
+#right-container #category {
+    width: 100%;
+    height: 100%;
+}
+
+#right-container #category img {
+    width: 100%;
+    height: 50%;
+}
+
+#right-container #category:hover,
+#left-container:hover {
     transition: 0.25s;
     transform: scale(1.03);
-}
-
-#container div img {
-    width: 100%;
-    height: 300px;
-    margin-bottom: 10px;
 }
 
 @media (max-width: 768px) {
@@ -59,15 +82,29 @@ body {
         width: 60%;
     }
     #container {
-        margin-top: 30px;
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
-    #container #left-child {
-        padding-top: 10px;
+    #left-container {
+        height: 100%;
     }
-    #container #right-child {
-        border-bottom: 0.4px solid black;
-        padding-top: 10px;
+    #left-container img {
+        width: 100%;
+        height: 82%;
+    }
+    #right-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 10px;
+        height: 480px;
+        height: 100%;
+    }
+    #right-container #category {
+        width: 100%;
+        height: 100%;
+    }
+    #right-container #category img {
+        width: 100%;
+        height: 70%;
     }
     #footer {
         position: relative;
