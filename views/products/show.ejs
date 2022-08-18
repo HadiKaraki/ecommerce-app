@@ -94,12 +94,14 @@
                                     </div>
                                     <% } %>
                         </div>
-                        <div id="delete-product">
-                            <form action="/product/delete/<%= populatedProduct._id %> ">
-                                <button id="delete-product-button">DELETE</button>
-                                <a style="float: left;" href="/product/edit/<%= populatedProduct._id %> ">EDIT</a>
-                            </form>
-                        </div>
+                        <% if(currentUser && currentUser.admin){ %>
+                            <div id="delete-product">
+                                <form action="/product/delete/<%= populatedProduct._id %> ">
+                                    <button id="delete-product-button">DELETE</button>
+                                    <a style="float: left;" href="/product/edit/<%= populatedProduct._id %> ">EDIT</a>
+                                </form>
+                            </div>
+                            <% } %>
             </div>
             <section id="hidden-container">
                 <button onclick="close()">x</button>
@@ -132,16 +134,16 @@
                     </div>
                     <div id="item-code">
                         <strong>
-                            <p style="margin-right: 80px; display: inline;">Item Code:</p>
-                        </strong>
+                                    <p style="margin-right: 80px; display: inline;">Item Code:</p>
+                                </strong>
                         <p style="display: inline; color: blue">
                             <%= populatedProduct.code %>
                         </p>
                     </div>
                     <div id="in-stock">
                         <strong>
-                            <p style="margin-right: 80px; display: inline;">In stock:</p>
-                        </strong>
+                                    <p style="margin-right: 80px; display: inline;">In stock:</p>
+                                </strong>
                         <% if(populatedProduct.in_stock) {%>
                             <p style="display: inline;"><span style="color: red;">&#10003;</span> Yes</p>
                             <% } else {%>
@@ -150,24 +152,24 @@
                     </div>
                     <div id="nb-in-stock">
                         <strong>
-                            <p style="margin-right: 80px; display: inline;">Left in stock:</p>
-                        </strong>
+                                    <p style="margin-right: 80px; display: inline;">Left in stock:</p>
+                                </strong>
                         <p style="display: inline;">
                             <%= populatedProduct.nb_in_stock %> left
                         </p>
                     </div>
                     <div id="brand">
                         <strong>
-                            <p style="margin-right: 120px; display: inline;">Brand:
-                            </p>
-                            <p style="display: inline;">
-                                <%= populatedProduct.brand %>
-                            </p>
-                        </strong>
+                                    <p style="margin-right: 120px; display: inline;">Brand:
+                                    </p>
+                                    <p style="display: inline;">
+                                        <%= populatedProduct.brand %>
+                                    </p>
+                                </strong>
                         <div id="average-rating">
                             <strong>
-                                <p style="margin: 0; margin-top: 30px;">Average rating:</p>
-                            </strong>
+                                        <p style="margin: 0; margin-top: 30px;">Average rating:</p>
+                                    </strong>
                             <p class="starability-result" style="margin-top: 10px;" data-rating="<%=averageRating%>">
                             </p>
                             <p style="margin: 0;">
@@ -180,23 +182,24 @@
                     <% if(!addedToCart) {%>
                         <form action="/product/addToCart/<%= populatedProduct._id %>" method="POST">
                             <button class="cart-button" id="addcart-button"><i class="fa fa-shopping-cart"
-                                    style="font-size:24px"></i></button>
+                                            style="font-size:24px"></i></button>
                         </form>
                         <% } else {%>
                             <form action="/product/removeFromCart/<%= populatedProduct._id %>" method="POST">
-                                <button class="cart-button" id="removecart-button" style="background-color: red;"><i
-                                        class="fa fa-shopping-cart" style="font-size:24px;"></i></button>
+                                <button class="cart-button" id="removecart-button" style="background-color: red;"><i class="fa fa-shopping-cart"
+                                                style="font-size:24px;"></i></button>
                             </form>
                             <% } %>
                                 <% if(!addedToWishlist) {%>
                                     <form action="/product/addToWishlist/<%= populatedProduct._id %>" method="POST">
-                                        <button class="wishlist-button" id="addwishlist-button"><i class="fa fa-heart-o"
-                                                aria-hidden="true" style="font-size:24px;"></i></button>
+                                        <button class="wishlist-button" id="addwishlist-button"><i
+                                                        class="fa fa-heart-o" aria-hidden="true"
+                                                        style="font-size:24px;"></i></button>
                                     </form>
                                     <% } else {%>
                                         <form action="/product/removeFromWishlist/<%= populatedProduct._id %>" method="POST">
                                             <button class="wishlist-button" id="removewishlist-button" style="background-color: red;"><i class="fa fa-heart-o"
-                                                    aria-hidden="true" style="font-size:24px;"></i></button>
+                                                            aria-hidden="true" style="font-size:24px;"></i></button>
                                         </form>
                                         <% } %>
                 </div>

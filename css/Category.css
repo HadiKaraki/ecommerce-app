@@ -26,6 +26,7 @@ h1 {
 
 #container {
     margin-top: 30px;
+    margin-bottom: 20px;
     background-color: rgb(241, 241, 241);
     /* height: 500px; */
     display: grid;
@@ -69,6 +70,7 @@ h1 {
 }
 
 #container #price {
+    font-size: 20px;
     color: red;
 }
 

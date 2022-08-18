@@ -32,6 +32,7 @@ h1 {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     margin-left: 10px;
     grid-column-gap: 10px;
+    margin-bottom: 20px;
 }
 
 #container #product {
@@ -69,6 +70,7 @@ h1 {
 }
 
 #container #price {
+    font-size: 20px;
     color: red;
 }
 
