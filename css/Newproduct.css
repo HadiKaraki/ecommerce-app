@@ -136,6 +136,9 @@ input[type="submit"]:hover {
         width: 90%;
         margin-bottom: 30px;
     }
+    body {
+        height: 67vh;
+    }
     form .txt_field {
         margin-top: 0;
     }

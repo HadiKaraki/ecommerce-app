@@ -6,7 +6,7 @@ body {
 }
 
 .center {
-    margin-top: 70px;
+    margin-top: 50px;
     position: relative;
     top: 50%;
     left: 50%;
@@ -75,17 +75,6 @@ form .file_field {
     transition: .5s;
 }
 
-
-/* .txt_field input:focus ~ label,
-.txt_field input:valid ~ label{
-  top: -5px;
-  color: #2691d9;
-}
-.txt_field input:focus ~ span::before,
-.txt_field input:valid ~ span::before{
-  width: 100%;
-} */
-
 .pass {
     margin: -5px 0 20px 5px;
     color: #a6a6a6;
@@ -133,11 +122,11 @@ input[type="submit"]:hover {
 
 @media (max-width: 768px) {
     body {
-        height: 40vh;
+        height: 27vh;
     }
     .center {
-        margin-top: 30px;
-        margin-bottom: 30px;
+        margin-top: 80px;
+        margin-bottom: 40px;
         width: 90%;
     }
     #footer {

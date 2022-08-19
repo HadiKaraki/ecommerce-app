@@ -65,6 +65,11 @@ body {
     }
     #container {
         grid-template-columns: 1fr 1fr;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    #shop-by {
+        margin-left: 0;
     }
     #container #category {
         height: 250px;
