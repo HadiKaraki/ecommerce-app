@@ -13,36 +13,45 @@
             <section id="container">
                 <div id="cart">
                     <div id="top-panel">
+                        <button id="edit-button" type="button" onclick="showButton()">
+                            <i class="fa fa-pencil" style="font-size: 24px;"></i>
+                            Edit
+                        </button>
+                        <button style="display: none;" id="close-edit" onclick="disableButton()">X</button>
                         <h1>Cart</h1>
                     </div>
                     <% for(let product of currUser.cart) {%>
                         <a href="/product/<%= product._id %> ">
-                            <section id="product">
-                                <div id="product-image">
-                                    <img src="<%= product.images[0].url %> ">
-                                </div>
-                                <div id="product-name">
-                                    <h7>
-                                        <%= product.name %>
-                                    </h7>
-                                </div>
-                                <div id="product-price">
-                                    <h7 style="color: red;">
-                                        $
-                                        <%= product.price %>
-                                    </h7>
-                                </div>
-                                <div id="remove-button">
-                                    <form action="/product/removeFromCart/<%= product._id %> " method="POST">
-                                        <button>Remove</button>
-                                    </form>
-                                </div>
-                            </section>
+                            <form action="/product/removeFromCart" method="POST">
+                                <section id="product">
+                                    <div id="product-image">
+                                        <img src="<%= product.images[0].url %> ">
+                                    </div>
+                                    <div id="product-name">
+                                        <h7>
+                                            <%= product.name %>
+                                        </h7>
+                                    </div>
+                                    <div id="product-price">
+                                        <h7 style="color: red;">
+                                            $
+                                            <%= product.price %>
+                                        </h7>
+                                    </div>
                         </a>
+                        <div id="checkbox-input" style="display: none;">
+                            <input type="checkbox" id="checkbox-<%= product._id %>" class="check-product" name="removeProducts[]" onchange="enableButton()" value="<%=product._id%>">
+                            <label for="checkbox-<%= product._id %>">Remove?</label>
+                        </div>
+                        </section>
                         <% } %>
                             <div id="bottom-panel">
+                                <div>
+                                    <button id="remove-button" disabled>Remove</button>
+                                </div>
+                                </form>
                                 <form action="/user/checkout" method="GET">
-                                    <button>Proceed to checkout</button>
+                                    <button id="checkout-button" style="float: left;">Proceed to checkout</button>
                                 </form>
                             </div>
                 </div>
@@ -50,4 +59,43 @@
             <% } else {%>
                 <h1>No products in cart currently.</h1>
                 <% } %>
+
+                    <script>
+                        var editButton = document.getElementById("edit-button")
+                        var closeEditButton = document.getElementById("close-edit")
+                        var inputsDiv = document.querySelectorAll('#checkbox-input');
+                        var inputs = document.querySelectorAll("input.check-product");
+                        var removeButton = document.getElementById("remove-button");
+
+                        function showButton() {
+                            removeButton.style.display = "block";
+                            for (let inputDiv of inputsDiv) {
+                                inputDiv.style.display = "block";
+                            }
+                            editButton.style.display = "none";
+                            closeEditButton.style.display = "block";
+                        }
+
+                        function enableButton() {
+                            for (let input of inputs) {
+                                if (input.checked) {
+                                    removeButton.disabled = false;
+                                    removeButton.style.backgroundColor = "red"
+                                    break;
+                                } else {
+                                    removeButton.disabled = true;
+                                    removeButton.style.backgroundColor = "lightgrey"
+                                }
+                            }
+                        }
+
+                        function disableButton() {
+                            removeButton.style.display = "none";
+                            editButton.style.display = "block";
+                            closeEditButton.style.display = "none";
+                            for (let inputDiv of inputsDiv) {
+                                inputDiv.style.display = "none";
+                            }
+                        }
+                    </script>
     </body>

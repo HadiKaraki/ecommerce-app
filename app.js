@@ -127,7 +127,7 @@ app.get("/search", async(req, res) => {
     let name = req.query.name;
     let option = req.query.option
     if (option === 'All') {
-        option = ['APPLIANCE, MOBILE, TV', 'CAMERA', 'GAMING']
+        option = ['APPLIANCE, MOBILE, TV', 'CAMERA', 'GAMING', 'LAPTOP']
     } else {
         option = option.toUpperCase();
     }
@@ -148,7 +148,7 @@ app.get("/search", async(req, res) => {
 app.get("/autocomplete", async(req, res) => {
     let option = req.query.option
     if (option === 'All') {
-        option = ['APPLIANCE, MOBILE, TV', 'CAMERA', 'GAMING']
+        option = ['APPLIANCE, MOBILE, TV', 'CAMERA', 'GAMING', 'LAPTOP']
     } else {
         option = option.toUpperCase();
     }

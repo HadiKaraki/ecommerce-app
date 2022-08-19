@@ -69,11 +69,11 @@
                                 </form>
                                 <% } else {%>
                                     <form action="/review/delete/<%= userReview._id %>?_method=DELETE" method="POST">
-                                        <h2>Your rating:</h2>
+                                        <h2 style="margin-top: 20px;">Your rating:</h2>
                                         <div id="review">
                                             <% if(userReview.body) {%>
                                                 <div style="margin-top: 10px;" id="review-body">
-                                                    <p>
+                                                    <p style="font-size: 18px;">
                                                         <%= userReview.body %>
                                                     </p>
                                                 </div>
@@ -136,7 +136,7 @@
                         <strong>
                                     <p style="margin-right: 80px; display: inline;">Item Code:</p>
                                 </strong>
-                        <p style="display: inline; color: blue">
+                        <p style="display: inline; color: blue; font-size: 20px;">
                             <%= populatedProduct.code %>
                         </p>
                     </div>
@@ -145,7 +145,7 @@
                                     <p style="margin-right: 80px; display: inline;">In stock:</p>
                                 </strong>
                         <% if(populatedProduct.in_stock) {%>
-                            <p style="display: inline;"><span style="color: red;">&#10003;</span> Yes</p>
+                            <p style="display: inline; font-size: 20px;"><span style="color: red;">&#10003;</span> Yes</p>
                             <% } else {%>
                                 <p>No</p>
                                 <% } %>
@@ -154,7 +154,7 @@
                         <strong>
                                     <p style="margin-right: 80px; display: inline;">Left in stock:</p>
                                 </strong>
-                        <p style="display: inline;">
+                        <p style="display: inline; font-size: 20px;">
                             <%= populatedProduct.nb_in_stock %> left
                         </p>
                     </div>
@@ -162,7 +162,7 @@
                         <strong>
                                     <p style="margin-right: 120px; display: inline;">Brand:
                                     </p>
-                                    <p style="display: inline;">
+                                    <p style="display: inline; font-size: 20px;">
                                         <%= populatedProduct.brand %>
                                     </p>
                                 </strong>
@@ -181,25 +181,27 @@
                 <div id="bottom-panel">
                     <% if(!addedToCart) {%>
                         <form action="/product/addToCart/<%= populatedProduct._id %>" method="POST">
-                            <button class="cart-button" id="addcart-button"><i class="fa fa-shopping-cart"
-                                            style="font-size:24px"></i></button>
+                            <button class="cart-button" id="addcart-button" style="font-weight: bold;"><i
+                                            class="fa fa-shopping-cart" style="font-size:24px"></i> ADD TO CART</button>
                         </form>
                         <% } else {%>
                             <form action="/product/removeFromCart/<%= populatedProduct._id %>" method="POST">
-                                <button class="cart-button" id="removecart-button" style="background-color: red;"><i class="fa fa-shopping-cart"
-                                                style="font-size:24px;"></i></button>
+                                <button class="cart-button" id="removecart-button" style="background-color: red; font-weight: bold;"><i
+                                                class="fa fa-shopping-cart" style="font-size:24px;"></i> REMOVE FROM
+                                            CART</button>
                             </form>
                             <% } %>
                                 <% if(!addedToWishlist) {%>
                                     <form action="/product/addToWishlist/<%= populatedProduct._id %>" method="POST">
-                                        <button class="wishlist-button" id="addwishlist-button"><i
-                                                        class="fa fa-heart-o" aria-hidden="true"
-                                                        style="font-size:24px;"></i></button>
+                                        <button class="wishlist-button" id="addwishlist-button" style="font-weight: bold;"><i class="fa fa-heart-o"
+                                                        aria-hidden="true" style="font-size:24px;"></i> ADD TO
+                                                    WISHLIST</button>
                                     </form>
                                     <% } else {%>
                                         <form action="/product/removeFromWishlist/<%= populatedProduct._id %>" method="POST">
-                                            <button class="wishlist-button" id="removewishlist-button" style="background-color: red;"><i class="fa fa-heart-o"
-                                                            aria-hidden="true" style="font-size:24px;"></i></button>
+                                            <button class="wishlist-button" id="removewishlist-button" style="background-color: red; font-weight: bold;"><i
+                                                            class="fa fa-heart-o" aria-hidden="true"
+                                                            style="font-size:24px;"></i> REMOVE FROM WISHLIST</button>
                                         </form>
                                         <% } %>
                 </div>

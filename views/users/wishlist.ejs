@@ -9,7 +9,7 @@
     </head>
 
     <body>
-        <% if(currUser.cart.length>0) {%>
+        <% if(currUser.wishlist.length>0) {%>
             <section id="container">
                 <% for(let product of currUser.wishlist) {%>
                     <a href="/product/<%= product._id %> ">

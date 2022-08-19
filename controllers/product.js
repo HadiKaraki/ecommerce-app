@@ -86,7 +86,12 @@ module.exports.addToCart = async(req, res) => {
 module.exports.removeFromCart = async(req, res) => {
     const { productID } = req.params;
     const userID = req.user._id;
-    await User.findByIdAndUpdate(userID, { $pull: { cart: productID } });
+    //await campground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
+    //await User.findByIdAndUpdate(userID, { $pull: { cart: productID } });
+    if (req.body.removeProducts) {
+        console.log(req.body.removeProducts)
+        await User.findByIdAndUpdate(userID, { $pull: { cart: { $in: req.body.removeProducts } } });
+    }
     req.flash('success', 'Removed from cart');
     res.redirect('back')
 }

@@ -20,7 +20,7 @@ router.post('/delete/:productID', isLoggedIn, isAdmin, catchAsync(products.delet
 
 router.post('/addToCart/:productID', isLoggedIn, catchAsync(products.addToCart))
 
-router.post('/removeFromCart/:productID', isLoggedIn, catchAsync(products.removeFromCart))
+router.post('/removeFromCart', isLoggedIn, catchAsync(products.removeFromCart))
 
 router.post('/addToWishlist/:productID', isLoggedIn, catchAsync(products.addToWishlist))
 

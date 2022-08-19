@@ -61,7 +61,7 @@ h1 {
 .left-child #rating-panel {
     background-color: white;
     display: flex;
-    height: 370px;
+    height: 350px;
     width: 100%;
     border-bottom: 0.4px solid black;
     border-left: 0.4px solid black;
@@ -98,7 +98,7 @@ h1 {
     flex: 1;
     border-bottom: 0.4px solid black;
     margin-right: 20px;
-    max-height: 605px;
+    max-height: 590px;
     overflow-y: scroll;
 }
 

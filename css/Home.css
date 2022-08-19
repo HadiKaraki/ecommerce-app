@@ -26,8 +26,17 @@ body {
     margin-right: 15px;
     margin-top: 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 10px;
+}
+
+#container #category {
+    height: 350px;
+}
+
+#container #category img {
+    height: 80%;
+    width: 100%;
 }
 
 #container div h1 {
@@ -38,35 +47,7 @@ body {
     text-decoration-thickness: 4px;
 }
 
-#left-container {
-    height: 88%;
-}
-
-#left-container img {
-    width: 100%;
-    height: 100%;
-}
-
-#right-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 10px;
-    height: 480px;
-    height: 70%;
-}
-
-#right-container #category {
-    width: 100%;
-    height: 100%;
-}
-
-#right-container #category img {
-    width: 100%;
-    height: 70%;
-}
-
-#right-container #category:hover,
-#left-container:hover {
+#container #category:hover {
     transition: 0.25s;
     transform: scale(1.03);
 }
@@ -83,32 +64,10 @@ body {
         width: 60%;
     }
     #container {
-        grid-template-columns: 1fr;
-    }
-    #left-container {
-        height: 100%;
-    }
-    #left-container img {
-        width: 100%;
-        height: 82%;
-    }
-    #right-container {
-        display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-column-gap: 10px;
-        height: 480px;
-        height: 100%;
     }
-    #right-container #category {
-        width: 100%;
-        height: 100%;
-    }
-    #right-container #category img {
-        width: 100%;
-        height: 70%;
-    }
-    #container div h1 {
-        font-size: 20px;
+    #container #category {
+        height: 250px;
     }
     #footer {
         position: relative;
