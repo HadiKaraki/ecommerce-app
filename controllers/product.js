@@ -56,9 +56,6 @@ module.exports.showProduct = async(req, res) => {
         if (reviewIndex > -1) {
             userReview = populatedProduct.reviews[reviewIndex]
         }
-        populatedProduct.in_stock = true;
-        populatedProduct.nb_in_stock = 3;
-        await populatedProduct.save();
         res.render('products/show', { populatedProduct, addedToCart, addedToWishlist, averageRating, reviewed, userReview });
     } catch (e) {
         console.log(castErrorDB(e));
@@ -132,9 +129,7 @@ module.exports.renderEditProduct = async(req, res) => {
 
 module.exports.editProduct = async(req, res) => {
     const { productID } = req.params;
-    const { nb_in_stock } = req.body;
     const product = await Product.findByIdAndUpdate(productID, {...req.body.product });
-    product.nb_in_stock = parseInt(nb_in_stock);
     if (req.files) {
         const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
         product.images.push(...imgs);

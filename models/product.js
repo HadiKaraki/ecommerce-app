@@ -37,7 +37,7 @@ const ProductSchema = new Schema({
     },
     in_stock: Boolean,
     nb_in_stock: {
-        type: Number,
+        type: Number
     },
     images: [ImageSchema],
     reviews: [{

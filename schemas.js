@@ -31,7 +31,7 @@ module.exports.productSchema = Joi.object({
         description: Joi.string().escapeHTML(),
         code: Joi.string().required().escapeHTML(),
         price: Joi.number().required().min(0),
-        nb_in_stock: Joi.string().min(0),
+        nb_in_stock: Joi.number().required().min(0),
         in_stock: Joi.boolean(),
         image: Joi.array()
     }).required()

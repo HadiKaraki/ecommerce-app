@@ -2,6 +2,7 @@
 
     <head>
         <meta charset="utf-8">
+        <title>Edit product</title>
         <link rel="stylesheet" href="../../Editproduct.css">
         <link rel="stylesheet" href="../../Navbar.css">
         <link rel="stylesheet" href="../../Footer.css">
@@ -9,27 +10,34 @@
 
     <body>
         <div class="center">
-            <h1>New product</h1>
+            <h1>Edit product</h1>
             <form action="/product/edit/<%= product._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="txt_field">
+                    <span>Name</span>
                     <input type="text" name="product[name]" value="<%= product.name %> ">
                 </div>
                 <div class="txt_field">
+                    <span>Brand</span>
                     <input type="text" name="product[brand]" value="<%= product.brand %>">
                 </div>
                 <div class="txt_field">
+                    <span>Price</span>
                     <input type="text" name="product[price]" value="<%= product.price %>">
                 </div>
                 <div class="txt_field">
+                    <span>Description</span>
                     <input type="text" name="product[description]" value="<%= product.description %>">
                 </div>
                 <div class="txt_field">
+                    <span>Code</span>
                     <input type="text" name="product[code]" value="<%= product.code %>">
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="nb_in_stock" value="<%= product.nb_in_stock %>">
+                    <span>Nb in stock</span>
+                    <input type="text" name="product[nb_in_stock]" value="<%= product.nb_in_stock %>">
                 </div>
                 <div class="select_field">
+                    <span>Available or no</span>
                     <select name="product[in_stock]">
                         <option selected disabled>
                             <%= product.in_stock %>
@@ -39,6 +47,7 @@
                     </select>
                 </div>
                 <div class="select_field">
+                    <span>Category</span>
                     <select name="product[category]">
                         <option selected disabled>
                             <%= product.category %>
@@ -48,6 +57,7 @@
                         <option>APPLIANCE</option>
                         <option>CAMERA</option>
                         <option>GAMING</option>
+                        <option>LAPTOP</option>
                     </select>
                 </div>
                 <div class="file_field">
