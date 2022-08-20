@@ -86,8 +86,6 @@ module.exports.addToCart = async(req, res) => {
 module.exports.removeFromCart = async(req, res) => {
     const { productID } = req.params;
     const userID = req.user._id;
-    //await campground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
-    //await User.findByIdAndUpdate(userID, { $pull: { cart: productID } });
     if (req.body.removeProducts) {
         console.log(req.body.removeProducts)
         await User.findByIdAndUpdate(userID, { $pull: { cart: { $in: req.body.removeProducts } } });
@@ -137,9 +135,10 @@ module.exports.editProduct = async(req, res) => {
     const { nb_in_stock } = req.body;
     const product = await Product.findByIdAndUpdate(productID, {...req.body.product });
     product.nb_in_stock = parseInt(nb_in_stock);
-    console.log(typeof(parseInt(nb_in_stock)));
-    // const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
-    // site.images.push(...imgs);
+    if (req.files) {
+        const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
+        product.images.push(...imgs);
+    }
     if (req.body.deleteImages) {
         for (let filename of req.body.deleteImages) {
             await cloudinary.uploader.destroy(filename);
@@ -153,9 +152,12 @@ module.exports.editProduct = async(req, res) => {
 
 module.exports.deleteProduct = async(req, res) => {
     const { id } = req.params;
-    await Product.findByIdAndDelete(id);
+    const result = await Product.findByIdAndDelete(id);
+    console.log(result)
     req.flash('success', 'Successfully removed product')
     res.redirect('/home');
-    // req.flash('error', 'Product not found!')
-    // res.redirect('/user/account');
+    if (!result) {
+        req.flash('error', 'Product not found!')
+        res.redirect('back');
+    }
 }

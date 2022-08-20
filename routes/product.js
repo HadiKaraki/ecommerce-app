@@ -1,7 +1,6 @@
 const products = require('../controllers/product');
 const express = require('express');
-const { isLoggedIn } = require('../middleware');
-const { isAdmin } = require('../middleware');
+const { isLoggedIn, validateProduct, isAdmin } = require('../middleware');
 const router = express.Router();
 const multer = require('multer');
 const { storage } = require('../cloudinary');
@@ -10,13 +9,11 @@ const catchAsync = require('../utils/catchAsync');
 
 router.route('/new')
     .get(isLoggedIn, isAdmin, catchAsync(products.renderNewProduct))
-    .post(upload.array('image'), isLoggedIn, isAdmin, catchAsync(products.addProduct))
+    .post(upload.array('image'), isLoggedIn, isAdmin, validateProduct, catchAsync(products.addProduct))
 
 router.route('/edit/:productID')
     .get(isLoggedIn, isAdmin, catchAsync(products.renderEditProduct))
-    .post(upload.array('image'), isLoggedIn, isAdmin, catchAsync(products.editProduct))
-
-router.post('/delete/:productID', isLoggedIn, isAdmin, catchAsync(products.deleteProduct))
+    .put(upload.array('image'), isLoggedIn, isAdmin, validateProduct, catchAsync(products.editProduct))
 
 router.post('/addToCart/:productID', isLoggedIn, catchAsync(products.addToCart))
 

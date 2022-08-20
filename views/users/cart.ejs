@@ -41,7 +41,7 @@
                         </a>
                         <div id="checkbox-input" style="display: none;">
                             <input type="checkbox" id="checkbox-<%= product._id %>" class="check-product" name="removeProducts[]" onchange="enableButton()" value="<%=product._id%>">
-                            <label for="checkbox-<%= product._id %>">Remove?</label>
+                            <label for="checkbox-<%= product._id %>" style="color: red; font-weight: bold; cursor: pointer;">Remove?</label>
                         </div>
                         </section>
                         <% } %>

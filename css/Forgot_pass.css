@@ -144,11 +144,10 @@ body {
         height: 38vh;
     }
     #footer {
-        height: 40%;
         position: fixed;
     }
     .center {
-        margin-top: 30px;
+        top: 50%;
         margin-bottom: 30px;
         width: 90%;
     }

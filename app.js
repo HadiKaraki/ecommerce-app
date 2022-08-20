@@ -31,7 +31,6 @@ const user = require('./routes/user');
 const product = require('./routes/product');
 const review = require('./routes/review');
 const brand = require('./routes/brand');
-const home = require('./routes/home');
 
 // MONGODB ATLAS
 const dbUrl = process.env.URL || 'mongodb://localhost:27017/ecommerceDB';
@@ -117,10 +116,13 @@ app.use('/brand', brand)
 app.use('/review', review)
 app.use('/product', product)
 app.use('/user', user)
-app.use('/home', home)
 
 app.get('/', (req, res) => {
     res.redirect('/home')
+})
+
+app.get('/home', (req, res) => {
+    res.render('home')
 })
 
 app.get("/search", async(req, res) => {

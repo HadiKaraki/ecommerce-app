@@ -56,14 +56,14 @@ const ProductSchema = new Schema({
 //     }
 // })
 
-ProductSchema.post('findOneAndDelete', async function(doc) {
-    if (doc) {
-        await Comment.deleteMany({
-            _id: {
-                $in: doc.posts
-            }
-        })
-    }
-})
+// ProductSchema.post('findOneAndDelete', async function(doc) {
+//     if (doc) {
+//         await Comment.deleteMany({
+//             _id: {
+//                 $in: doc.posts
+//             }
+//         })
+//     }
+// })
 
 module.exports = mongoose.model('Product', ProductSchema);

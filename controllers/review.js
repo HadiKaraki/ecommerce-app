@@ -8,7 +8,7 @@ module.exports.newReview = async(req, res) => {
     const { text, rating } = req.body;
     const review = new Review();
     const product = await Product.findById(productID);
-    review.body = text
+    review.body = text;
     review.rating = rating;
     review.author = req.user._id
     await review.save()

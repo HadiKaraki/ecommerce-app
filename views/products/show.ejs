@@ -96,8 +96,8 @@
                         </div>
                         <% if(currentUser && currentUser.admin){ %>
                             <div id="delete-product">
-                                <form action="/product/delete/<%= populatedProduct._id %> ">
-                                    <button id="delete-product-button">DELETE</button>
+                                <form action="/product/<%= populatedProduct._id %>?_method=DELETE" method="POST">
+                                    <button type="submit" id="delete-product-button">DELETE</button>
                                     <a style="float: left;" href="/product/edit/<%= populatedProduct._id %> ">EDIT</a>
                                 </form>
                             </div>

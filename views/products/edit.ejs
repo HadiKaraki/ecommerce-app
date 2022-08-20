@@ -10,7 +10,7 @@
     <body>
         <div class="center">
             <h1>New product</h1>
-            <form action="/product/edit/<%= product._id %>" method="POST" enctype="multipart/form-data">
+            <form action="/product/edit/<%= product._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="txt_field">
                     <input type="text" name="product[name]" value="<%= product.name %> ">
                 </div>
@@ -51,7 +51,17 @@
                     </select>
                 </div>
                 <div class="file_field">
+                    <span>Add more image(s)..</span>
                     <input type="file" id="image" name="image" multiple>
+                </div>
+                <div class="delete_images_field">
+                    <% product.images.forEach(function(img, i) { %>
+                        <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                        </div>
+                        <label for="image-<%=i%>">Delete?</label>
+                        <% })%>
                 </div>
                 <input type="submit" value="Edit product">
             </form>

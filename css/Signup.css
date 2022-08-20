@@ -133,10 +133,9 @@ input[type="submit"]:hover {
 
 @media (max-width: 768px) {
     body {
-        height: 63vh;
+        height: 60vh;
     }
     .center {
-        margin-top: 30px;
         margin-bottom: 30px;
         width: 90%;
     }
