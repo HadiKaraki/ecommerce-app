@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Search results</title>
-        <link rel="stylesheet" href="../Category.css">
+        <link rel="stylesheet" href="../Search_results.css">
     </head>
 
     <body>
@@ -38,13 +38,46 @@
                         </div>
                     </a>
                     <% } %>
-                        <% } else {%>
-                            <h1 style="display: block;">No results found</h1>
-                            <p style="display: block;">The product that you searched for is unavailable, or a spelling mistake may exist in your searching. You can lookup products through these categories:
-                                <a href="/product/category/APPLIANCE">Appliances</a>, <a href="/product/category/MOBILE">Mobile</a>,
-                                <a href="/product/category/TV">TVs</a>
-                            </p>
-                            <% } %>
         </section>
+        <% if(results.length<=2) {%>
+            <style>
+                @media (max-width: 768px) {
+                    #footer {
+                        position: fixed !important;
+                        bottom: 0 !important;
+                        width: 100% !important;
+                    }
+                }
+            </style>
+            <% } %>
+                <% } else {%>
+                    <style>
+                        #container {
+                            display: block !important;
+                        }
+                    </style>
+                    <div id="not-found">
+                        <h1>No results found</h1>
+                    </div>
+                    <div id="body-parag">
+                        <p>The product that you searched for is unavailable, or a spelling mistake may exist in your searching. You can lookup products through these categories:
+                            <a href="/product/category/APPLIANCE">Appliances</a>, <a href="/product/category/MOBILE">Mobile</a>,
+                            <a href="/product/category/TV">TVs</a>
+                        </p>
+                    </div>
+                    <style>
+                        #footer {
+                            position: fixed !important;
+                            bottom: 0 !important;
+                            width: 100% !important;
+                        }
+                        
+                        @media (max-width: 768px) {
+                            body {
+                                height: 20vh;
+                            }
+                        }
+                    </style>
+                    <% } %>
 
     </body>

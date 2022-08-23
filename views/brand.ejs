@@ -41,4 +41,15 @@
                 </div>
             </a>
             <% } %>
+                <% if(brandProducts.length<=2) {%>
+                    <style>
+                        @media (max-width: 768px) {
+                            #footer {
+                                position: fixed !important;
+                                bottom: 0 !important;
+                                width: 100% !important;
+                            }
+                        }
+                    </style>
+                    <% } %>
     </section>

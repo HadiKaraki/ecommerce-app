@@ -18,6 +18,7 @@ module.exports.showProduct = async(req, res) => {
             return res.redirect('back');
         }
         populatedProduct = await product.populate('reviews.author');
+        // AVERAGE RATING
         var reviewSum = 0;
         for (let review of populatedProduct.reviews) {
             reviewSum += review.rating;
@@ -28,9 +29,10 @@ module.exports.showProduct = async(req, res) => {
         var addedToWishlist = false;
         if (req.isAuthenticated()) {
             const currUserID = req.user._id
+            const currUser = await User.findById(currUserID);
+            // CHECK IF USER HAS A REVIEW
             var reviewed = false;
             var reviewIndex = -1;
-            const currUser = await User.findById(currUserID)
             for (let review of product.reviews) {
                 reviewIndex += 1;
                 if (review.author._id.equals(currUserID)) {
@@ -38,6 +40,7 @@ module.exports.showProduct = async(req, res) => {
                     break;
                 }
             }
+            // CHECK IF PRODUCT IS IN THE USER'S CART/WISHLIST
             const cartIndex = currUser.cart.indexOf(populatedProduct._id);
             const wishlistIndex = currUser.wishlist.indexOf(populatedProduct._id);
             if (cartIndex > -1) {
@@ -47,6 +50,7 @@ module.exports.showProduct = async(req, res) => {
                 addedToWishlist = true;
             }
         }
+        // GET USER'S REVIEW TO PUT UP FRONT:
         // product: reviews => array of "review" ids
         // populatedProduct: reviews => array of populated "review" documents
 
@@ -84,7 +88,6 @@ module.exports.removeFromCart = async(req, res) => {
     const { productID } = req.params;
     const userID = req.user._id;
     if (req.body.removeProducts) {
-        console.log(req.body.removeProducts)
         await User.findByIdAndUpdate(userID, { $pull: { cart: { $in: req.body.removeProducts } } });
     }
     req.flash('success', 'Removed from cart');

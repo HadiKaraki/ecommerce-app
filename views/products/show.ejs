@@ -46,7 +46,7 @@
                                     <div id="text-box">
                                         <label style="text-decoration: underline;" class="form-label" for="body">Review
                                             Text</label>
-                                        <textarea class="form-control" name="text" id="body" cols="30" rows="3" required></textarea>
+                                        <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>
@@ -54,7 +54,7 @@
                                     <button class="btn btn-success">Submit</button>
                                     <p>Leave a rating:</p>
                                     <fieldset class="starability-basic">
-                                        <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                                        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
                                         <input type="radio" id="rate1" name="rating" value="1" />
                                         <label for="rate1">1 star.</label>
                                         <input type="radio" id="rate2" name="rating" value="2" />
@@ -98,7 +98,7 @@
                             <div id="delete-product">
                                 <form action="/product/<%= populatedProduct._id %>?_method=DELETE" method="POST">
                                     <button type="submit" id="delete-product-button">DELETE</button>
-                                    <a style="float: left;" href="/product/edit/<%= populatedProduct._id %> ">EDIT</a>
+                                    <a id="edit-product" href="/product/edit/<%= populatedProduct._id %> ">EDIT</a>
                                 </form>
                             </div>
                             <% } %>

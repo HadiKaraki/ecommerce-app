@@ -10,18 +10,23 @@
         <div class="center">
             <h1>Edit Account</h1>
             <form action="/user/account" method="POST">
+                <span>First name</span>
                 <div class="txt_field">
-                    <input type="text" name="user[first_name]" value="<%=currentUser.first_name  %> ">
+                    <input type="text" name="user[first_name]" value="<%=currentUser.first_name %>">
                 </div>
+                <span>Last name</span>
                 <div class="txt_field">
-                    <input type="text" name="user[last_name]" value="<%=currentUser.last_name  %> ">
+                    <input type="text" name="user[last_name]" value="<%=currentUser.last_name  %>">
                 </div>
+                <span>Address name</span>
                 <div class="txt_field">
-                    <input type="text" name="user[address]" value="<%=currentUser.address  %> ">
+                    <input type="text" name="user[address]" value="<%=currentUser.address  %>">
                 </div>
+                <span>Phone number</span>
                 <div class="txt_field">
-                    <input type="text" name="user[phone_nb]" value="<%=currentUser.phone_nb  %> ">
+                    <input type="text" name="user[phone_nb]" value="<%=currentUser.phone_nb  %>">
                 </div>
+                <span>Title</span>
                 <div class="select_field">
                     <select name="title">
                         <option>Mr</option>

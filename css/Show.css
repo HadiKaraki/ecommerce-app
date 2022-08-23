@@ -94,6 +94,23 @@ h1 {
     resize: none;
 }
 
+.left-child #delete-product {
+    background-color: white;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.left-child #delete-product-button {
+    margin-right: 10px;
+    border: 0;
+    background-color: red;
+}
+
+.left-child #edit-product {
+    margin-left: 10px;
+    text-decoration: none;
+}
+
 .right-child {
     flex: 1;
     border-bottom: 0.4px solid black;

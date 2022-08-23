@@ -39,7 +39,18 @@
                     </a>
                     <% } %>
             </section>
-            <% } else {%>
-                <h1>No products added to wishlist currently.</h1>
+            <% if(currUser.wishlist.length<=2) {%>
+                <style>
+                    @media (max-width: 768px) {
+                        #footer {
+                            position: fixed !important;
+                            bottom: 0 !important;
+                            width: 100% !important;
+                        }
+                    }
+                </style>
                 <% } %>
+                    <% } else {%>
+                        <h1>No products added to wishlist currently.</h1>
+                        <% } %>
     </body>

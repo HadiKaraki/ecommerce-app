@@ -30,9 +30,7 @@ module.exports.wishlist = async(req, res) => {
 }
 
 module.exports.renderAccount = async(req, res) => {
-    const currUserID = req.user._id
-    const user = await User.findById(currUserID);
-    res.render('users/account', { user })
+    res.render('users/account')
 }
 
 module.exports.editAccount = async(req, res) => {

@@ -70,6 +70,17 @@
                     </a>
                     <% } %>
             </section>
+            <% if(products.length<=2) {%>
+                <style>
+                    @media (max-width: 768px) {
+                        #footer {
+                            position: fixed !important;
+                            bottom: 0 !important;
+                            width: 100% !important;
+                        }
+                    }
+                </style>
+                <% } %>
         </aside>
         <script>
             var allDivs = document.getElementsByTagName('div');

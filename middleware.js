@@ -1,4 +1,5 @@
 const User = require('./models/user');
+const Review = require('./models/review');
 const { productSchema } = require('./schemas.js');
 const ExpressError = require('./utils/ExpressError');
 
