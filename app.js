@@ -16,14 +16,13 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require("body-parser")
 const methodOverride = require('method-override');
-//const bcrypt = require('bcrypt');
 const helmet = require('helmet');
 const session = require('express-session')
 const MongoDBStore = require("connect-mongo");
 const LocalStrategy = require('passport-local');
 const catchAsync = require('./utils/catchAsync');
 const path = require('path');
-const { isLoggedIn } = require('./middleware');
+const { isLoggedIn, setCache } = require('./middleware');
 var collection;
 
 // ROUTES
@@ -71,11 +70,68 @@ const sessionConfig = {
     }
 }
 
-app.use(helmet.xssFilter());
+app.use(helmet({ crossOriginEmbedderPolicy: false }));
 
+// URL's for contentSecurityPolicy
+const scriptSrcUrls = [
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://api.mapbox.com/",
+    "https://kit.fontawesome.com/",
+    "https://cdn.jsdelivr.net",
+    "https://code.jquery.com/",
+    "https://ajax.googleapis.com/"
+];
+const styleSrcUrls = [
+    "https://kit-free.fontawesome.com/",
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.mapbox.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://fonts.googleapis.com/",
+    "https://use.fontawesome.com/",
+    "https://maxcdn.bootstrapcdn.com/",
+    "https://cdn.jsdelivr.net/",
+    "https://ajax.googleapis.com/",
+    "https://cdnjs.cloudflare.com/",
+    "https://code.jquery.com/"
+];
+const connectSrcUrls = [
+    "https://api.mapbox.com/",
+    "https://a.tiles.mapbox.com/",
+    "https://b.tiles.mapbox.com/",
+    "https://events.mapbox.com/",
+    "https://ajax.googleapis.com/"
+];
+const fontSrcUrls = [
+    "https://fonts.googleapis.com/",
+    "https://fonts.gstatic.com/",
+    "https://cdnjs.cloudflare.com/"
+];
+
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+            workerSrc: ["'self'", "blob:"],
+            objectSrc: [],
+            imgSrc: [
+                "'self'",
+                "blob:",
+                "data:",
+                "https://res.cloudinary.com/dvxvgwx9m/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+            ],
+            fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+);
+
+
+app.use(setCache)
 app.use(session(sessionConfig));
 app.use(flash());
-
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -189,4 +245,3 @@ app.listen(port, async() => {
 })
 
 //msUmz38PI9crSPZh
-//enigmatic-cove-37838
