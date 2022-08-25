@@ -72,6 +72,8 @@ const sessionConfig = {
 
 app.use(helmet({ crossOriginEmbedderPolicy: false }));
 
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+
 // URL's for contentSecurityPolicy
 const scriptSrcUrls = [
     "https://stackpath.bootstrapcdn.com/",
@@ -128,8 +130,7 @@ app.use(
     })
 );
 
-
-app.use(setCache)
+// app.use(setCache)
 app.use(session(sessionConfig));
 app.use(flash());
 app.use(passport.initialize());
