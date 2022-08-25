@@ -65,6 +65,8 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
+        //secure: true, (be careful when setting this to true, as compliant clients will not send the cookie back to the server in the future if the browser does not have an HTTPS connection.)
+        sameSite: true,
         expires: Date.now() + 1000 * 60 * 60 * 24,
         maxAge: 1000 * 60 * 60 * 24 // milliseconds seconds minutes days weeks
     }
@@ -77,8 +79,6 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 // URL's for contentSecurityPolicy
 const scriptSrcUrls = [
     "https://stackpath.bootstrapcdn.com/",
-    "https://api.tiles.mapbox.com/",
-    "https://api.mapbox.com/",
     "https://kit.fontawesome.com/",
     "https://cdn.jsdelivr.net",
     "https://code.jquery.com/",
@@ -87,8 +87,6 @@ const scriptSrcUrls = [
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
     "https://stackpath.bootstrapcdn.com/",
-    "https://api.mapbox.com/",
-    "https://api.tiles.mapbox.com/",
     "https://fonts.googleapis.com/",
     "https://use.fontawesome.com/",
     "https://maxcdn.bootstrapcdn.com/",
@@ -98,10 +96,6 @@ const styleSrcUrls = [
     "https://code.jquery.com/"
 ];
 const connectSrcUrls = [
-    "https://api.mapbox.com/",
-    "https://a.tiles.mapbox.com/",
-    "https://b.tiles.mapbox.com/",
-    "https://events.mapbox.com/",
     "https://ajax.googleapis.com/",
     "http://e-comwebsite.herokuapp.com/"
 ];
@@ -247,3 +241,4 @@ app.listen(port, async() => {
 })
 
 //msUmz38PI9crSPZh
+//The page did not request an origin-keyed agent cluster, but was put in one anyway because the origin 'http://localhost:3000' had previously been placed in an origin-keyed agent cluster. Update your headers to uniformly request origin-keying for all pages on the origin.

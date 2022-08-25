@@ -43,7 +43,15 @@
             <% } %>
                 <% if(brandProducts.length<=2) {%>
                     <style>
-                        @media (max-width: 768px) {
+                        @media (max-width: 359px) {
+                            #footer {
+                                position: fixed !important;
+                                bottom: 0 !important;
+                                width: 100% !important;
+                            }
+                        }
+                        
+                        @media (min-width: 400px) {
                             #footer {
                                 position: fixed !important;
                                 bottom: 0 !important;
