@@ -102,7 +102,8 @@ const connectSrcUrls = [
     "https://a.tiles.mapbox.com/",
     "https://b.tiles.mapbox.com/",
     "https://events.mapbox.com/",
-    "https://ajax.googleapis.com/"
+    "https://ajax.googleapis.com/",
+    "http://e-comwebsite.herokuapp.com/"
 ];
 const fontSrcUrls = [
     "https://fonts.googleapis.com/",
