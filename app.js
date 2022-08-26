@@ -8,6 +8,8 @@ const app = express();
 const { MongoClient, ObjectID } = require("mongodb");
 const Cors = require("cors");
 const { request } = require("express");
+const cookies = require("cookie")
+const signCookies = require("cookie-signature")
 const ejsMate = require('ejs-mate');
 const ejsLint = require('ejs-lint');
 const flash = require('connect-flash');
@@ -17,6 +19,8 @@ const passport = require('passport');
 const bodyParser = require("body-parser")
 const methodOverride = require('method-override');
 const helmet = require('helmet');
+const hpkp = require("hpkp");
+const permissionsPolicy = require("permissions-policy");
 const session = require('express-session')
 const MongoDBStore = require("connect-mongo");
 const LocalStrategy = require('passport-local');
@@ -121,6 +125,32 @@ app.use(
                 "https://res.cloudinary.com/dvxvgwx9m/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+);
+
+const ninetyDaysInSeconds = 7776000;
+app.use(
+    hpkp({
+        maxAge: ninetyDaysInSeconds,
+        sha256s: ["AbCdEf123=", "ZyXwVu456="],
+        includeSubDomains: true, // optional
+        reportOnly: false, // optional
+
+        // Set the header based on a condition.
+        // This is optional.
+        setIf(req, res) {
+            return req.secure;
+        },
+    })
+);
+
+app.use(
+    permissionsPolicy({
+        features: {
+            fullscreen: ["self"], // fullscreen=()
+            vibrate: ["none"], // vibrate=(none)
+            syncXhr: [], // syncXhr=()
         },
     })
 );
