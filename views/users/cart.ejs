@@ -13,11 +13,11 @@
             <section id="container">
                 <div id="cart">
                     <div id="top-panel">
-                        <button id="edit-button" type="button" onclick="showButton()">
+                        <button id="edit-button" type="button">
                             <i class="fa fa-pencil" style="font-size: 24px;"></i>
                             Edit
                         </button>
-                        <button style="display: none;" id="close-edit" onclick="disableButton()">X</button>
+                        <button style="display: none;" id="close-edit">X</button>
                         <h1>Cart</h1>
                     </div>
                     <% for(let product of currUser.cart) {%>
@@ -40,7 +40,7 @@
                                     </div>
                         </a>
                         <div id="checkbox-input" style="display: none;">
-                            <input type="checkbox" id="checkbox-<%= product._id %>" class="check-product" name="removeProducts[]" onchange="enableButton()" value="<%=product._id%>">
+                            <input type="checkbox" id="checkbox-<%= product._id %>" class="check-product" name="removeProducts[]" value="<%=product._id%>">
                             <label for="checkbox-<%= product._id %>" style="color: red; font-weight: bold; cursor: pointer;">Remove?</label>
                         </div>
                         </section>
@@ -71,42 +71,5 @@
                         <h1>No products in cart currently.</h1>
                         <% } %>
 
-                            <script>
-                                var editButton = document.getElementById("edit-button")
-                                var closeEditButton = document.getElementById("close-edit")
-                                var inputsDiv = document.querySelectorAll('#checkbox-input');
-                                var inputs = document.querySelectorAll("input.check-product");
-                                var removeButton = document.getElementById("remove-button");
-
-                                function showButton() {
-                                    removeButton.style.display = "block";
-                                    for (let inputDiv of inputsDiv) {
-                                        inputDiv.style.display = "block";
-                                    }
-                                    editButton.style.display = "none";
-                                    closeEditButton.style.display = "block";
-                                }
-
-                                function enableButton() {
-                                    for (let input of inputs) {
-                                        if (input.checked) {
-                                            removeButton.disabled = false;
-                                            removeButton.style.backgroundColor = "red"
-                                            break;
-                                        } else {
-                                            removeButton.disabled = true;
-                                            removeButton.style.backgroundColor = "lightgrey"
-                                        }
-                                    }
-                                }
-
-                                function disableButton() {
-                                    removeButton.style.display = "none";
-                                    editButton.style.display = "block";
-                                    closeEditButton.style.display = "none";
-                                    for (let inputDiv of inputsDiv) {
-                                        inputDiv.style.display = "none";
-                                    }
-                                }
-                            </script>
+                            <script src="../cart.js"></script>
     </body>
