@@ -112,12 +112,12 @@ const fontSrcUrls = [
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
-            defaultSrc: [],
+            defaultSrc: ["'self'"],
             connectSrc: ["'self'", ...connectSrcUrls],
             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
             workerSrc: ["'self'", "blob:"],
-            objectSrc: [],
+            objectSrc: ["'none'"],
             imgSrc: [
                 "'self'",
                 "blob:",
@@ -125,32 +125,53 @@ app.use(
                 "https://res.cloudinary.com/dvxvgwx9m/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
-        },
+            frameAncestors: ["'none'"]
+        }
     })
 );
 
-const ninetyDaysInSeconds = 7776000;
 app.use(
-    hpkp({
-        maxAge: ninetyDaysInSeconds,
-        sha256s: ["AbCdEf123=", "ZyXwVu456="],
-        includeSubDomains: true, // optional
-        reportOnly: false, // optional
-
-        // Set the header based on a condition.
-        // This is optional.
-        setIf(req, res) {
-            return req.secure;
-        },
+    helmet.frameguard({
+        action: "deny",
     })
 );
+
+// const ninetyDaysInSeconds = 7776000;
+// app.use(
+//     hpkp({
+//         maxAge: ninetyDaysInSeconds,
+//         sha256s: ["AbCdEf123=", "ZyXwVu456="],
+//         includeSubDomains: true, // optional
+//         reportOnly: false, // optional
+
+//         // Set the header based on a condition.
+//         // This is optional.
+//         setIf(req, res) {
+//             return req.secure;
+//         },
+//     })
+// );
 
 app.use(
     permissionsPolicy({
         features: {
             fullscreen: ["self"], // fullscreen=()
             vibrate: ["none"], // vibrate=(none)
-            syncXhr: [], // syncXhr=()
+            syncXhr: [],
+            accelerometer: ["none"],
+            ambientLigntSensor: ["none"],
+            autoplay: ["self"],
+            battery: ["none"],
+            camera: ["self"],
+            geolocation: ["self"],
+            gyroscope: ["self"],
+            layoutAnimations: ["self"],
+            microphone: ["none"],
+            oversizedImages: ["none"],
+            payment: ["self"],
+            speakerSelection: ["none"],
+            webShare: ["none"],
+            syncXhr: ["self"]
         },
     })
 );

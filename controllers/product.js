@@ -12,7 +12,7 @@ const castErrorDB = err => {
 module.exports.showProduct = async(req, res) => {
     try {
         const { id } = req.params;
-        var product = await Product.findById(id).populate('reviews')
+        var product = await Product.findById(id).populate('reviews');
         if (!product) {
             req.flash('error', 'Cannot find that product!');
             return res.redirect('back');
@@ -63,7 +63,7 @@ module.exports.showProduct = async(req, res) => {
         res.render('products/show', { populatedProduct, addedToCart, addedToWishlist, averageRating, reviewed, userReview });
     } catch (e) {
         console.log(castErrorDB(e));
-        req.flash('error', 'Cannot find that product!');
+        //req.flash('error', 'Cannot find that product!');
         res.redirect('back')
     }
 }
