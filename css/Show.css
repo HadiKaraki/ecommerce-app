@@ -299,4 +299,7 @@ button {
     .left-child #top-panel h1 {
         display: inline;
     }
+    /* #addcart-button, #removewishlist-button, #addcart-button i, #removewishlist-button i{
+        font-size: 12px !important;
+    } */
 }

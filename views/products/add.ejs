@@ -7,7 +7,98 @@
     </head>
 
     <body>
-        <div class="center">
+        <form action="/product/new" method="POST" enctype="multipart/form-data" id="meeting-form">
+            <section class="h-100 h-custom gradient-custom-2">
+              <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                  <div class="col-8">
+                    <div class="card card-registration shadow card-registration-2" style="border-radius: 15px;">
+                      <div class="card-body p-0">
+                        <div class="row g-0">
+                          <div class="col-lg-12">
+                            <div class="p-5">
+                              <h3 class="fw-bold mb-5" style="color: black; text-decoration: underline;">Add product</h3>
+                              <div class="row">
+                                <div class="col-md-6 mb-4 pb-2">
+                                  <div class="form-outline">
+                                    <input type="text" id="name" name="product[name]" class="form-control form-control-lg" required/>
+                                    <label class="form-label" for="name">Name</label>
+                                    <h5 id="NameCheck" style="color: red;">**Name is missing</h5>
+                                  </div>
+                                </div>
+                                <div class="col-md-6 mb-4 pb-2">
+                                  <div class="form-outline">
+                                    <input type="text" id="brand" name="product[brand]" class="form-control form-control-lg" required/>
+                                    <label class="form-label" for="brand">Brand</label>
+                                    <h5 id="brandCheck" style="color: red;">**Brand is missing</h5>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-6 mb-4 pb-2">
+                                  <div class="form-outline">
+                                    <input type="text" id="price" name="product[price]" placeholder="" class="form-control form-control-lg" required/>
+                                    <label class="form-label" for="price">Price</label>
+                                    <h5 id="priceCheck" style="color: red;">**Price is missing</h5>
+                                  </div>
+                                </div>
+                                  <div class="col-md-6 mb-4 pb-2">
+                                    <div class="form-outline">
+                                      <input type="text" id="description" name="product[description]" placeholder="" class="form-control form-control-lg" required/>
+                                      <label class="form-label" for="description">Description</label>
+                                      <h5 id="descriptionCheck" style="color: red;">**Description is missing</h5>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-6 mb-4 pb-2">
+                                  <div class="form-outline">
+                                    <input type="text" id="code" name="product[code]" placeholder="" class="form-control form-control-lg" required/>
+                                    <label class="form-label" for="code">Code</label>
+                                    <h5 id="codeCheck" style="color: red;">**Code is missing</h5>
+                                  </div>
+                                </div>
+                                <div class="col-md-6 mb-4 pb-2">
+                                  <div class="form-outline">
+                                    <input type="text" id="nbInStock" name="product[nb_in_stock]" placeholder="" class="form-control form-control-lg" required/>
+                                    <label class="form-label" for="nbInStock">Nb in stock</label>
+                                    <h5 id="nbInStockCheck" style="color: red;">**Number in stock is missing</h5>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="mb-4 pb-2">
+                                    <label class="form-label" for="company-id" id="company-id-label" name="companyId">In stock</label>
+                                    <select class="select" id="inStock" name="product[in_stock]" required>
+                                        <option>true</option>
+                                        <option>false</option>
+                                    </select>
+                                  </div>
+                                  <div class="mb-4 pb-2">
+                                    <label class="form-label" for="company-id" id="company-id-label" name="companyId">Category</label>
+                                    <select class="select" id="category" name="product[category]" required>
+                                        <option>TV</option>
+                                        <option>MOBILE</option>
+                                        <option>APPLIANCE</option>
+                                        <option>CAMERA</option>
+                                        <option>GAMING</option>
+                                        <option>LAPTOP</option>
+                                    </select>
+                                  </div>
+                                  <label>Add image(s)</label>
+                                  <div class="file_field mb-4 pb-2">
+                                    <input type="file" id="image" name="image" multiple required>
+                                </div>
+                              </div>
+                                <button type="submit" id="submitBtn" style="background-color: #2691d9 !important;" class="btn btn-dark btn-lg" data-mdb-ripple-color="dark">Submit</button>
+                            </div>
+                          </div>
+                      </section>
+                </form>
+                <script src="../newProduct.js"></script>
+
+                <!-- <script src="../../meetingValidator.js"></script> -->
+        <!-- <div class="center">
             <h1>New product</h1>
             <form action="/product/new" method="POST" enctype="multipart/form-data">
                 <div class="txt_field">
@@ -49,6 +140,6 @@
                 </div>
                 <input type="submit" value="Add product">
             </form>
-        </div>
+        </div> -->
 
     </body>

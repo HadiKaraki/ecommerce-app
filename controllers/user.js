@@ -58,7 +58,7 @@ module.exports.forgotPassEmail = async(req, res) => {
     secret = uuidv4();
     var token = jwt.sign(payload, secret, { expiresIn: '1h' })
     const output = `<p>A password reset was requested on this account. Click on 
-                        <a href="http://e-comwebsite.herokuapp.com/user/resetpassword/${user._id}/${token}">
+                        <a href="https://ecommerce.hadikaraki.net/user/resetpassword/${user._id}/${token}">
                             this
                         </a>
                         link in order to reset your password. This link expires in 1 hour.
@@ -132,15 +132,15 @@ module.exports.renderRegister = (req, res) => {
 module.exports.register = async(req, res) => {
     if (!req.isAuthenticated()) {
         try {
-            const { email, username, last_name, first_name, password, title, phone_number, address } = req.body;
-            const user = new User({ email, username, last_name, first_name, title, phone_number, address });
+            const { password } = req.body;
+            const user = new User(req.body.user);
+            user.password = password;
             user.admin = false;
             const registeredUser = await User.register(user, password);
-            await user.save()
             req.login(registeredUser, err => {
                 if (err) return next(err);
                 req.flash('success', 'Succesfuly created account')
-                res.redirect(`/user/creditcard`);
+                res.redirect(`/home`);
             })
         } catch (e) {
             req.flash('error', e.message);

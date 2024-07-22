@@ -7,24 +7,83 @@
     </head>
 
     <body>
-        <div class="center">
+        <form action="/user/account" method="POST">
+            <section class="h-100 h-custom gradient-custom-2">
+                <div class="container py-5 h-100">
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-8">
+                      <div class="card card-registration shadow card-registration-2" style="border-radius: 15px;">
+                        <div class="card-body p-0">
+                          <div class="row g-0">
+                            <div class="col-lg-12">
+                              <div class="p-5">
+                                <h3 class="fw-bold mb-5" style="color: black; text-decoration: underline;">User infomation</h3>
+                                <div class="row">
+                                  <div class="col-md-6 mb-4 pb-2">
+                                    <div class="form-outline">
+                                      <input type="text" id="first-name" name="user[first_name]" value="<%= currentUser.first_name %>" class="form-control form-control-lg" required/>
+                                      <label class="form-label" for="first-name">First name</label>
+                                      <h5 id="firstNameCheck" style="color: red;">**First name is missing</h5>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6 mb-4 pb-2">
+                                    <div class="form-outline">
+                                      <input type="text" id="last-name" name="user[last_name]" value="<%= currentUser.last_name %>" class="form-control form-control-lg" required/>
+                                      <label class="form-label" for="last-name">Last name</label>
+                                      <h5 id="lastNameCheck" style="color: red;">**Last name is missing</h5>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 pb-2">
+                                      <div class="form-outline">
+                                        <input type="text" id="address" name="user[address]" value="<%= currentUser.address %>" class="form-control form-control-lg" required/>
+                                        <label class="form-label" for="address">Address name</label>
+                                        <h5 id="addressCheck" style="color: red;">**Address is missing</h5>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 pb-2">
+                                      <div class="form-outline">
+                                        <input type="text" id="phone-nb" name="user[phone_nb]" value="<%= currentUser.phone_nb %>" class="form-control form-control-lg" required/>
+                                        <label class="form-label" for="phone-nb">Phone number</label>
+                                        <h5 id="phoneNumberCheck" style="color: red;">**Phone number is missing</h5>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-4 pb-2">
+                                        <label class="form-label" for="company-id" id="company-id-label" name="companyId">Title</label>
+                                        <select class="select" id="company-id" name="title" required>
+                                          <option>Mr</option>
+                                          <option>Mrs</option>
+                                        </select>
+                                      </div>
+                                  <button type="button" id="submitbtn" style="background-color: #2691d9 !important;" class="btn btn-dark btn-lg" data-mdb-ripple-color="dark">Update</button>
+                              </div>
+                            </div>
+                        </section>
+                    </form>
+                    <div id="space" style="margin-bottom: 35px;"></div>
+                    <script src="../editAccountValidator.js"></script>
+
+        <!-- <div class="center">
             <h1>Edit Account</h1>
             <form action="/user/account" method="POST">
                 <span>First name</span>
                 <div class="txt_field">
-                    <input type="text" name="user[first_name]" value="<%=currentUser.first_name %>">
+                    <input type="text" name="user[first_name]" value="currentUser.first_name">
                 </div>
                 <span>Last name</span>
                 <div class="txt_field">
-                    <input type="text" name="user[last_name]" value="<%=currentUser.last_name  %>">
+                    <input type="text" name="user[last_name]" value="currentUser.last_name">
                 </div>
                 <span>Address name</span>
                 <div class="txt_field">
-                    <input type="text" name="user[address]" value="<%=currentUser.address  %>">
+                    <input type="text" name="user[address]" value="currentUser.address">
                 </div>
                 <span>Phone number</span>
                 <div class="txt_field">
-                    <input type="text" name="user[phone_nb]" value="<%=currentUser.phone_nb  %>">
+                    <input type="text" name="user[phone_nb]" value="currentUser.phone_nb">
                 </div>
                 <span>Title</span>
                 <div class="select_field">
@@ -35,6 +94,6 @@
                 </div>
                 <input type="submit" value="Save">
             </form>
-        </div>
+        </div> -->
 
     </body>

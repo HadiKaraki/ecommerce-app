@@ -6,7 +6,88 @@
     </head>
 
     <body>
-        <div class="center">
+        <form action="/user/register" method="POST" id="signup-form">
+            <section class="h-100 h-custom gradient-custom-2">
+                <div class="container py-5 h-100">
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-8">
+                      <div class="card card-registration shadow card-registration-2" style="border-radius: 15px;">
+                        <div class="card-body p-0">
+                          <div class="row g-0">
+                            <div class="col-lg-12">
+                              <div class="p-5">
+                                <h3 class="fw-bold mb-5" style="color: black; text-decoration: underline;">User infomation</h3>
+                                <div class="row">
+                                  <div class="col-md-6 mb-4 pb-2">
+                                    <div class="form-outline">
+                                      <input type="text" id="first-name" name="user[first_name]" class="form-control form-control-lg" required/>
+                                      <label class="form-label" for="first-name">First name</label>
+                                      <h5 id="firstNameCheck" style="color: red;">**First name is missing</h5>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6 mb-4 pb-2">
+                                    <div class="form-outline">
+                                      <input type="text" id="last-name" name="user[last_name]" class="form-control form-control-lg" required/>
+                                      <label class="form-label" for="last-name">Last name</label>
+                                      <h5 id="lastNameCheck" style="color: red;">**Last name is missing</h5>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-4 pb-2">
+                                  <label class="form-label" for="company-id" id="company-id-label" name="companyId">Title</label>
+                                  <select class="select" id="company-id" name="title" required>
+                                    <option>Mr</option>
+                                    <option>Mrs</option>
+                                  </select>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 pb-2">
+                                      <div class="form-outline">
+                                        <input type="text" id="username" name="user[username]" class="form-control form-control-lg" required/>
+                                        <label class="form-label" for="username">Username</label>
+                                        <small id="uservalid" class="form-text text-muted invalid-feedback">Your username must be a valid username</small>
+                                        <h5 id="usercheck" style="color: red;">**Username is missing</h5>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 pb-2">
+                                      <div class="form-outline">
+                                        <input type="text" id="password" name="password" class="form-control form-control-lg" required/>
+                                        <label class="form-label" for="password">Password</label>
+                                        <h5 id="passcheck" style="color: red;">**Password is missing</h5>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 pb-2">
+                                      <div class="form-outline">
+                                        <input type="text" id="email" name="user[email]" class="form-control form-control-lg" required/>
+                                        <label class="form-label" for="email">Email</label>
+                                        <small id="emailvalid" class="form-text text-muted invalid-feedback">Your email must be a valid email</small>
+                                        <h5 id="emailCheck" style="color: red;">**Email is missing</h5>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 pb-2">
+                                        <input type="text" id="address" name="user[address]" class="form-control form-control-lg" required/>
+                                        <label class="form-label" for="address">Address</label>
+                                        <h5 id="addressCheck" style="color: red;">**Address is missing</h5>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-6 mb-4 pb-2">
+                                      <div class="form-outline">
+                                        <input type="text" id="phone-nb" name="user[phone_nb]" class="form-control form-control-lg" required/>
+                                        <label class="form-label" for="phone-nb">Phone number</label>
+                                        <h5 id="phoneNumberCheck" style="color: red;">**Phone number is missing</h5>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <button type="button" id="submitbtn" style="background-color: #2691d9 !important;" class="btn btn-dark btn-lg" data-mdb-ripple-color="dark">Register</button>
+                              </div>
+                            </div>
+                        </section>
+                    </form>
+                    <script src="../signupValidator.js"></script>
+        <!-- <div class="center">
             <div class="back-button">
                 <button type="button" id="back" onclick="history.go(-1)"><i class="fa fa-arrow-left"
                         aria-hidden="true"></i> Back</button>
@@ -14,22 +95,22 @@
             <h1>Sign up</h1>
             <form action="/user/register" method="POST">
                 <div class="txt_field">
-                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="text" name="user[username]" placeholder="Username" required>
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="first_name" placeholder="First name" required>
+                    <input type="text" name="user[first_name]" placeholder="First name" required>
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="last_name" placeholder="Last name" required>
+                    <input type="text" name="user[last_name]" placeholder="Last name" required>
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="email" placeholder="Email" required>
+                    <input type="text" name="user[email]" placeholder="Email" required>
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="address" placeholder="Address" required>
+                    <input type="text" name="user[address]" placeholder="Address" required>
                 </div>
                 <div class="txt_field">
-                    <input type="text" name="phone_number" placeholder="Phone number" required>
+                    <input type="text" name="user[phone_nb]" placeholder="Phone number" required>
                 </div>
                 <div class="txt_field">
                     <input type="password" name="password" placeholder="Password" required>
@@ -45,7 +126,7 @@
                 </div>
                 <input type="submit" value="Register">
             </form>
-        </div>
+        </div> -->
     </body>
 
     </html>

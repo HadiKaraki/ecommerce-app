@@ -185,7 +185,7 @@
                                             class="fa fa-shopping-cart" style="font-size:24px"></i> ADD TO CART</button>
                         </form>
                         <% } else {%>
-                            <form action="/product/removeFromCart/<%= populatedProduct._id %>" method="POST">
+                            <form action="/product/removeFromCartShow/<%= populatedProduct._id %>" method="POST">
                                 <button class="cart-button" id="removecart-button" style="background-color: red; font-weight: bold;"><i
                                                 class="fa fa-shopping-cart" style="font-size:24px;"></i> REMOVE FROM
                                             CART</button>
@@ -198,7 +198,7 @@
                                                     WISHLIST</button>
                                     </form>
                                     <% } else {%>
-                                        <form action="/product/removeFromWishlist/<%= populatedProduct._id %>" method="POST">
+                                        <form action="/product/removeFromWishlistShow/<%= populatedProduct._id %>" method="POST">
                                             <button class="wishlist-button" id="removewishlist-button" style="background-color: red; font-weight: bold;"><i
                                                             class="fa fa-heart-o" aria-hidden="true"
                                                             style="font-size:24px;"></i> REMOVE FROM WISHLIST</button>
@@ -231,6 +231,9 @@
                                         <% } %>
                         </div>
                         <% } %>
+                    <% if(populatedProduct.reviews.length==0) {%>
+                        <p>No reviews</p>
+                    <% } %>
                 </div>
             </div>
         </section>

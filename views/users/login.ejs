@@ -7,7 +7,42 @@
     </head>
 
     <body>
-        <div class="center">
+        <form action="/user/login" method="POST" id="login-form">
+            <div class="container d-flex justify-content-center align-items-center mt-5" style="margin-bottom: 40px;">
+                <div class="row">
+                    <div class="col-md-3 offset-md-3 col-xl-4 offset-xl-4">
+                        <div class="card shadow custom-card-width">
+                            <img src="../Social_media.png" class="card-img-top"/>
+                            <div class="card-body" style="margin-top: 15px;">
+                                <h5 class="card-title" style="text-decoration: underline;">Login</h5>
+                                <a href="/user/register" stlye="display: inline; float: right;">Signup</a>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="username" style="margin-top: 10px;">Username</label>
+                                        <input class="form-control" type="text" id="username" name="username" autofocus required>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                        <h6 id="usercheck" style="color: red; margin-top: 5px;">**Username is missing</h6>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="password">Password</label>
+                                        <input class="form-control" type="password" id="password" name="password" autofocus required>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                        <h6 id="passcheck" style="color: red; margin-top: 5px;">**Password is missing</h6>
+                                    </div>
+                                    <a href="/user/forgotpassword">Forgot password?</a>
+                                <button type="button" id="submitButton" style="background-color: #2691d9 !important; margin-top: 10px;" class="btn btn-primary btn-block">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="space" style="margin-bottom: 75px;"></div>
+        <script src="../loginValidator.js"></script>
+        <!-- <div class="center">
             <div class="back-button">
                 <button type="button" style="border: none; display: inline;" onclick="history.go(-1)"><i
                         class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
@@ -30,7 +65,7 @@
                     Not a member? <a href="/user/register">Signup</a>
                 </div>
             </form>
-        </div>
+        </div> -->
 
     </body>
 

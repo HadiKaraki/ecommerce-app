@@ -3,6 +3,55 @@ body {
     background-color: rgb(241, 241, 241);
 }
 
+#carWithRec {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+    /* background-color: white; */
+    height: 100%;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#carousel-image,
+#recomended {
+    cursor: pointer;
+    flex: 1;
+    /* Can be in percentage also. */
+    height: 300px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    object-fit: cover;
+    border-left: 0.4px solid black;
+    border-right: 0.4px solid black;
+    border-bottom: 0.4px solid black;
+}
+
+#carousel-image img,
+#recomended img {
+    display: flex;
+    height: 300px;
+    width: 100% !important;
+}
+
+.watermark {
+    position: relative;
+}
+
+.watermark::after {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    content: "COPYRIGHT";
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
+
 #shop-by {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     margin-left: 20px;
@@ -32,6 +81,7 @@ body {
 
 #container #category {
     height: 350px;
+    transition: 0.25s;
 }
 
 #container #category img {
@@ -58,12 +108,16 @@ body {
         margin-bottom: 20px;
         text-align: center;
     }
+    #image {
+        width: 100%;
+    }
     #search-box {
         float: center;
         margin: 0;
         width: 60%;
     }
-    #container {
+    #container,
+    #carWithRec {
         grid-template-columns: 1fr 1fr;
         margin-left: 0;
         margin-right: 0;

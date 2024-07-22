@@ -6,7 +6,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const { MongoClient, ObjectID } = require("mongodb");
-const Cors = require("cors");
 const { request } = require("express");
 const cookies = require("cookie")
 const signCookies = require("cookie-signature")
@@ -19,6 +18,7 @@ const passport = require('passport');
 const bodyParser = require("body-parser")
 const methodOverride = require('method-override');
 const helmet = require('helmet');
+const Cors = require("cors");
 const hpkp = require("hpkp");
 const permissionsPolicy = require("permissions-policy");
 const session = require('express-session')
@@ -27,6 +27,7 @@ const LocalStrategy = require('passport-local');
 const catchAsync = require('./utils/catchAsync');
 const path = require('path');
 const { isLoggedIn, setCache } = require('./middleware');
+const Product = require('./models/product');
 var collection;
 
 // ROUTES
@@ -72,7 +73,8 @@ const sessionConfig = {
         //secure: true, (be careful when setting this to true, as compliant clients will not send the cookie back to the server in the future if the browser does not have an HTTPS connection.)
         sameSite: true,
         expires: Date.now() + 1000 * 60 * 60 * 24,
-        maxAge: 1000 * 60 * 60 * 24 // milliseconds seconds minutes days weeks
+        maxAge: 1000 * 60 * 60 * 24, // milliseconds seconds minutes days weeks
+        signed: true
     }
 }
 
@@ -101,7 +103,7 @@ const styleSrcUrls = [
 ];
 const connectSrcUrls = [
     "https://ajax.googleapis.com/",
-    "http://e-comwebsite.herokuapp.com/"
+    "https://ecommerce.hadikaraki.net/"
 ];
 const fontSrcUrls = [
     "https://fonts.googleapis.com/",
@@ -156,21 +158,20 @@ app.use(
     permissionsPolicy({
         features: {
             fullscreen: ["self"], // fullscreen=()
-            vibrate: ["none"], // vibrate=(none)
-            syncXhr: [],
-            accelerometer: ["none"],
-            ambientLigntSensor: ["none"],
+            //vibrate: ["none"], // vibrate=(none)
+            accelerometer: ["self"],
+            //ambientLigntSensor: ["none"],
             autoplay: ["self"],
-            battery: ["none"],
+            //battery: ["none"],
             camera: ["self"],
             geolocation: ["self"],
             gyroscope: ["self"],
-            layoutAnimations: ["self"],
-            microphone: ["none"],
-            oversizedImages: ["none"],
+            //layoutAnimations: ["self"],
+            microphone: ["self"],
+            //oversizedImages: ["none"],
             payment: ["self"],
-            speakerSelection: ["none"],
-            webShare: ["none"],
+            //speakerSelection: ["none"],
+            webShare: ["self"],
             syncXhr: ["self"]
         },
     })
@@ -224,8 +225,9 @@ app.get('/', (req, res) => {
     res.redirect('/home')
 })
 
-app.get('/home', (req, res) => {
-    res.render('home')
+app.get('/home', async(req, res) => {
+    const products = await Product.find({});
+    res.render('home', {products})
 })
 
 app.get("/search", async(req, res) => {

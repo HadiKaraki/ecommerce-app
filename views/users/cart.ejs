@@ -10,7 +10,7 @@
 
     <body>
         <% if(currUser.cart.length>0) {%>
-            <section id="container">
+            <section id="container" style="margin-top: 100px;">
                 <div id="cart">
                     <div id="top-panel">
                         <button id="edit-button" type="button">
@@ -56,19 +56,14 @@
                             </div>
                 </div>
             </section>
-            <% if(currUser.cart.length<=3) {%>
-                <style>
-                    @media (max-width: 768px) {
-                        #footer {
-                            position: fixed !important;
-                            bottom: 0 !important;
-                            width: 100% !important;
-                        }
-                    }
-                </style>
-                <% } %>
+            <% if(currUser.cart.length<=2) {%>
+                <div id="space" style="margin-bottom: 305px;"></div>
+            <% } else { %>
+            <div id="space" style="margin-bottom: 105px;"></div>
+            <% } %>
                     <% } else {%>
-                        <h1>No products in cart currently.</h1>
+                        <h1 style="text-align: center; margin-top: 250px; font-size: 50px;">No products in cart currently.</h1>
+                        <div id="space" style="margin-bottom: 330px;"></div>
                         <% } %>
 
                             <script src="../cart.js"></script>

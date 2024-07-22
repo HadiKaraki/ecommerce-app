@@ -18,7 +18,7 @@
                             <div id="bottom-panel">
                                 <div id="description">
                                     <strong>
-                                        <p>
+                                        <p style="font-size: 17px;">
                                             <%= result.name %>
                                         </p>
                                     </strong>
@@ -39,8 +39,11 @@
                     </a>
                     <% } %>
         </section>
+        <% if(results.length<=5) {%>
+            <div id="space" style="margin-bottom: 305px;"></div>
+            <% } %>
         <% if(results.length<=2) {%>
-            <style>
+            <!-- <style>
                 @media (max-width: 359px) {
                     #footer {
                         position: fixed !important;
@@ -56,7 +59,7 @@
                         width: 100% !important;
                     }
                 }
-            </style>
+            </style> -->
             <% } %>
                 <% } else {%>
                     <style>
@@ -73,7 +76,8 @@
                             <a href="/product/category/TV">TVs</a>
                         </p>
                     </div>
-                    <style>
+                    <div id="space" style="margin-bottom: 455px;"></div>
+                    <!-- <style>
                         #footer {
                             position: fixed !important;
                             bottom: 0 !important;
@@ -85,7 +89,7 @@
                                 height: 20vh;
                             }
                         }
-                    </style>
+                    </style> -->
                     <% } %>
 
     </body>

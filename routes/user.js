@@ -28,7 +28,7 @@ router.route('/login')
 router.get('/logout', isLoggedIn, users.logout)
 
 router.route('/account')
-    .get(isLoggedIn, users.renderAccount)
+    .get(users.renderAccount)
     .post(isLoggedIn, catchAsync(users.editAccount));
 
 router.route('/forgotpassword')

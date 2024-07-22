@@ -41,8 +41,16 @@
                 </div>
             </a>
             <% } %>
+            <% if(brandProducts.length<=5) {%>
+                <div id="space" style="margin-bottom: 205px;"></div>
+                <style>
+                    body {
+                        height: 7.1cm !important;
+                    }
+                </style>
+                <% } %>
                 <% if(brandProducts.length<=2) {%>
-                    <style>
+                    <!-- <style>
                         @media (max-width: 359px) {
                             #footer {
                                 position: fixed !important;
@@ -58,6 +66,9 @@
                                 width: 100% !important;
                             }
                         }
-                    </style>
+                    </style> -->
                     <% } %>
     </section>
+    <% if(brandProducts.length<=5) {%>
+        <div id="space" style="margin-bottom: 305px;"></div>
+        <% } %>

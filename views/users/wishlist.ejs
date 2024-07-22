@@ -2,63 +2,66 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Wishlist items</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel="stylesheet" href="../Wishlist.css">
+        <title>Cart items</title>
+        <link rel="stylesheet" href="../Cart.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     </head>
 
     <body>
         <% if(currUser.wishlist.length>0) {%>
-            <section id="container">
-                <% for(let product of currUser.wishlist) {%>
-                    <a href="/product/<%= product._id %> ">
-                        <div id="product">
-                            <div id="image">
-                                <img src="<%= product.images[0].url %> ">
-                            </div>
-                            <div id="bottom-panel">
-                                <div id="description">
-                                    <strong>
-                                        <p>
+            <section id="container" style="margin-top: 100px;">
+                <div id="cart">
+                    <div id="top-panel">
+                        <button id="edit-button" type="button">
+                            <i class="fa fa-pencil" style="font-size: 24px;"></i>
+                            Edit
+                        </button>
+                        <button style="display: none;" id="close-edit">X</button>
+                        <h1>Wishlist</h1>
+                    </div>
+                    <% for(let product of currUser.wishlist) {%>
+                        <a href="/product/<%= product._id %> ">
+                            <form action="/product/removeFromCart" method="POST">
+                                <section id="product">
+                                    <div id="product-image">
+                                        <img src="<%= product.images[0].url %> ">
+                                    </div>
+                                    <div id="product-name">
+                                        <h7>
                                             <%= product.name %>
-                                        </p>
-                                    </strong>
+                                        </h7>
+                                    </div>
+                                    <div id="product-price">
+                                        <h7 style="color: red;">
+                                            $
+                                            <%= product.price %>
+                                        </h7>
+                                    </div>
+                        </a>
+                        <div id="checkbox-input" style="display: none;">
+                            <input type="checkbox" id="checkbox-<%= product._id %>" class="check-product" name="removeProducts[]" value="<%=product._id%>">
+                            <label for="checkbox-<%= product._id %>" style="color: red; font-weight: bold; cursor: pointer;">Remove?</label>
+                        </div>
+                        </section>
+                        <% } %>
+                            <div id="bottom-panel">
+                                <div>
+                                    <button id="remove-button" disabled>Remove</button>
                                 </div>
-                                <div id="price">
-                                    <p>
-                                        $
-                                        <%= product.price %>
-                                    </p>
-                                </div>
-                                <form action="/product/removeFromWishlist/<%= product._id %> " method="POST">
-                                    <button id="remove-button" style="background-color: red;">Remove</button>
                                 </form>
                             </div>
-                        </div>
-                    </a>
-                    <% } %>
+                </div>
             </section>
             <% if(currUser.wishlist.length<=2) {%>
-                <style>
-                    @media (max-width: 359px) {
-                        #footer {
-                            position: fixed !important;
-                            bottom: 0 !important;
-                            width: 100% !important;
-                        }
-                    }
-                    
-                    @media (min-width: 400px) {
-                        #footer {
-                            position: fixed !important;
-                            bottom: 0 !important;
-                            width: 100% !important;
-                        }
-                    }
-                </style>
-                <% } %>
+                <div id="space" style="margin-bottom: 305px;"></div>
+            <% } else { %>
+            <div id="space" style="margin-bottom: 105px;"></div>
+            <% } %>
                     <% } else {%>
-                        <h1>No products added to wishlist currently.</h1>
+                        <h1 style="text-align: center; margin-top: 250px; font-size: 50px;">No products in wishlist currently.</h1>
+                        <div id="space" style="margin-bottom: 330px;"></div>
                         <% } %>
+
+                            <script src="../wishlist.js"></script>
     </body>

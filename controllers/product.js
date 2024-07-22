@@ -81,7 +81,7 @@ module.exports.addToCart = async(req, res) => {
     currUser.cart.push(productID);
     await currUser.save();
     req.flash('success', 'Added to cart');
-    res.redirect('back')
+    res.redirect(`../../product/${productID}`);
 }
 
 module.exports.removeFromCart = async(req, res) => {
@@ -91,7 +91,15 @@ module.exports.removeFromCart = async(req, res) => {
         await User.findByIdAndUpdate(userID, { $pull: { cart: { $in: req.body.removeProducts } } });
     }
     req.flash('success', 'Removed from cart');
-    res.redirect('back')
+    res.redirect('../../user/cart')
+}
+
+module.exports.removeFromCartShow = async(req, res) => {
+    const { productID } = req.params;
+    const userID = req.user._id;
+    await User.findByIdAndUpdate(userID, { $pull: { cart: productID } });
+    req.flash('success', 'Removed from cart');
+    res.redirect(`../../product/${productID}`);
 }
 
 module.exports.addToWishlist = async(req, res) => {
@@ -101,7 +109,7 @@ module.exports.addToWishlist = async(req, res) => {
     currUser.wishlist.push(productID);
     await currUser.save();
     req.flash('success', 'Added to wishlist');
-    res.redirect('back')
+    res.redirect(`../../product/${productID}`);
 }
 
 module.exports.removeFromWishlist = async(req, res) => {
@@ -109,7 +117,15 @@ module.exports.removeFromWishlist = async(req, res) => {
     const userID = req.user._id;
     await User.findByIdAndUpdate(userID, { $pull: { wishlist: productID } });
     req.flash('success', 'Removed from wishlist');
-    res.redirect('back')
+    res.redirect('../../user/wishlist')
+}
+
+module.exports.removeFromWishlistShow = async(req, res) => {
+    const { productID } = req.params;
+    const userID = req.user._id;
+    await User.findByIdAndUpdate(userID, { $pull: { wishlist: productID } });
+    req.flash('success', 'Removed from wishlist');
+    res.redirect(`../../product/${productID}`);
 }
 
 module.exports.renderNewProduct = async(req, res) => {

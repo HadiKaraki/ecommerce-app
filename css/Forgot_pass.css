@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Open Sans', sans-serif;
-    height: 38vh;
+    height: 24vh;
 }
 
 .center {
@@ -12,7 +12,7 @@ body {
     top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 500px;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);

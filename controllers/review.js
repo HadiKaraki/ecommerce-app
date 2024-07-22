@@ -10,13 +10,14 @@ module.exports.newReview = async(req, res) => {
     product.reviews.push(review)
     await product.save();
     req.flash('success', 'Review added');
-    res.redirect('back')
+    res.redirect(`../../product/${productID}`);
 }
 
 module.exports.deleteReview = async(req, res) => {
     const { reviewID } = req.params;
+    const { productID } = req.params;
     await Product.findOneAndUpdate(reviewID, { $pull: { reviews: reviewID } });
     await Review.findByIdAndDelete(reviewID);
     req.flash('success', 'Review deleted')
-    res.redirect('back');
+    res.redirect(`../../product/${productID}`);
 }

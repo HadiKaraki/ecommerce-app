@@ -37,7 +37,8 @@ const UserSchema = new Schema({
     },
     phone_nb: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     cart: [{
         type: Schema.Types.ObjectId,
