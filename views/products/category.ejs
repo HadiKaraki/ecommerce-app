@@ -1,114 +1,114 @@
 <% layout('/layouts/boilerplate')%>
 
-    <head>
-        <meta charset="UTF-8">
-        <title>
-            <%= category %>
-        </title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel="stylesheet" href="../../Category.css">
-        <link rel="stylesheet" href="../../Navbar.css">
-        <link rel="stylesheet" href="../../Footer.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= category %>
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../../Category.css">
+    <link rel="stylesheet" href="../../Navbar.css">
+    <link rel="stylesheet" href="../../Footer.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
 
-    <body>
-        <aside id="productsAside">
-            <section id="container">
-                <% for(let product of products) {%>
-                    <a href="/product/<%= product._id %> ">
-                        <div class="<%= product.brand %>" id="product">
-                            <div id="image">
-                                <img crossorigin="anonymous" src="<%= product.images[0].url %> ">
+<body>
+    <aside id="productsAside">
+        <section id="container">
+            <% for(let product of products) {%>
+                <a href="/product/<%= product._id %> ">
+                    <div class="<%= product.brand %>" id="product">
+                        <div id="image">
+                            <img crossorigin="anonymous" src="<%= product.images[0].url %> ">
+                        </div>
+                        <div id="bottom-panel">
+                            <div id="description">
+                                <strong>
+                                    <p>
+                                        <%= product.name %>
+                                    </p>
+                                </strong>
                             </div>
-                            <div id="bottom-panel">
-                                <div id="description">
-                                    <strong>
-                                        <p>
-                                            <%= product.name %>
-                                        </p>
-                                    </strong>
-                                </div>
-                                <div id="price">
-                                    <p>
-                                        $
-                                        <%= product.price %>
-                                    </p>
-                                </div>
-                                <div id="in-stock">
-                                    <p>
-                                        <%= product.nb_in_stock %> in stock
-                                    </p>
-                                </div>
+                            <div id="price">
+                                <p>
+                                    $
+                                    <%= product.price %>
+                                </p>
+                            </div>
+                            <div id="in-stock">
+                                <p>
+                                    <%= product.nb_in_stock %> in stock
+                                </p>
                             </div>
                         </div>
-                    </a>
-                    <% } %>
-            </section>
-            <% if(products.length<=5) {%>
-            <div id="space" style="margin-bottom: 205px;"></div>
-            <style>
-                body {
-                    height: 7.1cm !important;
-                }
-            </style>
-            <% } %>
-            <% if(products.length<=2) {%>
-                <!-- <style>
-                    @media (max-width: 359px) {
-                        #footer {
-                            position: fixed !important;
-                            bottom: 0 !important;
-                            width: 100% !important;
-                        }
-                    }
-                    
-                    @media (min-width: 400px) {
-                        #footer {
-                            position: fixed !important;
-                            bottom: 0 !important;
-                            width: 100% !important;
-                        }
-                    }
-                    
-                    @media (max-width: 768px) {
-                        #footer {
-                            position: block !important;
-                            bottom: 0 !important;
-                            width: 100% !important;
-                        }
-                    }
-                </style> -->
+                    </div>
+                </a>
                 <% } %>
-        </aside>
-        <script>
-            var allDivs = document.getElementsByTagName('div');
-            var allInputs = document.getElementsByTagName('input');
-
-            function hideDiv() {
-                for (var i = 0; i < allDivs.length; i++) {
-                    allDivs[i].style.display = "block";
-                }
-                for (var i = 0; i < allInputs.length; i++) {
-                    if (!allInputs[i].checked) {
-                        var divs = document.getElementsByClassName(allInputs[i].value);
-                        for (var j = 0; j < divs.length; j++) {
-                            divs[j].style.display = "none";
-                        }
+        </section>
+        <% if(products.length<=5) {%>
+        <div id="space" style="margin-bottom: 205px;"></div>
+        <style>
+            body {
+                height: 7.1cm !important;
+            }
+        </style>
+        <% } %>
+        <% if(products.length<=2) {%>
+            <!-- <style>
+                @media (max-width: 359px) {
+                    #footer {
+                        position: fixed !important;
+                        bottom: 0 !important;
+                        width: 100% !important;
                     }
                 }
-                nonChecked();
-            }
-
-            function nonChecked() {
-                for (var i = 0; i < allInputs.length; i++) {
-                    if (allInputs[i].checked) {
-                        return;
+                
+                @media (min-width: 400px) {
+                    #footer {
+                        position: fixed !important;
+                        bottom: 0 !important;
+                        width: 100% !important;
                     }
                 }
-                for (var i = 0; i < allDivs.length; i++) {
-                    allDivs[i].style.display = "block";
+                
+                @media (max-width: 768px) {
+                    #footer {
+                        position: block !important;
+                        bottom: 0 !important;
+                        width: 100% !important;
+                    }
+                }
+            </style> -->
+            <% } %>
+    </aside>
+    <script>
+        var allDivs = document.getElementsByTagName('div');
+        var allInputs = document.getElementsByTagName('input');
+
+        function hideDiv() {
+            for (var i = 0; i < allDivs.length; i++) {
+                allDivs[i].style.display = "block";
+            }
+            for (var i = 0; i < allInputs.length; i++) {
+                if (!allInputs[i].checked) {
+                    var divs = document.getElementsByClassName(allInputs[i].value);
+                    for (var j = 0; j < divs.length; j++) {
+                        divs[j].style.display = "none";
+                    }
                 }
             }
-        </script>
-    </body>
+            nonChecked();
+        }
+
+        function nonChecked() {
+            for (var i = 0; i < allInputs.length; i++) {
+                if (allInputs[i].checked) {
+                    return;
+                }
+            }
+            for (var i = 0; i < allDivs.length; i++) {
+                allDivs[i].style.display = "block";
+            }
+        }
+    </script>
+</body>

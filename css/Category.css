@@ -1,6 +1,6 @@
 body {
     font-family: 'Open Sans', sans-serif;
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(255, 255, 255);
     margin: 0;
     padding: 0;
 }
@@ -27,36 +27,37 @@ h1 {
 }
 
 #container {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(255, 255, 255);
     /* height: 500px; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     margin-left: 10px;
     grid-column-gap: 10px;
+    margin: 40px 15% 20px;
 }
 
 #container #product {
     background-color: white;
     margin-bottom: 10px;
-    border: 0.5px solid black;
+    border: 0.1px solid rgb(208, 207, 207);
     /* max-width: 300px; */
     text-align: center;
+    border-radius: 5px;
 }
 
 #container #image {
     width: 100%;
-    height: 200px;
-    border-bottom: 0.5px solid black;
+    height: 150px;
     margin-bottom: 10px;
     display: flex;
+    border-radius: 5px;
 }
 
 #container #image img {
     width: 100%;
-    height: 200px;
+    max-height: 100%;
     margin: 0 auto;
+    border-radius: 10px;
 }
 
 #container #product #bottom-panel {
@@ -121,7 +122,6 @@ h1 {
     }
     #container #product #bottom-panel {
         height: 125px;
-        border-bottom: 0.5px solid black;
     }
     #container #product:nth-child(2n) {
         border-left: 0.5px solid black;

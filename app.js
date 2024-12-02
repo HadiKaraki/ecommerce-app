@@ -278,6 +278,11 @@ app.get('/back', (req, res) => {
     res.redirect(redirectUrl)
 })
 
+app.get('/test', async(req, res) => {
+    const products = await Product.find({});
+    res.render('test', {products})
+})
+
 app.all('*', (req, res) => {
     res.render('notfound')
 })
